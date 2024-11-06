@@ -1,0 +1,47 @@
+﻿<controls:ProWindow x:Class="TreefallPatternAnalysis.CustomModelProWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:controls="clr-namespace:ArcGIS.Desktop.Framework.Controls;assembly=ArcGIS.Desktop.Framework"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions"
+        mc:Ignorable="d"
+        xmlns:local="clr-namespace:TreefallPatternAnalysis"
+        Title="CustomModelAnalysis" Height="735" Width="1282" MinHeight="735" MinWidth="1282"
+        Loaded="ProWindow_Loaded"
+        WindowStartupLocation="CenterOwner"
+        Focusable="True" PreviewKeyDown="KeyPressed" PreviewKeyUp="KeyReleased">
+
+    <controls:ProWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <extensions:DesignOnlyResourceDictionary Source="pack://application:,,,/ArcGIS.Desktop.Framework;component\Themes\Default.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </controls:ProWindow.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <WpfPlot x:Name="graphPlot" MouseMove="MouseMoved" MouseWheel="MouseWheelChanged" HorizontalAlignment="Center" VerticalAlignment="Top" Height="418" Width="678" Grid.RowSpan="2"/>
+        <local:LPGraph x:Name="vrLpGraph" HorizontalAlignment="Left" Margin="0,435,0,0" VerticalAlignment="Top" Height="283" Width="640" Grid.RowSpan="2"/>
+        <local:LPGraph x:Name="vtLpGraph" HorizontalAlignment="Left" Margin="639,435,0,0" VerticalAlignment="Top" Height="283" Width="640" Grid.RowSpan="2"/>
+        <local:CustomModelParameters x:Name="customModelParameters" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Height="420" Width="300" Grid.RowSpan="2"/>
+        <Rectangle HorizontalAlignment="Left" Height="17" Margin="0,420,0,0" Fill="White" VerticalAlignment="Top" Width="640" Grid.RowSpan="2"/>
+        <Rectangle HorizontalAlignment="Left" Height="17" Margin="641,420,0,0" Fill="White" VerticalAlignment="Top" Width="640" Grid.RowSpan="2"/>
+        <Rectangle HorizontalAlignment="Left" Height="419" Margin="980,0,0,0" Fill="#F7F8F8" VerticalAlignment="Top" Width="301" Grid.RowSpan="2"/>
+        <Rectangle HorizontalAlignment="Left" Height="285" Margin="638,419,0,0" Stroke="Black" VerticalAlignment="Top" Width="2" Grid.RowSpan="2"/>
+        <Rectangle HorizontalAlignment="Left" Height="420" Margin="300,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="2" Grid.RowSpan="2"/>
+        <Rectangle HorizontalAlignment="Center" Height="2" Margin="0,418,0,0" Stroke="Black" VerticalAlignment="Top" Width="1280" Grid.RowSpan="2"/>
+        <Rectangle HorizontalAlignment="Center" Height="2" Stroke="Black" VerticalAlignment="Center" Width="1280"/>
+        <Rectangle HorizontalAlignment="Left" Height="420" Margin="978,-2,0,0" Stroke="Black" VerticalAlignment="Top" Width="2" Grid.RowSpan="2"/>
+        <local:PatternPlot x:Name="patternPlot" HorizontalAlignment="Left" Margin="980,-1,0,0" VerticalAlignment="Top" Width="150" Height="420" Grid.RowSpan="2"/>
+        <local:PatternPlot x:Name="patternPlot_Copy" HorizontalAlignment="Left" Margin="1128,-1,0,0" VerticalAlignment="Top" Width="150"  Height="420" Grid.RowSpan="2"/>
+        <Rectangle HorizontalAlignment="Left" Height="29" Margin="980,390,0,0" Fill="White" VerticalAlignment="Top" Width="301" Grid.RowSpan="2"/>
+        <Label Content="Vr Profile" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Margin="265,418,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Label Content="Vt Profile" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Margin="910,418,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Button Content="test match" HorizontalAlignment="Left" Margin="1040,390,0,0" VerticalAlignment="Top" Width="75" Height="25" Grid.RowSpan="2"/>
+        <Label Content="0" HorizontalAlignment="Left" Margin="1135,392,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+    </Grid>
+</controls:ProWindow>

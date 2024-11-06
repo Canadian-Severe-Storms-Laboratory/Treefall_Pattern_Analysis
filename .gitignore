@@ -1,8 +1,8 @@
-.vs/
-Backup/
-TreefallPatternAnalysis/bin/
-TreefallPatternAnalysis/obj/
-TreefallPatternAnalysis/properties/
-TreefallPatternAnalysis/DarkImages/
-TreefallPatternAnalysis/Images/
-UpgradeLog.htm
+/.vs/*
+/bin/*
+/obj/*
+/properties/*
+/DarkImages/*
+/Images/*
+PatternSolver.exe
+/PatternSolver/x64/*

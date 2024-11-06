@@ -1,25 +1,82 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33130.400
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreefallPatternAnalysis", "TreefallPatternAnalysis\TreefallPatternAnalysis.csproj", "{BF511220-6820-4743-B9A6-FFDDCF607C05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TreefallPatternAnalysis", "TreefallPatternAnalysis.csproj", "{18107F99-AE2C-4F96-9545-905CC893DE2E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E8303B89-3320-4BE8-A867-401815A20103} = {E8303B89-3320-4BE8-A867-401815A20103}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PatternSolver", "PatternSolver\PatternSolver.vcxproj", "{E8303B89-3320-4BE8-A867-401815A20103}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		_CPP_Debug|Any CPU = _CPP_Debug|Any CPU
+		_CPP_Debug|x64 = _CPP_Debug|x64
+		_CPP_Debug|x86 = _CPP_Debug|x86
+		_CPP_Release|Any CPU = _CPP_Release|Any CPU
+		_CPP_Release|x64 = _CPP_Release|x64
+		_CPP_Release|x86 = _CPP_Release|x86
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BF511220-6820-4743-B9A6-FFDDCF607C05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF511220-6820-4743-B9A6-FFDDCF607C05}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF511220-6820-4743-B9A6-FFDDCF607C05}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF511220-6820-4743-B9A6-FFDDCF607C05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}._CPP_Debug|Any CPU.ActiveCfg = CPP Release|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}._CPP_Debug|x64.ActiveCfg = _CPP_Release|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}._CPP_Debug|x64.Build.0 = _CPP_Release|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}._CPP_Debug|x86.ActiveCfg = _CPP_Release|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}._CPP_Debug|x86.Build.0 = _CPP_Release|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}._CPP_Release|Any CPU.ActiveCfg = CPP Release|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}._CPP_Release|x64.ActiveCfg = _CPP_Release|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}._CPP_Release|x64.Build.0 = _CPP_Release|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}._CPP_Release|x86.ActiveCfg = _CPP_Release|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}._CPP_Release|x86.Build.0 = _CPP_Release|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}.Debug|x64.Build.0 = Debug|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}.Debug|x86.Build.0 = Debug|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}.Release|x64.ActiveCfg = Release|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}.Release|x64.Build.0 = Release|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}.Release|x86.ActiveCfg = Release|Any CPU
+		{18107F99-AE2C-4F96-9545-905CC893DE2E}.Release|x86.Build.0 = Release|Any CPU
+		{E8303B89-3320-4BE8-A867-401815A20103}._CPP_Debug|Any CPU.ActiveCfg = _CPP_Release|x64
+		{E8303B89-3320-4BE8-A867-401815A20103}._CPP_Debug|Any CPU.Build.0 = _CPP_Release|x64
+		{E8303B89-3320-4BE8-A867-401815A20103}._CPP_Debug|x64.ActiveCfg = _CPP_Release|x64
+		{E8303B89-3320-4BE8-A867-401815A20103}._CPP_Debug|x64.Build.0 = _CPP_Release|x64
+		{E8303B89-3320-4BE8-A867-401815A20103}._CPP_Debug|x86.ActiveCfg = _CPP_Release|Win32
+		{E8303B89-3320-4BE8-A867-401815A20103}._CPP_Debug|x86.Build.0 = _CPP_Release|Win32
+		{E8303B89-3320-4BE8-A867-401815A20103}._CPP_Release|Any CPU.ActiveCfg = _CPP_Release|x64
+		{E8303B89-3320-4BE8-A867-401815A20103}._CPP_Release|Any CPU.Build.0 = _CPP_Release|x64
+		{E8303B89-3320-4BE8-A867-401815A20103}._CPP_Release|x64.ActiveCfg = _CPP_Release|x64
+		{E8303B89-3320-4BE8-A867-401815A20103}._CPP_Release|x64.Build.0 = _CPP_Release|x64
+		{E8303B89-3320-4BE8-A867-401815A20103}._CPP_Release|x86.ActiveCfg = _CPP_Release|Win32
+		{E8303B89-3320-4BE8-A867-401815A20103}._CPP_Release|x86.Build.0 = _CPP_Release|Win32
+		{E8303B89-3320-4BE8-A867-401815A20103}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{E8303B89-3320-4BE8-A867-401815A20103}.Debug|Any CPU.Build.0 = Debug|x64
+		{E8303B89-3320-4BE8-A867-401815A20103}.Debug|x64.ActiveCfg = Debug|x64
+		{E8303B89-3320-4BE8-A867-401815A20103}.Debug|x64.Build.0 = Debug|x64
+		{E8303B89-3320-4BE8-A867-401815A20103}.Debug|x86.ActiveCfg = Debug|Win32
+		{E8303B89-3320-4BE8-A867-401815A20103}.Debug|x86.Build.0 = Debug|Win32
+		{E8303B89-3320-4BE8-A867-401815A20103}.Release|Any CPU.ActiveCfg = Release|x64
+		{E8303B89-3320-4BE8-A867-401815A20103}.Release|Any CPU.Build.0 = Release|x64
+		{E8303B89-3320-4BE8-A867-401815A20103}.Release|x64.ActiveCfg = Release|x64
+		{E8303B89-3320-4BE8-A867-401815A20103}.Release|x64.Build.0 = Release|x64
+		{E8303B89-3320-4BE8-A867-401815A20103}.Release|x86.ActiveCfg = Release|Win32
+		{E8303B89-3320-4BE8-A867-401815A20103}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3282C3C7-46FE-42B8-ADEE-B4F89BC5C92E}
+		SolutionGuid = {4B33C7B1-FEF3-49B5-B858-2C201F48BC46}
 	EndGlobalSection
 EndGlobal

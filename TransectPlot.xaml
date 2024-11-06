@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="TreefallPatternAnalysis.TransectPlot"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TreefallPatternAnalysis"
+             mc:Ignorable="d" 
+             d:DesignHeight="440" d:DesignWidth="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <WpfPlot x:Name="overviewPlot" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Column="0" VerticalAlignment="Stretch" MouseDown="RescalePlot" />
+        <WpfPlot x:Name="vectorsPlot" HorizontalAlignment="Stretch" Margin="-15,0,0,0"  Grid.Column="1" VerticalAlignment="Stretch" MouseDown="RescalePlot"/>
+    </Grid>
+</UserControl>
