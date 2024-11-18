@@ -15,5 +15,6 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 Requirements:<br />
 ArcGIS Pro
 
-![image](https://github.com/Daniel-Butt/TreefallPatternAnalysis/assets/47188958/a2e34487-80e0-421b-b79a-dd12e9731e7c)
-
+![image](https://github.com/Canadian-Severe-Storms-Laboratory/Treefall_Pattern_Analysis/blob/v2/Screenshot%202024-11-18%20155645.png)
+![image](https://github.com/Canadian-Severe-Storms-Laboratory/Treefall_Pattern_Analysis/blob/v2/Screenshot%202024-11-18%20155914.png)
+![image](https://github.com/Canadian-Severe-Storms-Laboratory/Treefall_Pattern_Analysis/blob/v2/Screenshot%202024-11-18%20160336.png)
