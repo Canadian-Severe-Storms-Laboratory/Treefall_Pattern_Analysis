@@ -1,7 +1,7 @@
 # TreefallPatternAnalysis
-Tornado Treefall Pattern Analysis Software, Northern Tornadoes Project
+Tornado Treefall Pattern Analysis Software, Canadian Severe Storms Laboratory
 
-Daniel Butt, NTP 2023, dbutt7@uwo.ca
+Daniel Butt, NTP 2024, dbutt7@uwo.ca
 
 This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
