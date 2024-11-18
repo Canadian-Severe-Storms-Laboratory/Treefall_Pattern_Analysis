@@ -84,14 +84,24 @@ private:
 		return (errorSum / weightSum) / 3.14159265358979323;
 	}
 
+	bool isCorrectType(VortexModel& model) {
+		if (patternType == 0) return true;
+
+		if (patternType == 1) return model.isOuterType();
+
+		return !model.isOuterType();
+	}
+
 
 public:
+	std::vector<double> models;
 	Range VrRange;
 	Range VtRange;
 	Range VsRange;
 	Range VcRange;
 	Monitor monitor;
 	double matchThreshold = 0.1;
+	int patternType = 0;
 	int numSimulations = 10000;
 
 	double bestMatchScale = 1.0;
@@ -116,24 +126,26 @@ public:
 			for (double Vt = VtRatioRange.min; Vt <= VtRatioRange.max; Vt += VtRatioRange.step) {
 				for (double Vs = VsRatioRange.min; Vs <= VsRatioRange.max; Vs += VsRatioRange.step) {
 
-					BakerSterlingVortex model(Vr, Vt, Vs);
+					for (int j = 0; j < models.size(); j++) {
+						auto model = VortexFactory::fromIndex(models[j], Vr, Vt, Vs);
 
-					if (!model.hasPattern()) continue;
+						if (!model->hasPattern() || !isCorrectType(*model)) continue;
 
-					model.solveAxesOfInterest();
+						model->solveAxesOfInterest();
 
-					const double Rmax = obsPattern.length() / model.length();
+						const double Rmax = obsPattern.length() / model->length();
 
-					if (0.1 * obsPattern.length() > Rmax || Rmax > 0.5 * obsPattern.length()) continue; //Rmax must be between 10% and 50% of the observed pattern's length
+						if (0.1 * obsPattern.length() > Rmax || Rmax > 0.5 * obsPattern.length()) continue; //Rmax must be between 10% and 50% of the observed pattern's length
 
-					if (fabs(obsPattern.lengthAbove - model.lengthAbove() * Rmax) > obsPattern.spacing ||
-						fabs(obsPattern.lengthBelow - model.lengthBelow() * Rmax) > obsPattern.spacing) continue;
+						if (fabs(obsPattern.lengthAbove - model->lengthAbove() * Rmax) > obsPattern.spacing ||
+							fabs(obsPattern.lengthBelow - model->lengthBelow() * Rmax) > obsPattern.spacing) continue;
 
-					const double error = patternError(obsPattern, model);
+						const double error = patternError(obsPattern, *model);
 
-					#pragma omp critical
-					{
-						minError = std::min(minError, error);
+						#pragma omp critical
+						{
+							minError = std::min(minError, error);
+						}
 					}
 				}
 			}
@@ -150,41 +162,49 @@ public:
 
 		double minError = 1E100;
 
-		BakerSterlingVortex bestModel;
+		std::unique_ptr<VortexModel> bestModel;
 
-		for (double Vr = VrRatioRange.min; Vr <= VrRatioRange.max; Vr += VrRatioRange.step) {
+		#pragma omp parallel for schedule(dynamic) num_threads((int)(std::thread::hardware_concurrency()*0.8))
+		for (int i = 0; i < 32; i++) {
+
+			const double Vr = VrRatioRange.min + VrRatioRange.step * i;
+
 			for (double Vt = VtRatioRange.min; Vt <= VtRatioRange.max; Vt += VtRatioRange.step) {
 				for (double Vs = VsRatioRange.min; Vs <= VsRatioRange.max; Vs += VsRatioRange.step) {
 
-					BakerSterlingVortex model(Vr, Vt, Vs);
+					for (int j = 0; j < models.size(); j++) {
+						auto model = VortexFactory::fromIndex(models[j], Vr, Vt, Vs);
 
-					if (!model.hasPattern()) continue;
+						if (!model->hasPattern() || !isCorrectType(*model)) continue;
 
-					model.solveAxesOfInterest();
+						model->solveAxesOfInterest();
 
-					const double Rmax = obsPattern.length() / model.length();
+						const double Rmax = obsPattern.length() / model->length();
 
-					if (0.1 * obsPattern.length() > Rmax || Rmax > 0.5 * obsPattern.length()) continue; //Rmax must be between 10% and 50% of the observed pattern's length
+						if (0.1 * obsPattern.length() > Rmax || Rmax > 0.5 * obsPattern.length()) continue; //Rmax must be between 10% and 50% of the observed pattern's length
 
-					if (fabs(obsPattern.lengthAbove - model.lengthAbove() * Rmax) > obsPattern.spacing ||
-						fabs(obsPattern.lengthBelow - model.lengthBelow() * Rmax) > obsPattern.spacing) continue;
+						if (fabs(obsPattern.lengthAbove - model->lengthAbove() * Rmax) > obsPattern.spacing ||
+							fabs(obsPattern.lengthBelow - model->lengthBelow() * Rmax) > obsPattern.spacing) continue;
 
-					const double error = patternError(obsPattern, model);
+						const double error = patternError(obsPattern, *model);
 
-					if (error < minError) {
-						minError = error;
-						bestModel = model;
+						#pragma omp critical
+						{
+							if (error < minError) {
+								minError = error;
+								bestModel = std::move(model); //cannot copy unique_ptr
+							}
+						}
 					}
-
 				}
 			}
 		}
 
-		if (!bestModel.hasPattern()) return Pattern();
+		if (!bestModel->hasPattern()) return Pattern();
 
-		bestMatchScale = obsPattern.length() / bestModel.length();
+		bestMatchScale = obsPattern.length() / bestModel->length();
 
-		return bestModel.pattern(obsPattern.spacing / bestMatchScale);
+		return bestModel->pattern(obsPattern.spacing / bestMatchScale);
 	}
 
 
@@ -220,27 +240,32 @@ public:
 			double bestSwirl = 1E308;
 			double minError = 1E308;
 
+			auto model = VortexFactory::randomModel(models, dist, gen);
+			model->Vs = Vs;
+
 			for (double Vr = VrRatioRange.min; Vr <= VrRatioRange.max; Vr += VrRatioRange.step) {
 				for (double Vt = VtRatioRange.min; Vt <= VtRatioRange.max; Vt += VtRatioRange.step) {
 
-					BakerSterlingVortex model(Vr, Vt, Vs);
+					//BakerSterlingVortex model(Vr, Vt, Vs);
+					model->Vr = Vr;
+					model->Vt = Vt;
 
-					if (!model.hasPattern()) continue;
+					if (!model->hasPattern() || !isCorrectType(*model)) continue;
 
-					model.solveAxesOfInterest();
+					model->solveAxesOfInterest();
 
-					const double Rmax = obsPattern.length() / model.length();
+					const double Rmax = obsPattern.length() / model->length();
 
 					if (0.1 * obsPattern.length() > Rmax || Rmax > 0.5 * obsPattern.length()) continue; //Rmax must be between 10% and 50% of the observed pattern's length
 
-					if (fabs(obsPattern.lengthAbove - model.lengthAbove() * Rmax) > obsPattern.spacing ||
-						fabs(obsPattern.lengthBelow - model.lengthBelow() * Rmax) > obsPattern.spacing) continue;
+					if (fabs(obsPattern.lengthAbove - model->lengthAbove() * Rmax) > obsPattern.spacing ||
+						fabs(obsPattern.lengthBelow - model->lengthBelow() * Rmax) > obsPattern.spacing) continue;
 
-					const double error = patternError(obsPattern, model);
+					const double error = patternError(obsPattern, *model);
 
 					if (error > matchThreshold) continue;
 
-					const double Vmax = model.vmax() * Vc;
+					const double Vmax = model->vmax() * Vc;
 
 					#pragma omp critical 
 					{	
@@ -248,11 +273,13 @@ public:
 
 						if (error < minError) {
 							minError = error;
-							bestSwirl = model.swirlRatio();
+							bestSwirl = model->swirlRatio();
 						}
 					}
 				}
 			}
+
+			model.reset();
 
 			if (minError > matchThreshold) continue; 
 

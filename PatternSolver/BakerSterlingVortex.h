@@ -1,6 +1,5 @@
 #pragma once
 #include <algorithm>
-
 #include "VortexModel.h"
 #include "cyPolynomial.h"
 #include "quartic.h"
@@ -8,24 +7,7 @@
 EXPORT class BakerSterlingVortex : public VortexModel {
 
 private:
-
-public:
-
-	BakerSterlingVortex() : VortexModel(-1, -1, -1) {};
-
-	BakerSterlingVortex(double Vr, double Vt, double Vs) : VortexModel(Vr, Vt, Vs) {};
-
-	Vec2 vecAt(double x, double y) {
-
-		constexpr double Rmax = 1.0;
-
-		const double r2 = x * x + y * y;
-		const double k = (2.0 * Rmax) / (r2 + Rmax * Rmax);
-
-		return { -k * (Vr * x + Vt * y), k * (Vt * x - Vr * y) + Vs };
-	}
-
-	double patternLocation(double x) {
+	std::array<DComplex, 4> solveRoots(double x) {
 		constexpr double Rmax = 1.0;
 		constexpr double Vc = 1.0;
 
@@ -53,7 +35,26 @@ public:
 		const double a1 = d * a3;
 		const double a0 = x2 * (b3 + b1) + Vs2 * Rmax2 * Rmax2 + d * (b4 - b2);
 
-		std::array<DComplex, 4> solutions = solve_quartic(a3 / a4, a2 / a4, a1 / a4, a0 / a4);
+		return solve_quartic(a3 / a4, a2 / a4, a1 / a4, a0 / a4);
+	}
+
+public:
+
+	BakerSterlingVortex(double Vr=-1, double Vt=-1, double Vs=-1) : VortexModel(Vr, Vt, Vs) {};
+
+	Vec2 vecAt(double x, double y) {
+
+		constexpr double Rmax = 1.0;
+
+		const double r2 = x * x + y * y;
+		const double k = (2.0 * Rmax) / (r2 + Rmax * Rmax);
+
+		return { -k * (Vr * x + Vt * y), k * (Vt * x - Vr * y) + Vs };
+	}
+
+	double patternLocation(double x) override {
+
+		std::array<DComplex, 4> solutions = solveRoots(x);
 
 		double y = std::numeric_limits<double>::lowest();
 
@@ -63,5 +64,14 @@ public:
 		y = fabs(imag(solutions[3])) < 1e-10 ? std::max(y, real(solutions[3])) : y;
 
 		return y;
+	}
+
+	bool patternLocationExists(double x) override {
+		std::array<DComplex, 4> solutions = solveRoots(x);
+
+		return fabs(imag(solutions[0])) < 1e-10 ||
+			   fabs(imag(solutions[1])) < 1e-10 ||
+			   fabs(imag(solutions[2])) < 1e-10 ||
+			   fabs(imag(solutions[3])) < 1e-10;
 	}
 };

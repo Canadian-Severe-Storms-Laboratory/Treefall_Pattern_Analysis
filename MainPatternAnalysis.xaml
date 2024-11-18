@@ -9,9 +9,10 @@
         mc:Ignorable="d"
         ResizeMode="CanResize"
         ShowMinButton="True" 
-        Title="Treefall Pattern Analysis (Beta Version)" Height="750" Width="1280" MinHeight="750" MinWidth="1280" 
+        Title="Treefall Pattern Analysis" Height="750" Width="1280" MinHeight="750" MinWidth="1280" 
         Loaded="ProWindow_Loaded"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterOwner"
+        Icon="pack://application:,,,/TreefallPatternAnalysis;component/Images/Logo.ico">
     <controls:ProWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -23,11 +24,12 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="7*"/>
-            <ColumnDefinition Width="33*"/>
+            <ColumnDefinition Width="224*"/>
+            <ColumnDefinition Width="275*"/>
+            <ColumnDefinition Width="781*"/>
         </Grid.ColumnDefinitions>
 
-        <TabControl x:Name="headerTabs" Grid.ColumnSpan="2" SelectionChanged="TabChanged">
+        <TabControl x:Name="headerTabs" Grid.ColumnSpan="3" SelectionChanged="TabChanged">
             <TabItem Header="Input Selection" Width="150">
                 <Grid Background="#FFE5E5E5">
                     <local:RasterSelectionBox x:Name="VectorsSelectionBox" Height="50" Width="300" Margin="0,174,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -37,6 +39,7 @@
                     <Button Content="Next" FontSize="16" HorizontalAlignment="Left" Margin="1117,636,0,0" VerticalAlignment="Top" Height="30" Width="80" Click="InputSelectionNextButton"/>
                     <local:FileSelector x:Name="saveFileSelector" OnSelection="LoadSave" Width="60" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="725,404,0,0"/>
                     <Label Content="Load Saved Analysis" FontSize="20" HorizontalAlignment="Left" Margin="487,398,0,0" VerticalAlignment="Top" Width="193"/>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Transect Selection" Width="150">
@@ -67,12 +70,8 @@
 
             <TabItem Header="Analysis" Width="150">
                 <Grid Background="#FFE5E5E5" Margin="-2,0,2,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="153*"/>
-                        <ColumnDefinition Width="1121*"/>
-                    </Grid.ColumnDefinitions>
 
-                    <ListBox x:Name="modelTypeListView" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" HorizontalContentAlignment="Center" SelectionMode="Multiple" Margin="10,331,0,10" Width="200" Loaded="ModelTypeListView_Loaded" Grid.ColumnSpan="2">
+                    <ListBox x:Name="modelTypeListView" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" HorizontalContentAlignment="Center" SelectionMode="Multiple" Margin="10,290,0,10" Width="200" Loaded="ModelTypeListView_Loaded">
                         <ListBoxItem Content="Modified Rankine" FontSize="20" Padding="10" Margin="5,10,5,0" BorderBrush="Black"/>
                         <ListBoxItem Content="Baker-Sterling" FontSize="20"  Padding="10" Margin="5,10,5,0" BorderBrush="Black"/>
                         <ListBoxItem Content="Burgers-Rott" FontSize="20"  Padding="10" Margin="5,10,5,0" BorderBrush="Black"/>
@@ -80,48 +79,56 @@
                         <ListBoxItem Content="Burgers-Rott (RR)" FontSize="20"  Padding="10" Margin="5,10,5,0" BorderBrush="Black"/>
                         <ListBoxItem Content="Sullivan (RR)" FontSize="20"  Padding="10" Margin="5,10,5,0" BorderBrush="Black"/>
                     </ListBox>
-                    <Label Content="Parameter Ranges" Foreground="Black" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Height="45" Margin="246,476,0,0" VerticalAlignment="Top" Width="190" Grid.Column="1"/>
-                    <Label Content="Vortex Models" Foreground="Black" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="37" Margin="49,294,0,0" VerticalAlignment="Top" Width="122" Grid.ColumnSpan="2"/>
-                    <Label Content="Vt" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="181,519,0,0" VerticalAlignment="Top" Width="30" Grid.Column="1"/>
-                    <Label Content="Vr" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="277,519,0,0" VerticalAlignment="Top" Width="30" Grid.Column="1" RenderTransformOrigin="0.733,0.502"/>
-                    <Label Content="Vs" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="377,519,0,0" VerticalAlignment="Top" Width="30" Grid.Column="1"/>
-                    <Label Content="Vc" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="477,519,0,0" VerticalAlignment="Top" Width="30" Grid.Column="1" RenderTransformOrigin="1.1,0.565"/>
-                    <Label Content="Min" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="81,569,0,0" VerticalAlignment="Top" Width="40" Grid.Column="1"/>
-                    <Label Content="Max" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="81,644,0,0" VerticalAlignment="Top" Width="49" Grid.Column="1"/>
-                    <local:NumberBox x:Name="vtmin" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="165,573,0,0" NumberString="1" VerticalAlignment="Top" Width="54" Grid.Column="1"/>
-                    <local:NumberBox x:Name="vtmax" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="165,648,0,0" NumberString="50" VerticalAlignment="Top" Width="54" Grid.Column="1"/>
-                    <local:NumberBox x:Name="vrmax" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="265,648,0,0" NumberString="80" VerticalAlignment="Top" Width="54" Grid.Column="1"/>
-                    <local:NumberBox x:Name="vrmin" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="265,573,0,0" NumberString="20" VerticalAlignment="Top" Width="54" Grid.Column="1"/>
-                    <local:NumberBox x:Name="vsmin" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="365,573,0,0" NumberString="10" VerticalAlignment="Top" Width="54" Grid.Column="1"/>
-                    <local:NumberBox x:Name="vsmax" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="365,648,0,0" NumberString="20" VerticalAlignment="Top" Width="54" Grid.Column="1"/>
-                    <local:NumberBox x:Name="vcmax" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="465,648,0,0" NumberString="50" VerticalAlignment="Top" Width="54" Grid.Column="1"/>
-                    <local:NumberBox x:Name="vcmin" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="465,573,0,0" NumberString="30" VerticalAlignment="Top" Width="54" Grid.Column="1"/>
-                    <Label Grid.Column="1" FontSize="16" Content="Cutoff:" HorizontalAlignment="Left" Height="30" Margin="587,641,0,0" VerticalAlignment="Top" Width="140"/>
-                    <Label Grid.Column="1" FontSize="16" Content="#Simulations:" HorizontalAlignment="Left" Height="30" Margin="586,566,0,0" VerticalAlignment="Top" Width="110"/>
-                    <local:NumberBox x:Name="cutoffThreshold" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="717,644,0,0" NumberString="0.10" VerticalAlignment="Top" Width="54" Grid.Column="1" RenderTransformOrigin="0.712,0.633"/>
-                    <local:NumberBox x:Name="numberOfSimulations" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="701,569,0,0" NumberString="10000" VerticalAlignment="Top" Width="70" Grid.Column="1" RenderTransformOrigin="0.5,0.5"/>
-                    <WpfPlot x:Name="vmaxHistogramPlot" Grid.Column="1" Width="350" Height="350" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,13,0,0"></WpfPlot>
-                    <WpfPlot x:Name="swirlHistogramPlot" Grid.Column="1" Width="350" Height="350" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="425,13,0,0"></WpfPlot>
+                    <Label Content="Parameter Ranges" Foreground="Black" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Height="45" Margin="397,480,0,0" VerticalAlignment="Top" Width="190"/>
+                    <Label Content="Vortex Models" Foreground="Black" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="37" Margin="49,260,0,0" VerticalAlignment="Top" Width="122"/>
+                    <Label Content="Vt" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="332,523,0,0" VerticalAlignment="Top" Width="30"/>
+                    <Label Content="Vr" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="428,523,0,0" VerticalAlignment="Top" Width="30"/>
+                    <Label Content="Vs" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="528,523,0,0" VerticalAlignment="Top" Width="30"/>
+                    <Label Content="Vc" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="628,523,0,0" VerticalAlignment="Top" Width="30"/>
+                    <Label Content="Min" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="232,573,0,0" VerticalAlignment="Top" Width="40"/>
+                    <Label Content="Max" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="232,648,0,0" VerticalAlignment="Top" Width="49"/>
+                    <local:NumberBox x:Name="vtmin" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="316,577,0,0" NumberString="1" VerticalAlignment="Top" Width="54"/>
+                    <local:NumberBox x:Name="vtmax" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="316,652,0,0" NumberString="50" VerticalAlignment="Top" Width="54"/>
+                    <local:NumberBox x:Name="vrmax" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="416,652,0,0" NumberString="80" VerticalAlignment="Top" Width="54"/>
+                    <local:NumberBox x:Name="vrmin" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="416,577,0,0" NumberString="20" VerticalAlignment="Top" Width="54"/>
+                    <local:NumberBox x:Name="vsmin" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="516,577,0,0" NumberString="10" VerticalAlignment="Top" Width="54"/>
+                    <local:NumberBox x:Name="vsmax" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="516,652,0,0" NumberString="20" VerticalAlignment="Top" Width="54"/>
+                    <local:NumberBox x:Name="vcmax" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="616,652,0,0" NumberString="50" VerticalAlignment="Top" Width="54"/>
+                    <local:NumberBox x:Name="vcmin" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="616,577,0,0" NumberString="30" VerticalAlignment="Top" Width="54"/>
+                    <Label FontSize="16" Content="Cutoff:" HorizontalAlignment="Left" Height="30" Margin="738,645,0,0" VerticalAlignment="Top" Width="140"/>
+                    <Label FontSize="16" Content="#Simulations:" HorizontalAlignment="Left" Height="30" Margin="737,570,0,0" VerticalAlignment="Top" Width="110"/>
+                    <local:NumberBox x:Name="cutoffThreshold" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="868,648,0,0" NumberString="0.10" VerticalAlignment="Top" Width="54" RenderTransformOrigin="0.712,0.633"/>
+                    <local:NumberBox x:Name="numberOfSimulations" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="852,573,0,0" NumberString="1000" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.5,0.5"/>
+                    <WpfPlot x:Name="vmaxHistogramPlot" Width="350" Height="350" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="226,17,0,0"></WpfPlot>
+                    <WpfPlot x:Name="swirlHistogramPlot" Width="350" Height="350" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="576,17,0,0"></WpfPlot>
 
-                    <Button Click="RunSimulation" Width="70" Height="26" Content="Run" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="917,647,0,0" />
-                    <Button Click="RunSimulation" IsEnabled="False" Width="70" Height="26" Content="Run All" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="1021,647,0,0" RenderTransformOrigin="0.473,0.619" />
+                    <Button Click="RunSimulation_" Width="70" Height="26" Content="Run" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="984,647,0,0" />
+                    <Button Click="RunAllSimulations" Width="70" Height="26" Content="Run All" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1084,647,0,0" RenderTransformOrigin="0.186,0.715" />
+                    <Button Click="SaveResults" Width="70" Height="26" Content="Save" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="1184,647,0,0" RenderTransformOrigin="0.186,0.715" />
 
-                    <local:SliderAndTextBox x:Name="numVmaxHistBoxes" OnChanged="PlotTransectResults" HorizontalAlignment="Left" Margin="115,336,0,0" VerticalAlignment="Top" Minimum="3" Maximum="12" InitialValue="8" TickFrequency="1" Width="330" Height="90" Grid.Column="1"/>
-                    <local:SliderAndTextBox x:Name="numSwirlHistBoxes" OnChanged="PlotTransectResults" HorizontalAlignment="Left" Margin="465,336,0,0" VerticalAlignment="Top" Minimum="3" Maximum="12" InitialValue="5" TickFrequency="1" Width="330" Height="90" Grid.Column="1"/>
+                    <local:SliderAndTextBox x:Name="numVmaxHistBoxes" OnChanged="PlotTransectResults" HorizontalAlignment="Left" Margin="266,340,0,0" VerticalAlignment="Top" Minimum="3" Maximum="12" InitialValue="8" TickFrequency="1" Width="330" Height="90"/>
+                    <local:SliderAndTextBox x:Name="numSwirlHistBoxes" OnChanged="PlotTransectResults" HorizontalAlignment="Left" Margin="616,340,0,0" VerticalAlignment="Top" Minimum="3" Maximum="12" InitialValue="5" TickFrequency="1" Width="330" Height="90"/>
 
-                    <Label Content="#Boxes" Width="100" Height="30" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="119,0,0,0" Grid.Column="1"/>
-                    <Label Content="#Boxes" Width="100" Height="30" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="477,0,0,0" Grid.Column="1"/>
-                    <Button x:Name="testMatchButton2" Click="TestMatch"  Content="Test Match" FontSize="14" HorizontalAlignment="Left" Height="25" Margin="828,438,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1"/>
+                    <Label Content="#Boxes" Width="100" Height="30" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="270,342,0,0"/>
+                    <Label Content="#Boxes" Width="100" Height="30" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="628,342,0,0"/>
+                    <Button x:Name="testMatchButton2" Click="TestMatch"  Content="Test Match" FontSize="14" HorizontalAlignment="Left" Height="25" Margin="979,442,0,0" VerticalAlignment="Top" Width="80"/>
 
-                    <Label Content="Result Statistics" Width="161" Height="34" Foreground="Black" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Grid.ColumnSpan="2"/>
-                    <TextBlock x:Name="resultStatsText" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Height="250" Grid.ColumnSpan="2" Margin="10,39,0,0"/>
+                    <Label Content="Result Statistics" Width="160" Height="34" Foreground="Black" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,20,0,0"/>
+                    <TextBlock x:Name="resultStatsText" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Height="250" Margin="20,50,0,0"/>
+
+
+                    <Label Content="Pattern Type" Width="95" Height="34" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="980,573,0,0"/>
+                    <ComboBox x:Name="patternTypeComboBox" SelectedIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="25" Margin="1080,573,0,0">
+                        <ComboBoxItem Content="All Types"/>
+                        <ComboBoxItem Content="Outer Only"/>
+                        <ComboBoxItem Content="Not Outer"/>
+                    </ComboBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Save" Width="150"/>
 
         </TabControl>
 
-        <Grid x:Name="transectGrid" Grid.ColumnSpan="2" Visibility="Visible">
+        <Grid x:Name="transectGrid" Grid.ColumnSpan="3" Visibility="Visible">
 
             <local:PatternPlot x:Name="ObservedPatternPlot" HorizontalAlignment="Left" Margin="925,35,0,0" VerticalAlignment="Top" Width="160" Height="421" Grid.Column="1"/>
             <local:TransectCreationList x:Name="transectCreationList" OnChanged="TransectChanged" HorizontalAlignment="Left" Margin="1130,58,0,0" VerticalAlignment="Top" Width="130" Height="363" Grid.Column="1"/>

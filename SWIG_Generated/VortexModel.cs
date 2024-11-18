@@ -126,6 +126,11 @@ public partial class VortexModel : global::System.IDisposable {
     return ret;
   }
 
+  public virtual bool patternLocationExists(double x) {
+    bool ret = PatternSolverPINVOKE.VortexModel_patternLocationExists(swigCPtr, x);
+    return ret;
+  }
+
   public void solveAxesOfInterest() {
     PatternSolverPINVOKE.VortexModel_solveAxesOfInterest(swigCPtr);
   }
@@ -152,6 +157,11 @@ public partial class VortexModel : global::System.IDisposable {
 
   public bool hasPattern() {
     bool ret = PatternSolverPINVOKE.VortexModel_hasPattern(swigCPtr);
+    return ret;
+  }
+
+  public bool isOuterType() {
+    bool ret = PatternSolverPINVOKE.VortexModel_isOuterType(swigCPtr);
     return ret;
   }
 

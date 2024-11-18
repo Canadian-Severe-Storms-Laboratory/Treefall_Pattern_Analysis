@@ -45,18 +45,23 @@
   <ItemGroup>
     <ClInclude Include="AutoTransectFitter.h" />
     <ClInclude Include="BakerSterlingVortex.h" />
+    <ClInclude Include="BurgersRottRRVortex.h" />
+    <ClInclude Include="BurgersRottVortex.h" />
     <ClInclude Include="ConvergenceLine.h" />
     <ClInclude Include="CPP_CS_Interop.h" />
     <ClInclude Include="cyCore.h" />
     <ClInclude Include="cyPolynomial.h" />
     <ClInclude Include="dbscan.h" />
     <ClInclude Include="LinearPiecewiseVortex.h" />
+    <ClInclude Include="ModifiedRankineVortex.h" />
     <ClInclude Include="Monitor.h" />
     <ClInclude Include="NumericalMethods.h" />
     <ClInclude Include="ObservedPattern.h" />
     <ClInclude Include="PatternMatcher.h" />
     <ClInclude Include="quartic.h" />
     <ClInclude Include="SplineTable.h" />
+    <ClInclude Include="SullivanRRVortex.h" />
+    <ClInclude Include="SullivanVortex.h" />
     <ClInclude Include="Transect.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vec2.h" />
@@ -238,6 +243,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <OpenMPSupport>true</OpenMPSupport>
+      <AdditionalIncludeDirectories>C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\boost_1_86_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -268,6 +274,7 @@
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
       <FloatingPointModel>Precise</FloatingPointModel>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\boost_1_86_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -304,6 +311,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
       <FloatingPointModel>Precise</FloatingPointModel>
+      <AdditionalIncludeDirectories>C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\boost_1_86_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -333,6 +341,7 @@
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <OpenMPSupport>true</OpenMPSupport>
       <PreprocessorDefinitions>;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\boost_1_86_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -347,6 +356,7 @@
     </PreBuildEvent>
     <ClCompile>
       <PreprocessorDefinitions>;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\boost_1_86_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

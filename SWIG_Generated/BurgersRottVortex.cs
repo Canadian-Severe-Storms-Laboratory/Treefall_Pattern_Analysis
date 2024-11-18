@@ -9,20 +9,18 @@
 //------------------------------------------------------------------------------
 
 
-public partial class VortexFactory : global::System.IDisposable {
+public partial class BurgersRottVortex : VortexModel {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
-  protected bool swigCMemOwn;
 
-  internal VortexFactory(global::System.IntPtr cPtr, bool cMemoryOwn) {
-    swigCMemOwn = cMemoryOwn;
+  internal BurgersRottVortex(global::System.IntPtr cPtr, bool cMemoryOwn) : base(PatternSolverPINVOKE.BurgersRottVortex_SWIGUpcast(cPtr), cMemoryOwn) {
     swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
   }
 
-  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(VortexFactory obj) {
+  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(BurgersRottVortex obj) {
     return (obj == null) ? new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero) : obj.swigCPtr;
   }
 
-  internal static global::System.Runtime.InteropServices.HandleRef swigRelease(VortexFactory obj) {
+  internal static global::System.Runtime.InteropServices.HandleRef swigRelease(BurgersRottVortex obj) {
     if (obj != null) {
       if (!obj.swigCMemOwn)
         throw new global::System.ApplicationException("Cannot release ownership as memory is not owned");
@@ -35,38 +33,34 @@ public partial class VortexFactory : global::System.IDisposable {
     }
   }
 
-  ~VortexFactory() {
-    Dispose(false);
-  }
-
-  public void Dispose() {
-    Dispose(true);
-    global::System.GC.SuppressFinalize(this);
-  }
-
-  protected virtual void Dispose(bool disposing) {
+  protected override void Dispose(bool disposing) {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          PatternSolverPINVOKE.delete_VortexFactory(swigCPtr);
+          PatternSolverPINVOKE.delete_BurgersRottVortex(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
+      base.Dispose(disposing);
     }
   }
 
-  public static SWIGTYPE_p_BakerSterlingVortex bakerSterlingVortex(double Vr, double Vt, double Vs) {
-    SWIGTYPE_p_BakerSterlingVortex ret = new SWIGTYPE_p_BakerSterlingVortex(PatternSolverPINVOKE.VortexFactory_bakerSterlingVortex(Vr, Vt, Vs), true);
-    return ret;
+  public BurgersRottVortex(double Vr, double Vt, double Vs) : this(PatternSolverPINVOKE.new_BurgersRottVortex__SWIG_0(Vr, Vt, Vs), true) {
   }
 
-  public static LinearPiecewiseVortex BakerSterlingLPVortex(double Vr, double Vt, double Vs) {
-    LinearPiecewiseVortex ret = new LinearPiecewiseVortex(PatternSolverPINVOKE.VortexFactory_BakerSterlingLPVortex(Vr, Vt, Vs), true);
-    return ret;
+  public BurgersRottVortex(double Vr, double Vt) : this(PatternSolverPINVOKE.new_BurgersRottVortex__SWIG_1(Vr, Vt), true) {
   }
 
-  public VortexFactory() : this(PatternSolverPINVOKE.new_VortexFactory(), true) {
+  public BurgersRottVortex(double Vr) : this(PatternSolverPINVOKE.new_BurgersRottVortex__SWIG_2(Vr), true) {
+  }
+
+  public BurgersRottVortex() : this(PatternSolverPINVOKE.new_BurgersRottVortex__SWIG_3(), true) {
+  }
+
+  public override SWIGTYPE_p_Vec2 vecAt(double x, double y) {
+    SWIGTYPE_p_Vec2 ret = new SWIGTYPE_p_Vec2(PatternSolverPINVOKE.BurgersRottVortex_vecAt(swigCPtr, x, y), true);
+    return ret;
   }
 
 }

@@ -78,6 +78,21 @@
     <ClInclude Include="quartic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BurgersRottVortex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SullivanVortex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BurgersRottRRVortex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModifiedRankineVortex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SullivanRRVortex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="swig.i">

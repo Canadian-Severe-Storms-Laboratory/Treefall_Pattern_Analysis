@@ -11,8 +11,6 @@
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="New" Click="NewTransect"/>
-                    <MenuItem Header="Load" IsEnabled="False"/>
-                    <MenuItem Header="Save Selected" IsEnabled="False"/>
                     <Separator/>
                     <MenuItem Header="Delete Selected" Click="RemoveTransect"/>
                 </ContextMenu>

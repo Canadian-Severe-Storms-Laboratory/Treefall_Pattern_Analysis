@@ -1,16 +1,16 @@
 #pragma once
 #include <functional>
 #include <array>
+#include <boost/math/tools/toms748_solve.hpp>
+#include <boost/math/tools/minima.hpp>
 
 double binarySearch(std::function<bool(double)> func, std::array<double, 2> I, double tol = 1e-5) {
-    double mid;
-
-	double& left = I[0];
-	double& right = I[1];
+    
+	double left = I[0];
+	double right = I[1];
+    double mid = (right + left) * 0.5;
 
     while (right - left > tol) {
-
-        mid = (right + left) * 0.5;
 
         if (func(mid)) {
             left = mid;
@@ -18,12 +18,14 @@ double binarySearch(std::function<bool(double)> func, std::array<double, 2> I, d
         else {
             right = mid;
         }
+
+        mid = (right + left) * 0.5;
     }
 
     return mid;
 }
 
-double brentDekkerRoot(std::function<double(double)> func, std::array<double, 2> I, double tol = 1e-5) {
+double localRoot(std::function<double(double)> func, std::array<double, 2> I, double tol = 1e-5) {
     int iter;
 
     double a = I[0], b = I[1], c = I[1], d = 0.0, e = 0.0, min1, min2;
@@ -98,4 +100,139 @@ double brentDekkerRoot(std::function<double(double)> func, std::array<double, 2>
         fb = func(b);
     }
     return 0.0;
+}
+
+
+double localMinima(std::function<double(double)> f, std::array<double, 2> I, const double t = 1e-5) {
+    double a = I[0];
+    double b = I[1];
+
+    double c, d, e, eps, fu, fv, fw, fx, m, p, q, r, sa, sb, t2, tol, u, v, w, x;
+
+    // C is the square of the inverse of the golden ratio.
+    c = 0.5 * (3.0 - sqrt(5.0));
+
+    eps = sqrt(2.220446049250313E-016);
+
+    sa = a;
+    sb = b;
+    x = sa + c * (b - a);
+    w = x;
+    v = w;
+    d = 0.0;
+    e = 0.0;
+    fx = f(x);
+    fw = fx;
+    fv = fw;
+
+    while (true) {
+        m = 0.5 * (sa + sb);
+        tol = eps * fabs(x) + t;
+        t2 = 2.0 * tol;
+
+        // Check the stopping criterion.
+        if (fabs(x - m) <= t2 - 0.5 * (sb - sa))
+        {
+            break;
+        }
+
+        // Fit a parabola.
+        r = 0.0;
+        q = r;
+        p = q;
+
+        if (tol < fabs(e)) {
+            r = (x - w) * (fx - fv);
+            q = (x - v) * (fx - fw);
+            p = (x - v) * q - (x - w) * r;
+            q = 2.0 * (q - r);
+
+            if (0.0 < q) {
+                p = -p;
+            }
+
+            q = fabs(q);
+            r = e;
+            e = d;
+        }
+
+        if (fabs(p) < fabs(0.5 * q * r) && q * (sa - x) < p && p < q * (sb - x)) {
+
+            // Take the parabolic interpolation step.
+            d = p / q;
+            u = x + d;
+
+            // F must not be evaluated too close to A or B.
+            if ((u - sa) < t2 || (sb - u) < t2) {
+                if (x < m) {
+                    d = tol;
+                }
+                else {
+                    d = -tol;
+                }
+            }
+        }
+
+        // A golden-section step.
+        else {
+            if (x < m) {
+                e = sb - x;
+            }
+            else {
+                e = sa - x;
+            }
+            d = c * e;
+        }
+
+        // F must not be evaluated too close to X.
+        if (tol <= fabs(d)) {
+            u = x + d;
+        }
+        else if (0.0 < d) {
+            u = x + tol;
+        }
+        else {
+            u = x - tol;
+        }
+
+        fu = f(u);
+
+        // Update A, B, V, W, and X.
+        if (fu <= fx) {
+            if (u < x) {
+                sb = x;
+            }
+            else {
+                sa = x;
+            }
+
+            v = w;
+            fv = fw;
+            w = x;
+            fw = fx;
+            x = u;
+            fx = fu;
+        }
+        else {
+            if (u < x) {
+                sa = u;
+            }
+            else {
+                sb = u;
+            }
+
+            if (fu <= fw || w == x) {
+                v = w;
+                fv = fw;
+                w = u;
+                fw = fu;
+            }
+            else if (fu <= fv || v == x || v == w) {
+                v = u;
+                fv = fu;
+            }
+        }
+    }
+
+    return x;
 }

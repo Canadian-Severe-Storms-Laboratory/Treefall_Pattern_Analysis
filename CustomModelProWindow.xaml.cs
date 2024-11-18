@@ -5,13 +5,14 @@ using System.Windows;
 using System;
 using ScottPlot.Statistics;
 using ScottPlot.Drawing;
+using System.Runtime.InteropServices;
 
 namespace TreefallPatternAnalysis
 {
     public partial class CustomModelProWindow : ArcGIS.Desktop.Framework.Controls.ProWindow
     {
         private Plot plt;
-        private LinearPiecewiseVortex model;
+        private VortexModel model;
         private double[,] magnitudes;
         private Vector2[,] unitVecs;
         private double[] xPositions;
@@ -88,16 +89,19 @@ namespace TreefallPatternAnalysis
 
             int n = modelParams.n;
 
-            /*            model = new LinearPiecewiseVortex(vrLines, vtLines)
-                        {
-                            Vr = modelParams.vr,
-                            Vt = modelParams.vt,
-                            Vs = modelParams.vs,
-                        };*/
+            model = new LinearPiecewiseVortex(vrLines, vtLines)
+            {
+                Vr = modelParams.vr,
+                Vt = modelParams.vt,
+                Vs = modelParams.vs,
+            };
 
-            model = VortexFactory.BakerSterlingLPVortex(modelParams.vr, modelParams.vt, modelParams.vs);
+            //model = new ModifiedRankineVortex(0.63662, modelParams.vr, modelParams.vt, modelParams.vs);
 
-            model.solveAxesOfInterest();
+            if (model.hasPattern())
+            {
+                model.solveAxesOfInterest();
+            }
 
             var limits = RenderHeatMap(n);
 
@@ -202,6 +206,7 @@ namespace TreefallPatternAnalysis
             hm.CellHeight = dx;
             hm.CellWidth = dx;
             hm.Smooth = true;
+            hm.UseParallel = true;
 
             Colorbar colorbar = plt.AddColorbar(hm);
             colorbar.MinValue = 0.0;

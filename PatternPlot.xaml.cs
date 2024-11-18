@@ -43,31 +43,34 @@ namespace TreefallPatternAnalysis
 
         public void Display(Pattern pattern)
         {
-            double dx = pattern.dx * simScale;
-            double Xc = pattern.Xc;
-
             simVF.RootedVectors.Clear();
-            
-            Span<double> p = pattern.vecs;
 
-            double min = p[0];
-            double max = p[0];
-
-            for (int i = 0; i < p.Length; i+=4)
+            if (!pattern.vecs.IsEmpty)
             {
-                //rotate pattern
-                double y = (Xc - p[i]) * simScale;
-                double vx = p[i + 3];
-                double vy = -p[i + 2];
+                double dx = pattern.dx * simScale;
+                double Xc = pattern.Xc;
 
-                min = Math.Min(min, y);
-                max = Math.Max(max, y);
+                Span<double> p = pattern.vecs;
 
-                simVF.RootedVectors.Add((new Coordinate(0.0, y), new CoordinateVector(vx * dx, vy * dx)));
+                double min = p[0];
+                double max = p[0];
+
+                for (int i = 0; i < p.Length; i += 4)
+                {
+                    //rotate pattern
+                    double y = (Xc - p[i]) * simScale;
+                    double vx = p[i + 3];
+                    double vy = -p[i + 2];
+
+                    min = Math.Min(min, y);
+                    max = Math.Max(max, y);
+
+                    simVF.RootedVectors.Add((new Coordinate(0.0, y), new CoordinateVector(vx * dx, vy * dx)));
+                }
+
+                patternPlot.Plot.SetAxisLimitsX(-2.0 * dx, 2.0 * dx);
+                patternPlot.Plot.SetAxisLimitsY(min - 0.5 * dx, max + 0.5 * dx);
             }
-
-            patternPlot.Plot.SetAxisLimitsX(-2.0 * dx, 2.0 * dx);
-            patternPlot.Plot.SetAxisLimitsY(min - 0.5 * dx, max + 0.5 * dx);
             patternPlot.Refresh();
         }
 

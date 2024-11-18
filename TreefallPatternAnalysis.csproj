@@ -16,6 +16,7 @@
     <Page Remove="PatternSolver\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Images\logo.ico" />
     <None Remove="PatternSolver.exe" />
     <None Remove="PatternSolver.exp" />
     <None Remove="PatternSolver.lib" />
@@ -111,6 +112,11 @@
       <CopyLocal>False</CopyLocal>
       <Private>False</Private>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logo.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <None Update="PatternSolver.dll">

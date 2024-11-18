@@ -131,6 +131,7 @@ public:
 		monitor.message = "Matching...";
 
 		PatternMatcher matcher({ 20.0, 80.0 }, { 1.0, 60.0 }, { 5.0, 25.0 }, { 30.0, 60.0 });
+		matcher.models = { 1 };
 
 		for (auto& cluster : clusters) {
 			monitor.value++;

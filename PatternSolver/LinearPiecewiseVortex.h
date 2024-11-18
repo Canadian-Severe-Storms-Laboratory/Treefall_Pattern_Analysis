@@ -163,11 +163,11 @@ private:
 
 public:
 
-    LinearPiecewiseVortex() {};
+    LinearPiecewiseVortex() : VortexModel(-1, -1, -1) {};
 
-    LinearPiecewiseVortex(SplineTable splineTable_) : splineTable(splineTable_) {};
+    LinearPiecewiseVortex(SplineTable splineTable_, double Vs, double Vr, double Vt) : splineTable(splineTable_), VortexModel(Vs, Vr, Vt) {};
 
-    LinearPiecewiseVortex(std::vector<double> vrLineData, std::vector<double> vtLineData) {
+    LinearPiecewiseVortex(std::vector<double> vrLineData, std::vector<double> vtLineData) : VortexModel(-1, -1, -1) {
         std::vector<std::array<double, 4>> lineData;
 
         for (int i = 0; i < vrLineData.size(); i += 3) {
@@ -234,7 +234,7 @@ public:
         return { -vx, vy + Vs };
     }
 
-    double patternLocation(double x) {
+    double patternLocation(double x) override {
         constexpr double eps = 1e-5;
         double greatestY = -1.7976931348623157E+308;
 

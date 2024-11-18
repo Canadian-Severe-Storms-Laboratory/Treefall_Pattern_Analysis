@@ -10,6 +10,7 @@
         Title="CustomModelAnalysis" Height="735" Width="1282" MinHeight="735" MinWidth="1282"
         Loaded="ProWindow_Loaded"
         WindowStartupLocation="CenterOwner"
+        Icon="pack://application:,,,/TreefallPatternAnalysis;component/Images/Logo.ico"
         Focusable="True" PreviewKeyDown="KeyPressed" PreviewKeyUp="KeyReleased">
 
     <controls:ProWindow.Resources>

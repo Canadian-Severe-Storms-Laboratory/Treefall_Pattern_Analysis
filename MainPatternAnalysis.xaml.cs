@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using ScottPlot;
 using ArcGIS.Desktop.Internal.Mapping;
 using System.Linq;
+using System.Windows.Input;
 
 namespace TreefallPatternAnalysis
 {
@@ -89,6 +90,12 @@ namespace TreefallPatternAnalysis
                 await QueuedTask.Run(() =>
                 {
                     List<double> overviewVectors = ReadVectors(selectedVector);
+
+                    if (overviewVectors.Count / 4 > 30000)
+                    {
+                        MessageBox.Show("Warning: A large number of tree vectors were found.\n" +
+                                        "Please consider using larger area-averaged directions.");
+                    }
 
                     vecHashGrid = new VecHashGrid(overviewVectors.ToArray());
 
@@ -293,7 +300,7 @@ namespace TreefallPatternAnalysis
             return obsPattern;
         }
 
-        private void TestMatch(object sender, RoutedEventArgs e)
+        private async void TestMatch(object sender, RoutedEventArgs e)
         {
             if (transectCreationList.SelectedTransect() == null) return;
 
@@ -302,13 +309,22 @@ namespace TreefallPatternAnalysis
             Range VsRange = new() { min = vsmin.GetNumber(), max = vsmax.GetNumber() };
             Range VcRange = new() { min = vcmin.GetNumber(), max = vcmax.GetNumber() };
 
-            PatternMatcher matcher = new (VrRange, VtRange, VsRange, VcRange);
+            PatternMatcher matcher = new(VrRange, VtRange, VsRange, VcRange)
+            {
+                patternType = patternTypeComboBox.SelectedIndex,
+                models = modelTypeListView.SelectedItems.Cast<object>().Select(item => (double)modelTypeListView.Items.IndexOf(item)).ToArray()
+            };
 
             ObservedPattern obsPattern = GetSelectedObservedPattern();
 
             transectCreationList.SelectedTransect().bestMatchError = matcher.bestMatchError(obsPattern);
 
-            Pattern simPattern = matcher.bestMatch(obsPattern);
+            Pattern simPattern = null;
+
+            ForceCursor = true;
+            Cursor = Cursors.Wait;
+
+            await QueuedTask.Run(() => { simPattern = matcher.bestMatch(obsPattern); });
 
             if (simPattern.vecs.Count == 0)
             {
@@ -318,33 +334,41 @@ namespace TreefallPatternAnalysis
 
             ObservedPatternPlot.simScale = matcher.bestMatchScale;
             ObservedPatternPlot.Display(simPattern);
+
+            Cursor = null;
+            ForceCursor = false;
         }
 
-        private int previousTab = -1;
-        private bool lockTabs = false;
         private void TabChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lockTabs) return;
-            lockTabs = true;
+            if (e.OriginalSource is not TabControl) return;
 
-            if ((headerTabs.SelectedItem as TabItem).Header.ToString() == "Save")
-            {
-                if (!transectCreationList.Transects().IsNullOrEmpty() && !VectorsSelectionBox.IsEmpty() && !ConvergenceSelectionBox.IsEmpty())
-                {
-                    SaveFile.WriteSaveFile(transectCreationList.Transects(), [VectorsSelectionBox.GetSelectedLayer().Name, ConvergenceSelectionBox.GetSelectedLayer().Name]);
-                }
-
-                headerTabs.SelectedIndex = previousTab;
-                lockTabs = false;
-                return;
-            }
-
-            transectGrid.Visibility = headerTabs.SelectedIndex == 0 ? Visibility.Hidden : Visibility.Visible;
-            previousTab = headerTabs.SelectedIndex;
-            lockTabs = false;
+            transectGrid.Visibility = headerTabs.SelectedIndex == 0 ? Visibility.Hidden : Visibility.Visible;   
         }
 
-        private async void RunSimulation(object sender, RoutedEventArgs e)
+        private void SaveResults(object sender, RoutedEventArgs e)
+        {
+            if (!transectCreationList.Transects().IsNullOrEmpty() && !VectorsSelectionBox.IsEmpty() && !ConvergenceSelectionBox.IsEmpty())
+            {
+                SaveFile.WriteSaveFile(transectCreationList.Transects(), [VectorsSelectionBox.GetSelectedLayer().Name, ConvergenceSelectionBox.GetSelectedLayer().Name]);
+            }
+        }
+
+        private async void RunAllSimulations(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < transectCreationList.Count(); i++)
+            {
+                transectCreationList.Select(i);
+                await RunSimulation(sender, e);
+            }
+        }
+
+        private async void RunSimulation_(object sender, RoutedEventArgs e)
+        {
+            await RunSimulation(sender, e);
+        }
+
+        private async Task RunSimulation(object sender, RoutedEventArgs e)
         {
             if (transectCreationList.SelectedTransect() == null) return;
             Transect selectedTransect = transectCreationList.SelectedTransect();
@@ -357,17 +381,29 @@ namespace TreefallPatternAnalysis
             PatternMatcher matcher = new(VrRange, VtRange, VsRange, VcRange)
             {
                 numSimulations = numberOfSimulations.GetIntNumber(),
-                matchThreshold = cutoffThreshold.GetNumber()
+                matchThreshold = cutoffThreshold.GetNumber(),
+                patternType = patternTypeComboBox.SelectedIndex,
+                models = modelTypeListView.SelectedItems.Cast<object>().Select(item => (double)modelTypeListView.Items.IndexOf(item)).ToArray()
             };
 
+            Monitor monitor = matcher.monitor;
+            monitor.message = "Initalizing...";
+            monitor.Start();
+            
             ObservedPattern obsPattern = GetSelectedObservedPattern();
 
-            double error = matcher.bestMatchError(obsPattern);
+            double error = 100;
+            Pattern simPattern = null;
 
-            Pattern simPattern = matcher.bestMatch(obsPattern);
+            await QueuedTask.Run(() => 
+            {
+                error = matcher.bestMatchError(obsPattern);
+                simPattern = matcher.bestMatch(obsPattern);
+            });
 
             if (simPattern.vecs.Count == 0)
             {
+                monitor.Stop();
                 MessageBox.Show("No pattern match found");
                 return;
             }
@@ -375,16 +411,14 @@ namespace TreefallPatternAnalysis
             ObservedPatternPlot.simScale = matcher.bestMatchScale;
             ObservedPatternPlot.Display(simPattern);
 
-            Monitor monitor = matcher.monitor;
+            monitor.warning = "Pattern " + (transectCreationList.SelectedIndex() + 1) + "/" + transectCreationList.Count();
 
             if (error > cutoffThreshold.GetNumber() / 2.0)
             {
-                monitor.warning = "Warning: Pattern does not match very well";
+                monitor.warning += " Warning: Pattern does not match very well";
             }
 
             selectedTransect.bestMatchError = error;
-
-            monitor.Start();
 
             await QueuedTask.Run(() => matcher.monteCarloMatching(obsPattern));
 
@@ -410,6 +444,7 @@ namespace TreefallPatternAnalysis
                 swirlHistogramPlot.Plot.Clear();
                 vmaxHistogramPlot.Refresh();
                 swirlHistogramPlot.Refresh();
+                resultStatsText.Text = "";
                 return;
             }
 
@@ -465,32 +500,35 @@ namespace TreefallPatternAnalysis
                 y[i] = i / (double)transect.vmaxResults.Length;
             }
 
-            double ef0 = Math.Round(y[FindClosestIndex(transect.vmaxResults, 37.0)] - y[FindClosestIndex(transect.vmaxResults, 25.0)], 2);
-            double ef1 = Math.Round(y[FindClosestIndex(transect.vmaxResults, 50.0)] - y[FindClosestIndex(transect.vmaxResults, 37.0)], 2);
-            double ef2 = Math.Round(y[FindClosestIndex(transect.vmaxResults, 62.0)] - y[FindClosestIndex(transect.vmaxResults, 50.0)], 2);
-            double ef3 = Math.Round(y[FindClosestIndex(transect.vmaxResults, 75.0)] - y[FindClosestIndex(transect.vmaxResults, 62.0)], 2);
-            double ef4 = Math.Round(y[FindClosestIndex(transect.vmaxResults, 87.0)] - y[FindClosestIndex(transect.vmaxResults, 75.0)], 2);
-            double ef5 = Math.Round(1.0 - y[FindClosestIndex(transect.vmaxResults, 87.0)], 2);
+            double ef0 = Math.Round((y[FindClosestIndex(transect.vmaxResults, 37.0)] - y[FindClosestIndex(transect.vmaxResults, 25.0)]) * 100.0, 2);
+            double ef1 = Math.Round((y[FindClosestIndex(transect.vmaxResults, 50.0)] - y[FindClosestIndex(transect.vmaxResults, 37.0)]) * 100.0, 2);
+            double ef2 = Math.Round((y[FindClosestIndex(transect.vmaxResults, 62.0)] - y[FindClosestIndex(transect.vmaxResults, 50.0)]) * 100.0, 2);
+            double ef3 = Math.Round((y[FindClosestIndex(transect.vmaxResults, 75.0)] - y[FindClosestIndex(transect.vmaxResults, 62.0)]) * 100.0, 2);
+            double ef4 = Math.Round((y[FindClosestIndex(transect.vmaxResults, 87.0)] - y[FindClosestIndex(transect.vmaxResults, 75.0)]) * 100.0, 2);
+            double ef5 = Math.Round((1.0 - y[FindClosestIndex(transect.vmaxResults, 87.0)]) * 100.0, 2);
 
             resultStatsText.Text = $"Error:\t{Math.Round(transect.bestMatchError, 4)}\n" +
                                    $"Vmax:\t{Math.Round(vmaxMedian)} ± {Math.Round(vmaxStats.StDev)}\n" +
-                                   $"Swirl:\t{Math.Round(swirlMedian)} ± {Math.Round(swirlStats.StDev)}\n" +
+                                   $"Swirl:\t{Math.Round(swirlMedian, 2)} ± {Math.Round(swirlStats.StDev, 2)}\n" +
                                    $"\nProbabilities\n" +
-                                   $"EF0:\t{ef0} %\n" +
-                                   $"EF1:\t{ef1} %\n" +
-                                   $"EF2:\t{ef2} %\n" +
-                                   $"EF3:\t{ef3} %\n" +
-                                   $"EF4:\t{ef4} %\n" +
-                                   $"EF5:\t{ef5} %\n";
-                
+                                   $"EF0:\t{ef0}%\n" +
+                                   $"EF1:\t{ef1}%\n" +
+                                   $"EF2:\t{ef2}%\n" +
+                                   $"EF3:\t{ef3}%\n" +
+                                   $"EF4:\t{ef4}%\n" +
+                                   $"EF5:\t{ef5}%\n";        
         }
 
         private int FindClosestIndex(double[] arr, double val)
         {
-            return arr.Select((value, index) => new { Value = value, Index = index }) // Project value and index
-                    .OrderBy(x => Math.Abs(x.Value - val))                  // Order by the difference
-                    .First()                                                        // Take the first item
-                    .Index;
+            for (int i = 1; i < arr.Length; i++)
+            {
+                if (arr[i] <= val) continue;
+                
+                return i - 1;
+            }
+
+            return arr.Length - 1;
         }
     }
 }

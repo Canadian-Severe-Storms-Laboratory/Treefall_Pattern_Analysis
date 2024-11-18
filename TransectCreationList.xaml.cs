@@ -115,5 +115,20 @@ namespace TreefallPatternAnalysis
         {
             return transectList.SelectedItem as Transect;
         }
+
+        public int SelectedIndex()
+        {
+            return transectList.SelectedIndex;
+        } 
+
+        public int Count()
+        {
+            return transectList.Items.Count;
+        }   
+
+        public void Select(int index)
+        {
+            transectList.SelectedIndex = index;
+        }
     }
 }

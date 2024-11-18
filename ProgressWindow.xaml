@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TreefallPatternAnalysis"
         mc:Ignorable="d"
+        Icon="pack://application:,,,/TreefallPatternAnalysis;component/Images/Logo.ico"
         Title="ProgressWindow" Height="145" Width="350" MinHeight="145" MinWidth="350" MaxHeight="145" MaxWidth="350">
     <Grid>
         <Label x:Name="message" Content="Processing..." HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10, 10, 10, 0"/>
         <Grid>
-            <ProgressBar x:Name="progressBar" Minimum="0" Maximum="1" Value="0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Margin="10, 40, 10, 0"/>
-            <Label x:Name="countLabel" FontWeight="Bold" Content="" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <ProgressBar x:Name="progressBar" Foreground="MediumPurple" Minimum="0" Maximum="1" Value="0" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Top"  Margin="10, 40, 10, 0"/>
+            <Label x:Name="countLabel" Foreground="Black" FontSize="14" FontWeight="Bold" Content="" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
         <Label x:Name="warning" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10, 70, 10, 0"/>
 

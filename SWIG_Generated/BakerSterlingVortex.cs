@@ -9,18 +9,18 @@
 //------------------------------------------------------------------------------
 
 
-public partial class LinearPiecewiseVortex : VortexModel {
+public partial class BakerSterlingVortex : VortexModel {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
 
-  internal LinearPiecewiseVortex(global::System.IntPtr cPtr, bool cMemoryOwn) : base(PatternSolverPINVOKE.LinearPiecewiseVortex_SWIGUpcast(cPtr), cMemoryOwn) {
+  internal BakerSterlingVortex(global::System.IntPtr cPtr, bool cMemoryOwn) : base(PatternSolverPINVOKE.BakerSterlingVortex_SWIGUpcast(cPtr), cMemoryOwn) {
     swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
   }
 
-  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(LinearPiecewiseVortex obj) {
+  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(BakerSterlingVortex obj) {
     return (obj == null) ? new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero) : obj.swigCPtr;
   }
 
-  internal static global::System.Runtime.InteropServices.HandleRef swigRelease(LinearPiecewiseVortex obj) {
+  internal static global::System.Runtime.InteropServices.HandleRef swigRelease(BakerSterlingVortex obj) {
     if (obj != null) {
       if (!obj.swigCMemOwn)
         throw new global::System.ApplicationException("Cannot release ownership as memory is not owned");
@@ -38,7 +38,7 @@ public partial class LinearPiecewiseVortex : VortexModel {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          PatternSolverPINVOKE.delete_LinearPiecewiseVortex(swigCPtr);
+          PatternSolverPINVOKE.delete_BakerSterlingVortex(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -46,24 +46,30 @@ public partial class LinearPiecewiseVortex : VortexModel {
     }
   }
 
-  public LinearPiecewiseVortex() : this(PatternSolverPINVOKE.new_LinearPiecewiseVortex__SWIG_0(), true) {
+  public BakerSterlingVortex(double Vr, double Vt, double Vs) : this(PatternSolverPINVOKE.new_BakerSterlingVortex__SWIG_0(Vr, Vt, Vs), true) {
   }
 
-  public LinearPiecewiseVortex(SWIGTYPE_p_SplineTable splineTable_, double Vs, double Vr, double Vt) : this(PatternSolverPINVOKE.new_LinearPiecewiseVortex__SWIG_1(SWIGTYPE_p_SplineTable.getCPtr(splineTable_), Vs, Vr, Vt), true) {
-    if (PatternSolverPINVOKE.SWIGPendingException.Pending) throw PatternSolverPINVOKE.SWIGPendingException.Retrieve();
+  public BakerSterlingVortex(double Vr, double Vt) : this(PatternSolverPINVOKE.new_BakerSterlingVortex__SWIG_1(Vr, Vt), true) {
   }
 
-  public LinearPiecewiseVortex(DoubleVector vrLineData, DoubleVector vtLineData) : this(PatternSolverPINVOKE.new_LinearPiecewiseVortex__SWIG_2(DoubleVector.getCPtr(vrLineData), DoubleVector.getCPtr(vtLineData)), true) {
-    if (PatternSolverPINVOKE.SWIGPendingException.Pending) throw PatternSolverPINVOKE.SWIGPendingException.Retrieve();
+  public BakerSterlingVortex(double Vr) : this(PatternSolverPINVOKE.new_BakerSterlingVortex__SWIG_2(Vr), true) {
+  }
+
+  public BakerSterlingVortex() : this(PatternSolverPINVOKE.new_BakerSterlingVortex__SWIG_3(), true) {
   }
 
   public override SWIGTYPE_p_Vec2 vecAt(double x, double y) {
-    SWIGTYPE_p_Vec2 ret = new SWIGTYPE_p_Vec2(PatternSolverPINVOKE.LinearPiecewiseVortex_vecAt(swigCPtr, x, y), true);
+    SWIGTYPE_p_Vec2 ret = new SWIGTYPE_p_Vec2(PatternSolverPINVOKE.BakerSterlingVortex_vecAt(swigCPtr, x, y), true);
     return ret;
   }
 
   public override double patternLocation(double x) {
-    double ret = PatternSolverPINVOKE.LinearPiecewiseVortex_patternLocation(swigCPtr, x);
+    double ret = PatternSolverPINVOKE.BakerSterlingVortex_patternLocation(swigCPtr, x);
+    return ret;
+  }
+
+  public override bool patternLocationExists(double x) {
+    bool ret = PatternSolverPINVOKE.BakerSterlingVortex_patternLocationExists(swigCPtr, x);
     return ret;
   }
 

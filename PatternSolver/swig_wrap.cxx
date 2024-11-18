@@ -356,13 +356,18 @@ template <typename T> T SwigValueInit() {
 #include "Utils.h"
 #include "VortexModel.h"
 #include "LinearPiecewiseVortex.h"
+#include "BakerSterlingVortex.h"
+#include "BurgersRottVortex.h"
+#include "BurgersRottRRVortex.h"
+#include "SullivanVortex.h"
+#include "SullivanRRVortex.h"
+#include "ModifiedRankineVortex.h"
 #include "VecHashGrid.h"
 #include "ConvergenceLine.h"
 #include "Transect.h"
 #include "ObservedPattern.h"
 #include "AutoTransectFitter.h"
 #include "PatternMatcher.h"
-#include "VortexFactory.h"
 #include "Monitor.h"
 
 
@@ -1543,6 +1548,20 @@ SWIGEXPORT double SWIGSTDCALL CSharp_VortexModel_patternLocation(void * jarg1, d
 }
 
 
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_VortexModel_patternLocationExists(void * jarg1, double jarg2) {
+  unsigned int jresult ;
+  VortexModel *arg1 = (VortexModel *) 0 ;
+  double arg2 ;
+  bool result;
+  
+  arg1 = (VortexModel *)jarg1; 
+  arg2 = (double)jarg2; 
+  result = (bool)(arg1)->patternLocationExists(arg2);
+  jresult = result; 
+  return jresult;
+}
+
+
 SWIGEXPORT void SWIGSTDCALL CSharp_VortexModel_solveAxesOfInterest(void * jarg1) {
   VortexModel *arg1 = (VortexModel *) 0 ;
   
@@ -1606,6 +1625,18 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_VortexModel_hasPattern(void * jarg1) 
   
   arg1 = (VortexModel *)jarg1; 
   result = (bool)(arg1)->hasPattern();
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_VortexModel_isOuterType(void * jarg1) {
+  unsigned int jresult ;
+  VortexModel *arg1 = (VortexModel *) 0 ;
+  bool result;
+  
+  arg1 = (VortexModel *)jarg1; 
+  result = (bool)(arg1)->isOuterType();
   jresult = result; 
   return jresult;
 }
@@ -1773,9 +1804,12 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_new_LinearPiecewiseVortex__SWIG_0() {
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_new_LinearPiecewiseVortex__SWIG_1(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_LinearPiecewiseVortex__SWIG_1(void * jarg1, double jarg2, double jarg3, double jarg4) {
   void * jresult ;
   SplineTable arg1 ;
+  double arg2 ;
+  double arg3 ;
+  double arg4 ;
   SplineTable *argp1 ;
   LinearPiecewiseVortex *result = 0 ;
   
@@ -1785,7 +1819,10 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_new_LinearPiecewiseVortex__SWIG_1(void * ja
     return 0;
   }
   arg1 = *argp1; 
-  result = (LinearPiecewiseVortex *)new LinearPiecewiseVortex(arg1);
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  arg4 = (double)jarg4; 
+  result = (LinearPiecewiseVortex *)new LinearPiecewiseVortex(arg1,arg2,arg3,arg4);
   jresult = (void *)result; 
   return jresult;
 }
@@ -1851,6 +1888,488 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_LinearPiecewiseVortex(void * jarg1) {
   LinearPiecewiseVortex *arg1 = (LinearPiecewiseVortex *) 0 ;
   
   arg1 = (LinearPiecewiseVortex *)jarg1; 
+  delete arg1;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_BakerSterlingVortex__SWIG_0(double jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  BakerSterlingVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (BakerSterlingVortex *)new BakerSterlingVortex(arg1,arg2,arg3);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_BakerSterlingVortex__SWIG_1(double jarg1, double jarg2) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  BakerSterlingVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  result = (BakerSterlingVortex *)new BakerSterlingVortex(arg1,arg2);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_BakerSterlingVortex__SWIG_2(double jarg1) {
+  void * jresult ;
+  double arg1 ;
+  BakerSterlingVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  result = (BakerSterlingVortex *)new BakerSterlingVortex(arg1);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_BakerSterlingVortex__SWIG_3() {
+  void * jresult ;
+  BakerSterlingVortex *result = 0 ;
+  
+  result = (BakerSterlingVortex *)new BakerSterlingVortex();
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_BakerSterlingVortex_vecAt(void * jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  BakerSterlingVortex *arg1 = (BakerSterlingVortex *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  Vec2 result;
+  
+  arg1 = (BakerSterlingVortex *)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (arg1)->vecAt(arg2,arg3);
+  jresult = new Vec2(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT double SWIGSTDCALL CSharp_BakerSterlingVortex_patternLocation(void * jarg1, double jarg2) {
+  double jresult ;
+  BakerSterlingVortex *arg1 = (BakerSterlingVortex *) 0 ;
+  double arg2 ;
+  double result;
+  
+  arg1 = (BakerSterlingVortex *)jarg1; 
+  arg2 = (double)jarg2; 
+  result = (double)(arg1)->patternLocation(arg2);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_BakerSterlingVortex_patternLocationExists(void * jarg1, double jarg2) {
+  unsigned int jresult ;
+  BakerSterlingVortex *arg1 = (BakerSterlingVortex *) 0 ;
+  double arg2 ;
+  bool result;
+  
+  arg1 = (BakerSterlingVortex *)jarg1; 
+  arg2 = (double)jarg2; 
+  result = (bool)(arg1)->patternLocationExists(arg2);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_BakerSterlingVortex(void * jarg1) {
+  BakerSterlingVortex *arg1 = (BakerSterlingVortex *) 0 ;
+  
+  arg1 = (BakerSterlingVortex *)jarg1; 
+  delete arg1;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_BurgersRottVortex__SWIG_0(double jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  BurgersRottVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (BurgersRottVortex *)new BurgersRottVortex(arg1,arg2,arg3);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_BurgersRottVortex__SWIG_1(double jarg1, double jarg2) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  BurgersRottVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  result = (BurgersRottVortex *)new BurgersRottVortex(arg1,arg2);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_BurgersRottVortex__SWIG_2(double jarg1) {
+  void * jresult ;
+  double arg1 ;
+  BurgersRottVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  result = (BurgersRottVortex *)new BurgersRottVortex(arg1);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_BurgersRottVortex__SWIG_3() {
+  void * jresult ;
+  BurgersRottVortex *result = 0 ;
+  
+  result = (BurgersRottVortex *)new BurgersRottVortex();
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_BurgersRottVortex_vecAt(void * jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  BurgersRottVortex *arg1 = (BurgersRottVortex *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  Vec2 result;
+  
+  arg1 = (BurgersRottVortex *)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (arg1)->vecAt(arg2,arg3);
+  jresult = new Vec2(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_BurgersRottVortex(void * jarg1) {
+  BurgersRottVortex *arg1 = (BurgersRottVortex *) 0 ;
+  
+  arg1 = (BurgersRottVortex *)jarg1; 
+  delete arg1;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_BurgersRottRRVortex__SWIG_0(double jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  BurgersRottRRVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (BurgersRottRRVortex *)new BurgersRottRRVortex(arg1,arg2,arg3);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_BurgersRottRRVortex__SWIG_1(double jarg1, double jarg2) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  BurgersRottRRVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  result = (BurgersRottRRVortex *)new BurgersRottRRVortex(arg1,arg2);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_BurgersRottRRVortex__SWIG_2(double jarg1) {
+  void * jresult ;
+  double arg1 ;
+  BurgersRottRRVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  result = (BurgersRottRRVortex *)new BurgersRottRRVortex(arg1);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_BurgersRottRRVortex__SWIG_3() {
+  void * jresult ;
+  BurgersRottRRVortex *result = 0 ;
+  
+  result = (BurgersRottRRVortex *)new BurgersRottRRVortex();
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_BurgersRottRRVortex_vecAt(void * jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  BurgersRottRRVortex *arg1 = (BurgersRottRRVortex *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  Vec2 result;
+  
+  arg1 = (BurgersRottRRVortex *)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (arg1)->vecAt(arg2,arg3);
+  jresult = new Vec2(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_BurgersRottRRVortex(void * jarg1) {
+  BurgersRottRRVortex *arg1 = (BurgersRottRRVortex *) 0 ;
+  
+  arg1 = (BurgersRottRRVortex *)jarg1; 
+  delete arg1;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_SullivanVortex__SWIG_0(double jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  SullivanVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (SullivanVortex *)new SullivanVortex(arg1,arg2,arg3);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_SullivanVortex__SWIG_1(double jarg1, double jarg2) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  SullivanVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  result = (SullivanVortex *)new SullivanVortex(arg1,arg2);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_SullivanVortex__SWIG_2(double jarg1) {
+  void * jresult ;
+  double arg1 ;
+  SullivanVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  result = (SullivanVortex *)new SullivanVortex(arg1);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_SullivanVortex__SWIG_3() {
+  void * jresult ;
+  SullivanVortex *result = 0 ;
+  
+  result = (SullivanVortex *)new SullivanVortex();
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_SullivanVortex(void * jarg1) {
+  SullivanVortex *arg1 = (SullivanVortex *) 0 ;
+  
+  arg1 = (SullivanVortex *)jarg1; 
+  delete arg1;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_SullivanRRVortex__SWIG_0(double jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  SullivanRRVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (SullivanRRVortex *)new SullivanRRVortex(arg1,arg2,arg3);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_SullivanRRVortex__SWIG_1(double jarg1, double jarg2) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  SullivanRRVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  result = (SullivanRRVortex *)new SullivanRRVortex(arg1,arg2);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_SullivanRRVortex__SWIG_2(double jarg1) {
+  void * jresult ;
+  double arg1 ;
+  SullivanRRVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  result = (SullivanRRVortex *)new SullivanRRVortex(arg1);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_SullivanRRVortex__SWIG_3() {
+  void * jresult ;
+  SullivanRRVortex *result = 0 ;
+  
+  result = (SullivanRRVortex *)new SullivanRRVortex();
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_SullivanRRVortex(void * jarg1) {
+  SullivanRRVortex *arg1 = (SullivanRRVortex *) 0 ;
+  
+  arg1 = (SullivanRRVortex *)jarg1; 
+  delete arg1;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_ModifiedRankineVortex_phi_set(void * jarg1, double jarg2) {
+  ModifiedRankineVortex *arg1 = (ModifiedRankineVortex *) 0 ;
+  double arg2 ;
+  
+  arg1 = (ModifiedRankineVortex *)jarg1; 
+  arg2 = (double)jarg2; 
+  if (arg1) (arg1)->phi = arg2;
+}
+
+
+SWIGEXPORT double SWIGSTDCALL CSharp_ModifiedRankineVortex_phi_get(void * jarg1) {
+  double jresult ;
+  ModifiedRankineVortex *arg1 = (ModifiedRankineVortex *) 0 ;
+  double result;
+  
+  arg1 = (ModifiedRankineVortex *)jarg1; 
+  result = (double) ((arg1)->phi);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_ModifiedRankineVortex__SWIG_0(double jarg1, double jarg2, double jarg3, double jarg4) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  double arg4 ;
+  ModifiedRankineVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  arg4 = (double)jarg4; 
+  result = (ModifiedRankineVortex *)new ModifiedRankineVortex(arg1,arg2,arg3,arg4);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_ModifiedRankineVortex__SWIG_1(double jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  ModifiedRankineVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (ModifiedRankineVortex *)new ModifiedRankineVortex(arg1,arg2,arg3);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_ModifiedRankineVortex__SWIG_2(double jarg1, double jarg2) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  ModifiedRankineVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  result = (ModifiedRankineVortex *)new ModifiedRankineVortex(arg1,arg2);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_ModifiedRankineVortex__SWIG_3(double jarg1) {
+  void * jresult ;
+  double arg1 ;
+  ModifiedRankineVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  result = (ModifiedRankineVortex *)new ModifiedRankineVortex(arg1);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_ModifiedRankineVortex_vecAt(void * jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  ModifiedRankineVortex *arg1 = (ModifiedRankineVortex *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  Vec2 result;
+  
+  arg1 = (ModifiedRankineVortex *)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (arg1)->vecAt(arg2,arg3);
+  jresult = new Vec2(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_ModifiedRankineVortex(void * jarg1) {
+  ModifiedRankineVortex *arg1 = (ModifiedRankineVortex *) 0 ;
+  
+  arg1 = (ModifiedRankineVortex *)jarg1; 
   delete arg1;
 }
 
@@ -3176,6 +3695,28 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_AutoTransectFitter(void * jarg1) {
 }
 
 
+SWIGEXPORT void SWIGSTDCALL CSharp_PatternMatcher_models_set(void * jarg1, void * jarg2) {
+  PatternMatcher *arg1 = (PatternMatcher *) 0 ;
+  std::vector< double > *arg2 = (std::vector< double > *) 0 ;
+  
+  arg1 = (PatternMatcher *)jarg1; 
+  arg2 = (std::vector< double > *)jarg2; 
+  if (arg1) (arg1)->models = *arg2;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_PatternMatcher_models_get(void * jarg1) {
+  void * jresult ;
+  PatternMatcher *arg1 = (PatternMatcher *) 0 ;
+  std::vector< double > *result = 0 ;
+  
+  arg1 = (PatternMatcher *)jarg1; 
+  result = (std::vector< double > *)& ((arg1)->models);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
 SWIGEXPORT void SWIGSTDCALL CSharp_PatternMatcher_VrRange_set(void * jarg1, void * jarg2) {
   PatternMatcher *arg1 = (PatternMatcher *) 0 ;
   Utils::Range *arg2 = (Utils::Range *) 0 ;
@@ -3303,6 +3844,28 @@ SWIGEXPORT double SWIGSTDCALL CSharp_PatternMatcher_matchThreshold_get(void * ja
   
   arg1 = (PatternMatcher *)jarg1; 
   result = (double) ((arg1)->matchThreshold);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_PatternMatcher_patternType_set(void * jarg1, int jarg2) {
+  PatternMatcher *arg1 = (PatternMatcher *) 0 ;
+  int arg2 ;
+  
+  arg1 = (PatternMatcher *)jarg1; 
+  arg2 = (int)jarg2; 
+  if (arg1) (arg1)->patternType = arg2;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_PatternMatcher_patternType_get(void * jarg1) {
+  int jresult ;
+  PatternMatcher *arg1 = (PatternMatcher *) 0 ;
+  int result;
+  
+  arg1 = (PatternMatcher *)jarg1; 
+  result = (int) ((arg1)->patternType);
   jresult = result; 
   return jresult;
 }
@@ -3502,56 +4065,6 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_PatternMatcher(void * jarg1) {
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_VortexFactory_bakerSterlingVortex(double jarg1, double jarg2, double jarg3) {
-  void * jresult ;
-  double arg1 ;
-  double arg2 ;
-  double arg3 ;
-  BakerSterlingVortex result;
-  
-  arg1 = (double)jarg1; 
-  arg2 = (double)jarg2; 
-  arg3 = (double)jarg3; 
-  result = VortexFactory::bakerSterlingVortex(arg1,arg2,arg3);
-  jresult = new BakerSterlingVortex(result); 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_VortexFactory_BakerSterlingLPVortex(double jarg1, double jarg2, double jarg3) {
-  void * jresult ;
-  double arg1 ;
-  double arg2 ;
-  double arg3 ;
-  LinearPiecewiseVortex result;
-  
-  arg1 = (double)jarg1; 
-  arg2 = (double)jarg2; 
-  arg3 = (double)jarg3; 
-  result = VortexFactory::BakerSterlingLPVortex(arg1,arg2,arg3);
-  jresult = new LinearPiecewiseVortex(result); 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_new_VortexFactory() {
-  void * jresult ;
-  VortexFactory *result = 0 ;
-  
-  result = (VortexFactory *)new VortexFactory();
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_delete_VortexFactory(void * jarg1) {
-  VortexFactory *arg1 = (VortexFactory *) 0 ;
-  
-  arg1 = (VortexFactory *)jarg1; 
-  delete arg1;
-}
-
-
 SWIGEXPORT void SWIGSTDCALL CSharp_Monitor_value_set(void * jarg1, double jarg2) {
   Monitor *arg1 = (Monitor *) 0 ;
   double arg2 ;
@@ -3740,6 +4253,30 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_Monitor(void * jarg1) {
 
 
 SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_LinearPiecewiseVortex_SWIGUpcast(LinearPiecewiseVortex *jarg1) {
+    return (VortexModel *)jarg1;
+}
+
+SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_BakerSterlingVortex_SWIGUpcast(BakerSterlingVortex *jarg1) {
+    return (VortexModel *)jarg1;
+}
+
+SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_BurgersRottVortex_SWIGUpcast(BurgersRottVortex *jarg1) {
+    return (VortexModel *)jarg1;
+}
+
+SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_BurgersRottRRVortex_SWIGUpcast(BurgersRottRRVortex *jarg1) {
+    return (VortexModel *)jarg1;
+}
+
+SWIGEXPORT BurgersRottVortex * SWIGSTDCALL CSharp_SullivanVortex_SWIGUpcast(SullivanVortex *jarg1) {
+    return (BurgersRottVortex *)jarg1;
+}
+
+SWIGEXPORT BurgersRottRRVortex * SWIGSTDCALL CSharp_SullivanRRVortex_SWIGUpcast(SullivanRRVortex *jarg1) {
+    return (BurgersRottRRVortex *)jarg1;
+}
+
+SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_ModifiedRankineVortex_SWIGUpcast(ModifiedRankineVortex *jarg1) {
     return (VortexModel *)jarg1;
 }
 

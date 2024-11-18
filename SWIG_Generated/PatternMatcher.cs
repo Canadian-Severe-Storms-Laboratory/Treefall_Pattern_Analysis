@@ -56,6 +56,17 @@ public partial class PatternMatcher : global::System.IDisposable {
     }
   }
 
+  public DoubleVector models {
+    set {
+      PatternSolverPINVOKE.PatternMatcher_models_set(swigCPtr, DoubleVector.getCPtr(value));
+    } 
+    get {
+      global::System.IntPtr cPtr = PatternSolverPINVOKE.PatternMatcher_models_get(swigCPtr);
+      DoubleVector ret = (cPtr == global::System.IntPtr.Zero) ? null : new DoubleVector(cPtr, false);
+      return ret;
+    } 
+  }
+
   public Range VrRange {
     set {
       PatternSolverPINVOKE.PatternMatcher_VrRange_set(swigCPtr, Range.getCPtr(value));
@@ -117,6 +128,16 @@ public partial class PatternMatcher : global::System.IDisposable {
     } 
     get {
       double ret = PatternSolverPINVOKE.PatternMatcher_matchThreshold_get(swigCPtr);
+      return ret;
+    } 
+  }
+
+  public int patternType {
+    set {
+      PatternSolverPINVOKE.PatternMatcher_patternType_set(swigCPtr, value);
+    } 
+    get {
+      int ret = PatternSolverPINVOKE.PatternMatcher_patternType_get(swigCPtr);
       return ret;
     } 
   }

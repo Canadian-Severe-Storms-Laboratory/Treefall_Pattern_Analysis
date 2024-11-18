@@ -48,28 +48,21 @@ EXPORT class VortexModel
 protected:
 	std::array<double, 3> axesOfInterest() {
 		
+		constexpr double limit = 100.0;
+
 		//x axis of Vmax
 		const double x0 = Vt / hypot(Vr, Vt);
 
-		auto lowerFunc = [&](double x) {
+		auto lowerFunc = [&](double x) { return !patternLocationExists(x); }; //there is not a root
 
-			const double y = patternLocation(x);
-			return y < -100.0; //there is not a root
-		};
+		auto upperFunc = [&](double x) { return patternLocationExists(x); }; //there is a root
+		
+		const double lower = binarySearch(lowerFunc, { -limit, x0 });
+		const double upper = binarySearch(upperFunc, { x0, limit });
 
-		auto upperFunc = [&](double x) {
-			return patternLocation(x) > -100.0; //there is a root
-		};
+		auto signFunc = [&](double x) { return vecAt(x, patternLocation(x)).x; };
 
-		const double lower = binarySearch(lowerFunc, { -100.0, x0 });
-		const double upper = binarySearch(upperFunc, { x0, 100.0 });
-
-		auto signFunc = [&](double x) {
-			const double y = patternLocation(x);
-			return vecAt(x, y).x;
-		};
-
-		const double Xc = brentDekkerRoot(signFunc, { lower + 1e-5, upper - 1e-5 });
+		const double Xc = localRoot(signFunc, { lower + 1e-5, upper - 1e-5 });
 
 		return { lower, upper, Xc };
 	}
@@ -90,12 +83,63 @@ public:
 	double upper;
 	double Xc;
 
-	VortexModel() : Vr(0.0), Vt(0.0), Vs(0.0), lower(0.0), upper(0.0), Xc(0.0) {};
-
-	VortexModel(double _Vr, double _Vt, double _Vs) : Vr(_Vr), Vt(_Vt), Vs(_Vs), lower(0.0), upper(0.0), Xc(0.0) {};
+	VortexModel(double _Vr=-1, double _Vt=-1, double _Vs=-1) : Vr(_Vr), Vt(_Vt), Vs(_Vs), lower(0.0), upper(0.0), Xc(0.0) {};
 
 	virtual Vec2 vecAt(double x, double y) = 0;
-	virtual double patternLocation(double x) = 0;
+	
+	virtual double patternLocation(double x) {
+		constexpr double Rmax = 1.0;
+		constexpr double Vc2 = 1.0;
+		constexpr double limit = 100.0;
+
+		const auto rootFunc = [&](double y) { return Vc2 - vecAt(x, y).magSq(); };
+
+		if (fabs(x) < Rmax) {
+			const double ym = sqrt(Rmax * Rmax - x * x);
+
+			const double v1 = rootFunc(limit);
+			const double v2 = rootFunc(ym);
+
+			if (v1 * v2 <= 0.0) return localRoot(rootFunc, { ym, limit });
+
+			const double v3 = rootFunc(-ym);
+
+			if (v2 * v3 <= 0.0) return localRoot(rootFunc, { -ym, ym });
+		}
+
+		const double ym = localMinima(rootFunc, { -limit, limit });
+
+		if (rootFunc(ym) <= 0.0) return localRoot(rootFunc, { ym, limit });
+
+		return std::numeric_limits<double>::lowest();
+	}
+
+	virtual bool patternLocationExists(double x) {
+		constexpr double Rmax = 1.0;
+		constexpr double Vc2 = 1.0;
+		constexpr double limit = 100.0;
+
+		const auto rootFunc = [&](double y) { return Vc2 - vecAt(x, y).magSq(); };
+
+		if (fabs(x) < Rmax) {
+			const double ym = sqrt(Rmax * Rmax - x * x);
+
+			const double v1 = rootFunc(limit);
+			const double v2 = rootFunc(ym);
+
+			if (v1 * v2 <= 0.0) return true;
+
+			const double v3 = rootFunc(-ym);
+
+			if (v2 * v3 <= 0.0) return true;
+		}
+
+		const double ym = localMinima(rootFunc, { -limit, limit });
+
+		if (rootFunc(ym) <= 0.0) return true;
+
+		return false;
+	}
 
 	void solveAxesOfInterest() {
 		const std::array<double, 3> axes = axesOfInterest();
@@ -122,6 +166,10 @@ public:
 
 	bool hasPattern() {
 		return vmax() > 1.0;
+	}
+
+	bool isOuterType() {
+		return vmax() >= 1.0 + 2.0 * Vs;
 	}
 
 	Vec2 unitVecAt(double x, double y) {
@@ -178,6 +226,7 @@ public:
 		std::vector<double> fieldList;
 		fieldList.reserve(2 * Nx * Ny);
 
+		//could be parallized
 		for (int i = 0; i < Ny; i++) {
 
 			//avoid division by zero
@@ -206,6 +255,7 @@ public:
 
 		const double dx = (upper - lower) / (numPoints - 1);
 
+		//could be parallized
 		for (double x = lower + 0.001; x <= upper - 0.001; x += dx) {
 			curve.xs.push_back(x);
 			curve.ys.push_back(patternLocation(x));
