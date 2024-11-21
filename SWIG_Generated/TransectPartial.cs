@@ -1,5 +1,6 @@
 ﻿using ScottPlot;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 public partial class Transect
@@ -14,6 +15,8 @@ public partial class Transect
     public double[] vmaxResults;
     [JsonInclude]
     public double[] swirlResults;
+    [JsonInclude]
+    public double[] rmaxResults;
     [JsonInclude]
     public double bestMatchError;
 
@@ -98,6 +101,11 @@ public partial class Transect
         ys[1] = y + pv[1] * (heightOffset - lengthBelow);
 
         return (xs, ys);
+    }
+
+    public double Length()
+    {
+        return (Math.Floor(lengthAbove / spacing) + Math.Floor(lengthBelow / spacing)) * spacing;
     }
 
     public override string ToString()

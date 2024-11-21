@@ -113,8 +113,8 @@
                     <Label Content="#Boxes" Width="100" Height="30" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="628,342,0,0"/>
                     <Button x:Name="testMatchButton2" Click="TestMatch"  Content="Test Match" FontSize="14" HorizontalAlignment="Left" Height="25" Margin="979,442,0,0" VerticalAlignment="Top" Width="80"/>
 
-                    <Label Content="Result Statistics" Width="160" Height="34" Foreground="Black" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,20,0,0"/>
-                    <TextBlock x:Name="resultStatsText" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Height="250" Margin="20,50,0,0"/>
+                    <Label Content="Result Statistics" Width="160" Height="34" Foreground="Black" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,11,0,0"/>
+                    <TextBlock x:Name="resultStatsText" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Height="250" Margin="18,40,0,0"/>
 
 
                     <Label Content="Pattern Type" Width="95" Height="34" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="980,573,0,0"/>
@@ -122,6 +122,11 @@
                         <ComboBoxItem Content="All Types"/>
                         <ComboBoxItem Content="Outer Only"/>
                         <ComboBoxItem Content="Not Outer"/>
+                    </ComboBox>
+
+                    <ComboBox x:Name="resultGraphComboBox" SelectedIndex="0" SelectionChanged="PlotTransectResults" HorizontalAlignment="Left" Margin="711,442,0,0" VerticalAlignment="Top" Width="140" Height="25">
+                        <ComboBoxItem Content="Swirl Ratio"/>
+                        <ComboBoxItem Content="Core Radius (Rmax)"/>
                     </ComboBox>
                 </Grid>
             </TabItem>

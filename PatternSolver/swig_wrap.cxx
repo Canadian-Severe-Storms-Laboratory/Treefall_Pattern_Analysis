@@ -1884,6 +1884,20 @@ SWIGEXPORT double SWIGSTDCALL CSharp_LinearPiecewiseVortex_patternLocation(void 
 }
 
 
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_LinearPiecewiseVortex_patternLocationExists(void * jarg1, double jarg2) {
+  unsigned int jresult ;
+  LinearPiecewiseVortex *arg1 = (LinearPiecewiseVortex *) 0 ;
+  double arg2 ;
+  bool result;
+  
+  arg1 = (LinearPiecewiseVortex *)jarg1; 
+  arg2 = (double)jarg2; 
+  result = (bool)(arg1)->patternLocationExists(arg2);
+  jresult = result; 
+  return jresult;
+}
+
+
 SWIGEXPORT void SWIGSTDCALL CSharp_delete_LinearPiecewiseVortex(void * jarg1) {
   LinearPiecewiseVortex *arg1 = (LinearPiecewiseVortex *) 0 ;
   
@@ -3695,6 +3709,122 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_AutoTransectFitter(void * jarg1) {
 }
 
 
+SWIGEXPORT void SWIGSTDCALL CSharp_MatchResult_minVels_set(void * jarg1, void * jarg2) {
+  MatchResult *arg1 = (MatchResult *) 0 ;
+  std::vector< double > *arg2 = (std::vector< double > *) 0 ;
+  
+  arg1 = (MatchResult *)jarg1; 
+  arg2 = (std::vector< double > *)jarg2; 
+  if (arg1) (arg1)->minVels = *arg2;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_MatchResult_minVels_get(void * jarg1) {
+  void * jresult ;
+  MatchResult *arg1 = (MatchResult *) 0 ;
+  std::vector< double > *result = 0 ;
+  
+  arg1 = (MatchResult *)jarg1; 
+  result = (std::vector< double > *)& ((arg1)->minVels);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_MatchResult_bestSwirls_set(void * jarg1, void * jarg2) {
+  MatchResult *arg1 = (MatchResult *) 0 ;
+  std::vector< double > *arg2 = (std::vector< double > *) 0 ;
+  
+  arg1 = (MatchResult *)jarg1; 
+  arg2 = (std::vector< double > *)jarg2; 
+  if (arg1) (arg1)->bestSwirls = *arg2;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_MatchResult_bestSwirls_get(void * jarg1) {
+  void * jresult ;
+  MatchResult *arg1 = (MatchResult *) 0 ;
+  std::vector< double > *result = 0 ;
+  
+  arg1 = (MatchResult *)jarg1; 
+  result = (std::vector< double > *)& ((arg1)->bestSwirls);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_MatchResult_Rmaxs_set(void * jarg1, void * jarg2) {
+  MatchResult *arg1 = (MatchResult *) 0 ;
+  std::vector< double > *arg2 = (std::vector< double > *) 0 ;
+  
+  arg1 = (MatchResult *)jarg1; 
+  arg2 = (std::vector< double > *)jarg2; 
+  if (arg1) (arg1)->Rmaxs = *arg2;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_MatchResult_Rmaxs_get(void * jarg1) {
+  void * jresult ;
+  MatchResult *arg1 = (MatchResult *) 0 ;
+  std::vector< double > *result = 0 ;
+  
+  arg1 = (MatchResult *)jarg1; 
+  result = (std::vector< double > *)& ((arg1)->Rmaxs);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_MatchResult_reserve(void * jarg1, unsigned int jarg2) {
+  MatchResult *arg1 = (MatchResult *) 0 ;
+  size_t arg2 ;
+  
+  arg1 = (MatchResult *)jarg1; 
+  arg2 = (size_t)jarg2; 
+  (arg1)->reserve(arg2);
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_MatchResult_sort(void * jarg1) {
+  MatchResult *arg1 = (MatchResult *) 0 ;
+  
+  arg1 = (MatchResult *)jarg1; 
+  (arg1)->sort();
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_MatchResult_add(void * jarg1, double jarg2, double jarg3, double jarg4) {
+  MatchResult *arg1 = (MatchResult *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  double arg4 ;
+  
+  arg1 = (MatchResult *)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  arg4 = (double)jarg4; 
+  (arg1)->add(arg2,arg3,arg4);
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_MatchResult() {
+  void * jresult ;
+  MatchResult *result = 0 ;
+  
+  result = (MatchResult *)new MatchResult();
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_MatchResult(void * jarg1) {
+  MatchResult *arg1 = (MatchResult *) 0 ;
+  
+  arg1 = (MatchResult *)jarg1; 
+  delete arg1;
+}
+
+
 SWIGEXPORT void SWIGSTDCALL CSharp_PatternMatcher_models_set(void * jarg1, void * jarg2) {
   PatternMatcher *arg1 = (PatternMatcher *) 0 ;
   std::vector< double > *arg2 = (std::vector< double > *) 0 ;
@@ -3915,50 +4045,6 @@ SWIGEXPORT double SWIGSTDCALL CSharp_PatternMatcher_bestMatchScale_get(void * ja
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_PatternMatcher_minVelResults_set(void * jarg1, void * jarg2) {
-  PatternMatcher *arg1 = (PatternMatcher *) 0 ;
-  std::vector< double > *arg2 = (std::vector< double > *) 0 ;
-  
-  arg1 = (PatternMatcher *)jarg1; 
-  arg2 = (std::vector< double > *)jarg2; 
-  if (arg1) (arg1)->minVelResults = *arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_PatternMatcher_minVelResults_get(void * jarg1) {
-  void * jresult ;
-  PatternMatcher *arg1 = (PatternMatcher *) 0 ;
-  std::vector< double > *result = 0 ;
-  
-  arg1 = (PatternMatcher *)jarg1; 
-  result = (std::vector< double > *)& ((arg1)->minVelResults);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_PatternMatcher_bestSwirlResults_set(void * jarg1, void * jarg2) {
-  PatternMatcher *arg1 = (PatternMatcher *) 0 ;
-  std::vector< double > *arg2 = (std::vector< double > *) 0 ;
-  
-  arg1 = (PatternMatcher *)jarg1; 
-  arg2 = (std::vector< double > *)jarg2; 
-  if (arg1) (arg1)->bestSwirlResults = *arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_PatternMatcher_bestSwirlResults_get(void * jarg1) {
-  void * jresult ;
-  PatternMatcher *arg1 = (PatternMatcher *) 0 ;
-  std::vector< double > *result = 0 ;
-  
-  arg1 = (PatternMatcher *)jarg1; 
-  result = (std::vector< double > *)& ((arg1)->bestSwirlResults);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
 SWIGEXPORT void * SWIGSTDCALL CSharp_new_PatternMatcher(void * jarg1, void * jarg2, void * jarg3, void * jarg4) {
   void * jresult ;
   Utils::Range arg1 ;
@@ -4041,19 +4127,23 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_PatternMatcher_bestMatch(void * jarg1, void
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_PatternMatcher_monteCarloMatching(void * jarg1, void * jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_PatternMatcher_monteCarloMatching(void * jarg1, void * jarg2) {
+  void * jresult ;
   PatternMatcher *arg1 = (PatternMatcher *) 0 ;
   SwigValueWrapper< ObservedPattern > arg2 ;
   ObservedPattern *argp2 ;
+  MatchResult result;
   
   arg1 = (PatternMatcher *)jarg1; 
   argp2 = (ObservedPattern *)jarg2; 
   if (!argp2) {
     SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "Attempt to dereference null ObservedPattern", 0);
-    return ;
+    return 0;
   }
   arg2 = *argp2; 
-  (arg1)->monteCarloMatching(arg2);
+  result = (arg1)->monteCarloMatching(arg2);
+  jresult = new MatchResult(result); 
+  return jresult;
 }
 
 

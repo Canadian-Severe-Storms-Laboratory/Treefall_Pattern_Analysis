@@ -35,11 +35,42 @@ static void timeIt(std::function<void()> f, int n=1) {
 }
 
 
-
-
 int main(){
 
-	auto model = ModifiedRankineVortex(0.95, 0.9, 0.5, 0.25);
+	auto model = SullivanVortex();
+
+	std::vector<double> rmaxPrecentages;
+
+	for (int Vr = 20; Vr < 80; Vr++) {
+		for (int Vt = 1; Vt < 60; Vt++) {
+			for (int Vs = 5; Vs < 25; Vs++) {
+				for (int Vc = 30; Vc < 60; Vc++) {
+
+					model.Vr = (double)Vr / (double)Vc;
+					model.Vt = (double)Vt / (double)Vc;
+					model.Vs = (double)Vs / (double)Vc;
+
+					if (!model.hasPattern() || model.isOuterType()) continue;
+
+					model.solveAxesOfInterest();
+
+					double rp = 1.0 / model.length();
+
+					if (rp < 1.0) {
+						rmaxPrecentages.push_back(rp);
+					}
+				}
+			}
+		}
+	}
+
+	std::ofstream myfile;
+	myfile.open("rmax.csv");
+
+	for (int i = 0; i < rmaxPrecentages.size(); i++) {
+		myfile << rmaxPrecentages[i] << "\n";
+	}
+	myfile.close();
 
 	//std::vector<std::array<double, 2>> pts;
 	//pts.reserve(1000);
@@ -48,7 +79,7 @@ int main(){
 	//	pts.push_back({ 10.0 * (double)rand() / RAND_MAX, 0.5 * (double)rand() / RAND_MAX + 0.5 });
 	//}
 
-	timeIt([&]() {model.solveAxesOfInterest(); auto p = model.patternCurve(15); }, 10000);
+	//timeIt([&]() {model.solveAxesOfInterest(); auto p = model.patternCurve(15); }, 10000);
 
 	//for (int i = 0; i < 1000; i++) {
 	//	printf("Actual:%f  Aprox:%f\n", pow(pts[i][0], pts[i][1]), fastPow(pts[i][0], pts[i][1]));

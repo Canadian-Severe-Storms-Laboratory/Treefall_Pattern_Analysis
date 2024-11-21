@@ -67,4 +67,9 @@ public partial class LinearPiecewiseVortex : VortexModel {
     return ret;
   }
 
+  public override bool patternLocationExists(double x) {
+    bool ret = PatternSolverPINVOKE.LinearPiecewiseVortex_patternLocationExists(swigCPtr, x);
+    return ret;
+  }
+
 }

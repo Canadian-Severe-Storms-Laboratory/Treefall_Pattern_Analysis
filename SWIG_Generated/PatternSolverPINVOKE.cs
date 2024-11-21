@@ -495,6 +495,9 @@ class PatternSolverPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_LinearPiecewiseVortex_patternLocation")]
   public static extern double LinearPiecewiseVortex_patternLocation(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
 
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_LinearPiecewiseVortex_patternLocationExists")]
+  public static extern bool LinearPiecewiseVortex_patternLocationExists(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
+
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_LinearPiecewiseVortex")]
   public static extern void delete_LinearPiecewiseVortex(global::System.Runtime.InteropServices.HandleRef jarg1);
 
@@ -948,6 +951,39 @@ class PatternSolverPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_AutoTransectFitter")]
   public static extern void delete_AutoTransectFitter(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_MatchResult_minVels_set")]
+  public static extern void MatchResult_minVels_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_MatchResult_minVels_get")]
+  public static extern global::System.IntPtr MatchResult_minVels_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_MatchResult_bestSwirls_set")]
+  public static extern void MatchResult_bestSwirls_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_MatchResult_bestSwirls_get")]
+  public static extern global::System.IntPtr MatchResult_bestSwirls_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_MatchResult_Rmaxs_set")]
+  public static extern void MatchResult_Rmaxs_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_MatchResult_Rmaxs_get")]
+  public static extern global::System.IntPtr MatchResult_Rmaxs_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_MatchResult_reserve")]
+  public static extern void MatchResult_reserve(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_MatchResult_sort")]
+  public static extern void MatchResult_sort(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_MatchResult_add")]
+  public static extern void MatchResult_add(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, double jarg3, double jarg4);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_MatchResult")]
+  public static extern global::System.IntPtr new_MatchResult();
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_MatchResult")]
+  public static extern void delete_MatchResult(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_models_set")]
   public static extern void PatternMatcher_models_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
@@ -1008,18 +1044,6 @@ class PatternSolverPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_bestMatchScale_get")]
   public static extern double PatternMatcher_bestMatchScale_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_minVelResults_set")]
-  public static extern void PatternMatcher_minVelResults_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_minVelResults_get")]
-  public static extern global::System.IntPtr PatternMatcher_minVelResults_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_bestSwirlResults_set")]
-  public static extern void PatternMatcher_bestSwirlResults_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_bestSwirlResults_get")]
-  public static extern global::System.IntPtr PatternMatcher_bestSwirlResults_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_PatternMatcher")]
   public static extern global::System.IntPtr new_PatternMatcher(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, global::System.Runtime.InteropServices.HandleRef jarg3, global::System.Runtime.InteropServices.HandleRef jarg4);
 
@@ -1030,7 +1054,7 @@ class PatternSolverPINVOKE {
   public static extern global::System.IntPtr PatternMatcher_bestMatch(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_monteCarloMatching")]
-  public static extern void PatternMatcher_monteCarloMatching(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  public static extern global::System.IntPtr PatternMatcher_monteCarloMatching(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_PatternMatcher")]
   public static extern void delete_PatternMatcher(global::System.Runtime.InteropServices.HandleRef jarg1);

@@ -24,8 +24,6 @@ namespace TreefallPatternAnalysis
         public MainPatternAnalysis()
         {
             InitializeComponent();
-            
-            AllocConsole();
 
             vmaxHistogramPlot.Plot.Style(figureBackground: System.Drawing.Color.FromArgb(255, 229, 229, 229));
             swirlHistogramPlot.Plot.Style(figureBackground: System.Drawing.Color.FromArgb(255, 229, 229, 229));
@@ -121,7 +119,16 @@ namespace TreefallPatternAnalysis
 
         private async void LoadSave(object sender, RoutedEventArgs e)
         {
-            var transects = SaveFile.LoadSaveFile(saveFileSelector.GetFilePath(), VectorsSelectionBox, ConvergenceSelectionBox);
+            List<Transect> transects = null;
+
+            try
+            {
+                transects = SaveFile.LoadSaveFile(saveFileSelector.GetFilePath(), VectorsSelectionBox, ConvergenceSelectionBox);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load save. File may be corrupted or outdated.\n\nError:\n" + ex.Message);
+            }
 
             if (transects == null) return;
 
@@ -420,21 +427,22 @@ namespace TreefallPatternAnalysis
 
             selectedTransect.bestMatchError = error;
 
-            await QueuedTask.Run(() => matcher.monteCarloMatching(obsPattern));
+            MatchResult results = await QueuedTask.Run(() => matcher.monteCarloMatching(obsPattern));
 
             monitor.Stop();
 
             if (monitor.cancelled) return;
 
-            selectedTransect.vmaxResults = matcher.minVelResults;
-            selectedTransect.swirlResults = matcher.bestSwirlResults;
+            selectedTransect.vmaxResults = results.minVels;
+            selectedTransect.swirlResults = results.bestSwirls;
+            selectedTransect.rmaxResults = results.Rmaxs;
 
             PlotTransectResults(null, null);
         }
 
         private void PlotTransectResults(object sender, RoutedEventArgs e)
         {
-            if (transectCreationList.SelectedTransect() == null) return;
+            if (transectCreationList == null || transectCreationList.SelectedTransect() == null) return;
 
             Transect transect = transectCreationList.SelectedTransect();
 
@@ -449,8 +457,31 @@ namespace TreefallPatternAnalysis
             }
 
             PlotHist(vmaxHistogramPlot, transect.vmaxResults, (int)numVmaxHistBoxes.GetValue());
-            PlotHist(swirlHistogramPlot, transect.swirlResults, (int)numSwirlHistBoxes.GetValue());
+
+            switch (resultGraphComboBox.SelectedIndex)
+            {
+                case 0:
+                    PlotHist(swirlHistogramPlot, transect.swirlResults, (int)numSwirlHistBoxes.GetValue());
+                    break;
+                case 1:
+                    PlotHist(swirlHistogramPlot, transect.rmaxResults, (int)numSwirlHistBoxes.GetValue());
+                    AddRmaxLimitLines(swirlHistogramPlot, transect);
+                    break;
+            }
+
             WriteStats(transect);
+        }
+
+        private void AddRmaxLimitLines(WpfPlot plot, Transect transect)
+        {
+            Plot plt = plot.Plot;
+
+            double length = transect.Length();
+
+            plt.AddVerticalLine(length * 0.1, System.Drawing.Color.Red, 2, LineStyle.Dash);
+            plt.AddVerticalLine(length * 0.5, System.Drawing.Color.Red, 2, LineStyle.Dash);
+
+            plot.Refresh();
         }
 
         private void PlotHist(WpfPlot plot, double[] data, int numBins)
@@ -487,11 +518,15 @@ namespace TreefallPatternAnalysis
                 return;
             }
 
+            double length = transect.Length();
+
             var vmaxStats = new ScottPlot.Statistics.BasicStats(transect.vmaxResults);
             var swirlStats = new ScottPlot.Statistics.BasicStats(transect.swirlResults);
+            var rmaxStats = new ScottPlot.Statistics.BasicStats(transect.rmaxResults);
 
             double vmaxMedian = transect.vmaxResults[transect.vmaxResults.Length / 2];
             double swirlMedian = transect.swirlResults[transect.swirlResults.Length / 2];
+            double rmaxMedian = transect.rmaxResults[transect.rmaxResults.Length / 2];
 
             double[] y = new double[transect.vmaxResults.Length];
 
@@ -505,11 +540,12 @@ namespace TreefallPatternAnalysis
             double ef2 = Math.Round((y[FindClosestIndex(transect.vmaxResults, 62.0)] - y[FindClosestIndex(transect.vmaxResults, 50.0)]) * 100.0, 2);
             double ef3 = Math.Round((y[FindClosestIndex(transect.vmaxResults, 75.0)] - y[FindClosestIndex(transect.vmaxResults, 62.0)]) * 100.0, 2);
             double ef4 = Math.Round((y[FindClosestIndex(transect.vmaxResults, 87.0)] - y[FindClosestIndex(transect.vmaxResults, 75.0)]) * 100.0, 2);
-            double ef5 = Math.Round((1.0 - y[FindClosestIndex(transect.vmaxResults, 87.0)]) * 100.0, 2);
+            double ef5 = Math.Round((y[y.Length - 1] - y[FindClosestIndex(transect.vmaxResults, 87.0)]) * 100.0, 2);
 
             resultStatsText.Text = $"Error:\t{Math.Round(transect.bestMatchError, 4)}\n" +
                                    $"Vmax:\t{Math.Round(vmaxMedian)} ± {Math.Round(vmaxStats.StDev)}\n" +
                                    $"Swirl:\t{Math.Round(swirlMedian, 2)} ± {Math.Round(swirlStats.StDev, 2)}\n" +
+                                   $"Rmax:\t{Math.Round(rmaxMedian)} ± {Math.Round(rmaxStats.StDev)} ({Math.Round(rmaxMedian / length, 2)}%)\n" +
                                    $"\nProbabilities\n" +
                                    $"EF0:\t{ef0}%\n" +
                                    $"EF1:\t{ef1}%\n" +

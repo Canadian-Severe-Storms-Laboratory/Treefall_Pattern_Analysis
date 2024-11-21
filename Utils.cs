@@ -32,12 +32,12 @@ namespace ArcGISUtils
             string path;
 
             #if DEBUG
-                path = @"C:\Users\danie\Documents\Experiments\SAR analysis\TornadoSAR\bin\Debug\net8.0-windows";
+                path = @"C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\bin\Debug\net8.0-windows";
             #else
                 path = AddinAssemblyLocation();
             #endif
 
-            string[] dlls = ["OpenCvSharp", "OpenCvSharpExtern"];
+            string[] dlls = ["PatternSolver"];
 
             foreach (string dll in dlls)
             {

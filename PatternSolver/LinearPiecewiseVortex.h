@@ -294,4 +294,8 @@ public:
         return greatestY;
     }
 
+    bool patternLocationExists(double x) override {
+		return patternLocation(x) > -1E300;
+    }
+
 };

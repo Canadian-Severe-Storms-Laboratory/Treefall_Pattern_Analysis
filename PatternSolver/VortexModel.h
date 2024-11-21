@@ -165,7 +165,7 @@ public:
 	}
 
 	bool hasPattern() {
-		return vmax() > 1.0;
+		return vmax() > 1.01;
 	}
 
 	bool isOuterType() {

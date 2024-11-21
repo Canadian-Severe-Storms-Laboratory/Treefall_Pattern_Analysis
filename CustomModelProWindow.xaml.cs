@@ -5,7 +5,6 @@ using System.Windows;
 using System;
 using ScottPlot.Statistics;
 using ScottPlot.Drawing;
-using System.Runtime.InteropServices;
 
 namespace TreefallPatternAnalysis
 {

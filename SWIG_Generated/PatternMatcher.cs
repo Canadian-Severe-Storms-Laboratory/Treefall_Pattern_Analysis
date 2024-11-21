@@ -162,28 +162,6 @@ public partial class PatternMatcher : global::System.IDisposable {
     } 
   }
 
-  public DoubleVector minVelResults {
-    set {
-      PatternSolverPINVOKE.PatternMatcher_minVelResults_set(swigCPtr, DoubleVector.getCPtr(value));
-    } 
-    get {
-      global::System.IntPtr cPtr = PatternSolverPINVOKE.PatternMatcher_minVelResults_get(swigCPtr);
-      DoubleVector ret = (cPtr == global::System.IntPtr.Zero) ? null : new DoubleVector(cPtr, false);
-      return ret;
-    } 
-  }
-
-  public DoubleVector bestSwirlResults {
-    set {
-      PatternSolverPINVOKE.PatternMatcher_bestSwirlResults_set(swigCPtr, DoubleVector.getCPtr(value));
-    } 
-    get {
-      global::System.IntPtr cPtr = PatternSolverPINVOKE.PatternMatcher_bestSwirlResults_get(swigCPtr);
-      DoubleVector ret = (cPtr == global::System.IntPtr.Zero) ? null : new DoubleVector(cPtr, false);
-      return ret;
-    } 
-  }
-
   public PatternMatcher(Range VrRange, Range VtRange, Range VsRange, Range VcRange) : this(PatternSolverPINVOKE.new_PatternMatcher(Range.getCPtr(VrRange), Range.getCPtr(VtRange), Range.getCPtr(VsRange), Range.getCPtr(VcRange)), true) {
     if (PatternSolverPINVOKE.SWIGPendingException.Pending) throw PatternSolverPINVOKE.SWIGPendingException.Retrieve();
   }
@@ -200,9 +178,10 @@ public partial class PatternMatcher : global::System.IDisposable {
     return ret;
   }
 
-  public void monteCarloMatching(ObservedPattern obsPattern) {
-    PatternSolverPINVOKE.PatternMatcher_monteCarloMatching(swigCPtr, ObservedPattern.getCPtr(obsPattern));
+  public MatchResult monteCarloMatching(ObservedPattern obsPattern) {
+    MatchResult ret = new MatchResult(PatternSolverPINVOKE.PatternMatcher_monteCarloMatching(swigCPtr, ObservedPattern.getCPtr(obsPattern)), true);
     if (PatternSolverPINVOKE.SWIGPendingException.Pending) throw PatternSolverPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
   }
 
 }

@@ -1,5 +1,6 @@
 ﻿using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
+using static ArcGISUtils.Utils;
 
 namespace TreefallPatternAnalysis
 {
@@ -13,6 +14,9 @@ namespace TreefallPatternAnalysis
             //already open?
             if (_mainpatternanalysis != null)
                 return;
+
+            PreLoadDlls();
+
             _mainpatternanalysis = new MainPatternAnalysis();
             _mainpatternanalysis.Owner = FrameworkApplication.Current.MainWindow;
             _mainpatternanalysis.Closed += (o, e) => { _mainpatternanalysis = null; };

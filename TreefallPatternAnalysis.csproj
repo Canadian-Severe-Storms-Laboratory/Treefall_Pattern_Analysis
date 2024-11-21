@@ -120,7 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Update="PatternSolver.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

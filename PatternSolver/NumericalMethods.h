@@ -1,8 +1,6 @@
 #pragma once
 #include <functional>
 #include <array>
-#include <boost/math/tools/toms748_solve.hpp>
-#include <boost/math/tools/minima.hpp>
 
 double binarySearch(std::function<bool(double)> func, std::array<double, 2> I, double tol = 1e-5) {
     

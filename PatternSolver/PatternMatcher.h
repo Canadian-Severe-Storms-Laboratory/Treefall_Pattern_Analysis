@@ -12,6 +12,31 @@
 
 using namespace Utils;
 
+EXPORT struct MatchResult {
+	std::vector<double> minVels;
+	std::vector<double> bestSwirls;
+	std::vector<double> Rmaxs;
+
+	void reserve(const size_t size) {
+		minVels.reserve(size);
+		bestSwirls.reserve(size);
+		Rmaxs.reserve(size);
+	}
+
+	void sort() {
+		std::sort(minVels.begin(), minVels.end());
+		std::sort(bestSwirls.begin(), bestSwirls.end());
+		std::sort(Rmaxs.begin(), Rmaxs.end());
+	}
+
+	void add(const double minVel, const double bestSwirl, const double Rmax) {
+		minVels.push_back(minVel);
+		bestSwirls.push_back(bestSwirl);
+		Rmaxs.push_back(Rmax);
+	}
+};
+
+
 EXPORT class PatternMatcher
 {
 private:
@@ -105,9 +130,6 @@ public:
 	int numSimulations = 10000;
 
 	double bestMatchScale = 1.0;
-
-	std::vector<double> minVelResults;
-	std::vector<double> bestSwirlResults;
 
 	PatternMatcher(Range VrRange, Range VtRange, Range VsRange, Range VcRange) : VrRange(VrRange), VtRange(VtRange), VsRange(VsRange), VcRange(VcRange) {}
 
@@ -208,7 +230,7 @@ public:
 	}
 
 
-	void monteCarloMatching(ObservedPattern obsPattern) {
+	MatchResult monteCarloMatching(ObservedPattern obsPattern) {
 
 		const int ITERS = numSimulations;
 
@@ -217,14 +239,12 @@ public:
 		monitor.message = "Matching...";
 		monitor.value = 0;
 
-		minVelResults.clear();
-		bestSwirlResults.clear();
+		MatchResult results;
 
-		minVelResults.reserve(ITERS);
-		bestSwirlResults.reserve(ITERS);
+		results.reserve(ITERS);
 
 		#pragma omp parallel num_threads((int)(std::thread::hardware_concurrency()*0.8))
-		while (minVelResults.size() < ITERS && !monitor.cancelled) {
+		while (results.minVels.size() < ITERS && !monitor.cancelled) {
 
 			std::random_device rd;
 			std::mt19937 gen(rd());
@@ -238,6 +258,7 @@ public:
 
 			double minVel = 1E308;
 			double bestSwirl = 1E308;
+			double bestR = 1E308;
 			double minError = 1E308;
 
 			auto model = VortexFactory::randomModel(models, dist, gen);
@@ -246,7 +267,6 @@ public:
 			for (double Vr = VrRatioRange.min; Vr <= VrRatioRange.max; Vr += VrRatioRange.step) {
 				for (double Vt = VtRatioRange.min; Vt <= VtRatioRange.max; Vt += VtRatioRange.step) {
 
-					//BakerSterlingVortex model(Vr, Vt, Vs);
 					model->Vr = Vr;
 					model->Vt = Vt;
 
@@ -274,6 +294,7 @@ public:
 						if (error < minError) {
 							minError = error;
 							bestSwirl = model->swirlRatio();
+							bestR = Rmax;
 						}
 					}
 				}
@@ -285,14 +306,14 @@ public:
 
 			#pragma omp critical
 			{
-				minVelResults.push_back(minVel);
-				bestSwirlResults.push_back(bestSwirl);
+				results.add(minVel, bestSwirl, bestR);
 				monitor.value++;
 			}
 		}
 
-		std::sort(minVelResults.begin(), minVelResults.end());
-		std::sort(bestSwirlResults.begin(), bestSwirlResults.end());
+		results.sort();
+
+		return results;
 	}
 
 };
