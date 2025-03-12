@@ -285,11 +285,12 @@ public:
 
 					if (error > matchThreshold) continue;
 
-					const double Vmax = model->vmax() * Vc;
+					//const double Vmax = model->vmax() * Vc;
+					const double Vgust = model->vgust(Vc, Rmax) * Vc;
 
 					#pragma omp critical 
 					{	
-						minVel = std::min(Vmax, minVel);
+						minVel = std::min(Vgust, minVel);
 
 						if (error < minError) {
 							minError = error;

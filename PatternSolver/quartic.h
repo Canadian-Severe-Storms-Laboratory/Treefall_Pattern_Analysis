@@ -61,6 +61,8 @@ typedef std::complex<double> DComplex;
 //         1 real root : x[0], x[1] ± i*x[2], return 1
 unsigned int solveP3(double* x, double a, double b, double c);
 
+double quartic_greatest_root(double a, double b, double c, double d);
+
 //---------------------------------------------------------------------------
 // Solve quartic equation x^4 + a*x^3 + b*x^2 + c*x + d
 // (attention - this function returns dynamically allocated array. It has to be released afterwards)

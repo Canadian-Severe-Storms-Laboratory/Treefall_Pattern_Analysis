@@ -185,6 +185,11 @@ public partial class VortexModel : global::System.IDisposable {
     return ret;
   }
 
+  public double vgust(double Vc, double Rmax) {
+    double ret = PatternSolverPINVOKE.VortexModel_vgust(swigCPtr, Vc, Rmax);
+    return ret;
+  }
+
   public DoubleVector field(double minX, double maxX, double minY, double maxY, int N) {
     DoubleVector ret = new DoubleVector(PatternSolverPINVOKE.VortexModel_field__SWIG_0(swigCPtr, minX, maxX, minY, maxY, N), true);
     return ret;

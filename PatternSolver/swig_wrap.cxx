@@ -355,6 +355,8 @@ template <typename T> T SwigValueInit() {
 #include "CPP_CS_Interop.h"
 #include "Utils.h"
 #include "VortexModel.h"
+#include "RationalPolynomialVortex.h"
+#include "RationalPolynomialRRVortex.h"
 #include "LinearPiecewiseVortex.h"
 #include "BakerSterlingVortex.h"
 #include "BurgersRottVortex.h"
@@ -1700,6 +1702,22 @@ SWIGEXPORT double SWIGSTDCALL CSharp_VortexModel_swirlRatio(void * jarg1) {
 }
 
 
+SWIGEXPORT double SWIGSTDCALL CSharp_VortexModel_vgust(void * jarg1, double jarg2, double jarg3) {
+  double jresult ;
+  VortexModel *arg1 = (VortexModel *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  double result;
+  
+  arg1 = (VortexModel *)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (double)(arg1)->vgust(arg2,arg3);
+  jresult = result; 
+  return jresult;
+}
+
+
 SWIGEXPORT void * SWIGSTDCALL CSharp_VortexModel_field__SWIG_0(void * jarg1, double jarg2, double jarg3, double jarg4, double jarg5, int jarg6) {
   void * jresult ;
   VortexModel *arg1 = (VortexModel *) 0 ;
@@ -2062,22 +2080,6 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_new_BurgersRottVortex__SWIG_3() {
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_BurgersRottVortex_vecAt(void * jarg1, double jarg2, double jarg3) {
-  void * jresult ;
-  BurgersRottVortex *arg1 = (BurgersRottVortex *) 0 ;
-  double arg2 ;
-  double arg3 ;
-  Vec2 result;
-  
-  arg1 = (BurgersRottVortex *)jarg1; 
-  arg2 = (double)jarg2; 
-  arg3 = (double)jarg3; 
-  result = (arg1)->vecAt(arg2,arg3);
-  jresult = new Vec2(result); 
-  return jresult;
-}
-
-
 SWIGEXPORT void SWIGSTDCALL CSharp_delete_BurgersRottVortex(void * jarg1) {
   BurgersRottVortex *arg1 = (BurgersRottVortex *) 0 ;
   
@@ -2134,22 +2136,6 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_new_BurgersRottRRVortex__SWIG_3() {
   
   result = (BurgersRottRRVortex *)new BurgersRottRRVortex();
   jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_BurgersRottRRVortex_vecAt(void * jarg1, double jarg2, double jarg3) {
-  void * jresult ;
-  BurgersRottRRVortex *arg1 = (BurgersRottRRVortex *) 0 ;
-  double arg2 ;
-  double arg3 ;
-  Vec2 result;
-  
-  arg1 = (BurgersRottRRVortex *)jarg1; 
-  arg2 = (double)jarg2; 
-  arg3 = (double)jarg3; 
-  result = (arg1)->vecAt(arg2,arg3);
-  jresult = new Vec2(result); 
   return jresult;
 }
 
@@ -4348,22 +4334,6 @@ SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_LinearPiecewiseVortex_SWIGUpcast(Lin
 
 SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_BakerSterlingVortex_SWIGUpcast(BakerSterlingVortex *jarg1) {
     return (VortexModel *)jarg1;
-}
-
-SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_BurgersRottVortex_SWIGUpcast(BurgersRottVortex *jarg1) {
-    return (VortexModel *)jarg1;
-}
-
-SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_BurgersRottRRVortex_SWIGUpcast(BurgersRottRRVortex *jarg1) {
-    return (VortexModel *)jarg1;
-}
-
-SWIGEXPORT BurgersRottVortex * SWIGSTDCALL CSharp_SullivanVortex_SWIGUpcast(SullivanVortex *jarg1) {
-    return (BurgersRottVortex *)jarg1;
-}
-
-SWIGEXPORT BurgersRottRRVortex * SWIGSTDCALL CSharp_SullivanRRVortex_SWIGUpcast(SullivanRRVortex *jarg1) {
-    return (BurgersRottRRVortex *)jarg1;
 }
 
 SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_ModifiedRankineVortex_SWIGUpcast(ModifiedRankineVortex *jarg1) {

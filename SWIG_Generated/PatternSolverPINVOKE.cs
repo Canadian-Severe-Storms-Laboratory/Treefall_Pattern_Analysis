@@ -462,6 +462,9 @@ class PatternSolverPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_VortexModel_swirlRatio")]
   public static extern double VortexModel_swirlRatio(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_VortexModel_vgust")]
+  public static extern double VortexModel_vgust(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, double jarg3);
+
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_VortexModel_field__SWIG_0")]
   public static extern global::System.IntPtr VortexModel_field__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, double jarg3, double jarg4, double jarg5, int jarg6);
 
@@ -537,9 +540,6 @@ class PatternSolverPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_BurgersRottVortex__SWIG_3")]
   public static extern global::System.IntPtr new_BurgersRottVortex__SWIG_3();
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_BurgersRottVortex_vecAt")]
-  public static extern global::System.IntPtr BurgersRottVortex_vecAt(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, double jarg3);
-
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_BurgersRottVortex")]
   public static extern void delete_BurgersRottVortex(global::System.Runtime.InteropServices.HandleRef jarg1);
 
@@ -554,9 +554,6 @@ class PatternSolverPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_BurgersRottRRVortex__SWIG_3")]
   public static extern global::System.IntPtr new_BurgersRottRRVortex__SWIG_3();
-
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_BurgersRottRRVortex_vecAt")]
-  public static extern global::System.IntPtr BurgersRottRRVortex_vecAt(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, double jarg3);
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_BurgersRottRRVortex")]
   public static extern void delete_BurgersRottRRVortex(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -1112,18 +1109,6 @@ class PatternSolverPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_BakerSterlingVortex_SWIGUpcast")]
   public static extern global::System.IntPtr BakerSterlingVortex_SWIGUpcast(global::System.IntPtr jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_BurgersRottVortex_SWIGUpcast")]
-  public static extern global::System.IntPtr BurgersRottVortex_SWIGUpcast(global::System.IntPtr jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_BurgersRottRRVortex_SWIGUpcast")]
-  public static extern global::System.IntPtr BurgersRottRRVortex_SWIGUpcast(global::System.IntPtr jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_SullivanVortex_SWIGUpcast")]
-  public static extern global::System.IntPtr SullivanVortex_SWIGUpcast(global::System.IntPtr jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_SullivanRRVortex_SWIGUpcast")]
-  public static extern global::System.IntPtr SullivanRRVortex_SWIGUpcast(global::System.IntPtr jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_ModifiedRankineVortex_SWIGUpcast")]
   public static extern global::System.IntPtr ModifiedRankineVortex_SWIGUpcast(global::System.IntPtr jarg1);

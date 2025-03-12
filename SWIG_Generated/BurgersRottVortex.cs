@@ -9,10 +9,12 @@
 //------------------------------------------------------------------------------
 
 
-public partial class BurgersRottVortex : VortexModel {
+public partial class BurgersRottVortex : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
+  protected bool swigCMemOwn;
 
-  internal BurgersRottVortex(global::System.IntPtr cPtr, bool cMemoryOwn) : base(PatternSolverPINVOKE.BurgersRottVortex_SWIGUpcast(cPtr), cMemoryOwn) {
+  internal BurgersRottVortex(global::System.IntPtr cPtr, bool cMemoryOwn) {
+    swigCMemOwn = cMemoryOwn;
     swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
   }
 
@@ -33,7 +35,16 @@ public partial class BurgersRottVortex : VortexModel {
     }
   }
 
-  protected override void Dispose(bool disposing) {
+  ~BurgersRottVortex() {
+    Dispose(false);
+  }
+
+  public void Dispose() {
+    Dispose(true);
+    global::System.GC.SuppressFinalize(this);
+  }
+
+  protected virtual void Dispose(bool disposing) {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
@@ -42,7 +53,6 @@ public partial class BurgersRottVortex : VortexModel {
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
-      base.Dispose(disposing);
     }
   }
 
@@ -56,11 +66,6 @@ public partial class BurgersRottVortex : VortexModel {
   }
 
   public BurgersRottVortex() : this(PatternSolverPINVOKE.new_BurgersRottVortex__SWIG_3(), true) {
-  }
-
-  public override SWIGTYPE_p_Vec2 vecAt(double x, double y) {
-    SWIGTYPE_p_Vec2 ret = new SWIGTYPE_p_Vec2(PatternSolverPINVOKE.BurgersRottVortex_vecAt(swigCPtr, x, y), true);
-    return ret;
   }
 
 }

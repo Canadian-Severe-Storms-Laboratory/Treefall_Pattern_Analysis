@@ -1,35 +1,12 @@
 #pragma once
-#include "VortexModel.h"
-#include "cyPolynomial.h"
-#include <array>
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <algorithm>
+#include "RationalPolynomialVortex.h"
 
-
-class BurgersRottVortex : public VortexModel
+EXPORT class BurgersRottVortex : public RationalPolynomialVortex<1.82417933, 3.11150184667, 1.51889411, 1.0, 0.768428406667>
 {
-protected:
-	double k0 = 1.82417933, k1 = 3.11150184667, k2 = 1.51889411, k3 = 1.0, k4 = 0.768428406667;
 
 public:
 
-	BurgersRottVortex(double Vr=-1, double Vt=-1, double Vs=-1) : VortexModel(Vr, Vt, Vs) {};
-
-	Vec2 vecAt(double x, double y) {
-
-		constexpr double Rmax = 1.0;
-
-		const double r2 = x * x + y * y;
-
-		const double R2 = Rmax * Rmax;
-
-		const double s = Rmax * (k1 * R2 + k3 * r2) / (R2 * (k0 * R2 + k2 * r2) + k4 * r2 * r2);
-
-		return { -s * (x * Vr + y * Vt), s * (x * Vt - y * Vr) + Vs };	
-	}
+	BurgersRottVortex(double Vr=-1, double Vt=-1, double Vs=-1) : RationalPolynomialVortex(Vr, Vt, Vs) {};
 
 	//double patternLocation(double x) {
 	//	constexpr double Rmax = 1.0;

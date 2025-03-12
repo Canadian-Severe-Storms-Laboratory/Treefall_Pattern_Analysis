@@ -101,7 +101,7 @@ double localRoot(std::function<double(double)> func, std::array<double, 2> I, do
 }
 
 
-double localMinima(std::function<double(double)> f, std::array<double, 2> I, const double t = 1e-5) {
+double localMinima(std::function<double(double)> f, std::array<double, 2> I, const double t = 1e-5, const double minThres = -1e308) {
     double a = I[0];
     double b = I[1];
 
@@ -122,6 +122,8 @@ double localMinima(std::function<double(double)> f, std::array<double, 2> I, con
     fx = f(x);
     fw = fx;
     fv = fw;
+
+	if (fx < minThres) return x;
 
     while (true) {
         m = 0.5 * (sa + sb);
@@ -195,6 +197,8 @@ double localMinima(std::function<double(double)> f, std::array<double, 2> I, con
 
         fu = f(u);
 
+        if (fu < minThres) return u;
+
         // Update A, B, V, W, and X.
         if (fu <= fx) {
             if (u < x) {
@@ -234,3 +238,41 @@ double localMinima(std::function<double(double)> f, std::array<double, 2> I, con
 
     return x;
 }
+
+
+// integration using Simpson's method, N = number of function samples
+template<size_t N=10>
+double integral(std::function<double(double)> f, std::array<double, 2> I) {
+
+    static_assert(N % 2 == 0); // N must be even
+
+    const double a = I[0];
+    const double b = I[1];
+    const double h = (b - a) / N;
+    constexpr double s = 1.0 / 3.0;
+    
+    double sum_odds = f(a + h) + f(a + (N - 1) * h);
+    double sum_evens = f(a + 2 * h);
+
+    for (int i = 3; i < N - 2; i += 2) {
+        sum_odds += f(a + i * h);
+        sum_evens += f(a + (i + 1) * h);
+    }
+
+    return (f(a) + f(b) + 2.0 * sum_evens + 4.0 * sum_odds) * h * s;
+}
+
+template<size_t N = 10>
+double integral2D(std::function<double(double, double)> f, std::array<double, 4> I) {
+
+    const auto outerFunc = [&](double y) {
+        
+        const auto innerFunc = [&](double x) { return f(x, y); };
+
+        return integral<N>(innerFunc, {I[0], I[1]});
+    };
+
+    return integral<N>(outerFunc, { I[2], I[3] });
+}
+
+

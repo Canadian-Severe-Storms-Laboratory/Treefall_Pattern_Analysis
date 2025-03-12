@@ -12,6 +12,8 @@
                 <ContextMenu>
                     <MenuItem Header="New" Click="NewTransect"/>
                     <Separator/>
+                    <MenuItem Header="Sort" Click="SortTransects"/>
+                    <Separator/>
                     <MenuItem Header="Delete Selected" Click="RemoveTransect"/>
                 </ContextMenu>
             </ListBox.ContextMenu>

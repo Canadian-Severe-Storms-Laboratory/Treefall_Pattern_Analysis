@@ -9,10 +9,12 @@
 //------------------------------------------------------------------------------
 
 
-public partial class SullivanVortex : BurgersRottVortex {
+public partial class SullivanVortex : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
+  protected bool swigCMemOwn;
 
-  internal SullivanVortex(global::System.IntPtr cPtr, bool cMemoryOwn) : base(PatternSolverPINVOKE.SullivanVortex_SWIGUpcast(cPtr), cMemoryOwn) {
+  internal SullivanVortex(global::System.IntPtr cPtr, bool cMemoryOwn) {
+    swigCMemOwn = cMemoryOwn;
     swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
   }
 
@@ -33,7 +35,16 @@ public partial class SullivanVortex : BurgersRottVortex {
     }
   }
 
-  protected override void Dispose(bool disposing) {
+  ~SullivanVortex() {
+    Dispose(false);
+  }
+
+  public void Dispose() {
+    Dispose(true);
+    global::System.GC.SuppressFinalize(this);
+  }
+
+  protected virtual void Dispose(bool disposing) {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
@@ -42,7 +53,6 @@ public partial class SullivanVortex : BurgersRottVortex {
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
-      base.Dispose(disposing);
     }
   }
 

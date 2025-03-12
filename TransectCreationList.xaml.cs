@@ -2,6 +2,7 @@
 using ScottPlot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -22,7 +23,7 @@ namespace TreefallPatternAnalysis
                 typeof(TransectCreationList)
             );
 
-        private int numTransectsCreated = 0;
+        //private int numTransectsCreated = 0;
 
         public TransectCreationList()
         {
@@ -64,8 +65,23 @@ namespace TreefallPatternAnalysis
 
         private void NewTransect(object sender, RoutedEventArgs e)
         {
-            transectList.Items.Add(new Transect((++numTransectsCreated).ToString()));
+            int count = transectList.Items.Count;
+            transectList.Items.Add(new Transect((count + 1).ToString()));
             transectList.SelectedIndex = transectList.Items.Count - 1;
+        }
+
+        private void SortTransects(object sender, RoutedEventArgs e)
+        {
+            List<Transect> transects = transectList.Items.OfType<Transect>().ToList();
+
+            transects.Sort((a, b) => a.positionOffset.CompareTo(b.positionOffset));
+            transectList.Items.Clear();
+
+            for (int i = 0; i < transects.Count; i++)
+            {
+                transects[i].name = (i + 1).ToString();
+                transectList.Items.Add(transects[i]);
+            }
         }
 
         public void LoadFromSave(List<Transect> list, Plot plt)
@@ -86,7 +102,7 @@ namespace TreefallPatternAnalysis
 
         public void Add(Transect transect)
         {
-            transect.name = (++numTransectsCreated).ToString();
+            transect.name = (transectList.Items.Count).ToString();
             transectList.Items.Add(transect);
 
             for (int i = 0; i < transectList.Items.Count; i++)

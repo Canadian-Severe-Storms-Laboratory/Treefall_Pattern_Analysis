@@ -58,6 +58,7 @@ protected:
 		auto upperFunc = [&](double x) { return patternLocationExists(x); }; //there is a root
 		
 		const double lower = binarySearch(lowerFunc, { -limit, x0 });
+
 		const double upper = binarySearch(upperFunc, { x0, limit });
 
 		auto signFunc = [&](double x) { return vecAt(x, patternLocation(x)).x; };
@@ -97,17 +98,12 @@ public:
 		if (fabs(x) < Rmax) {
 			const double ym = sqrt(Rmax * Rmax - x * x);
 
-			const double v1 = rootFunc(limit);
-			const double v2 = rootFunc(ym);
+			if (rootFunc(ym) <= 0.0) return localRoot(rootFunc, { ym, limit });
 
-			if (v1 * v2 <= 0.0) return localRoot(rootFunc, { ym, limit });
-
-			const double v3 = rootFunc(-ym);
-
-			if (v2 * v3 <= 0.0) return localRoot(rootFunc, { -ym, ym });
+			if (rootFunc(-ym) <= 0.0) return localRoot(rootFunc, { -ym, ym });
 		}
 
-		const double ym = localMinima(rootFunc, { -limit, limit });
+		const double ym = localMinima(rootFunc, { -limit, limit }, 1e-5, 0.0); //Test this more...
 
 		if (rootFunc(ym) <= 0.0) return localRoot(rootFunc, { ym, limit });
 
@@ -124,17 +120,12 @@ public:
 		if (fabs(x) < Rmax) {
 			const double ym = sqrt(Rmax * Rmax - x * x);
 
-			const double v1 = rootFunc(limit);
-			const double v2 = rootFunc(ym);
+			if (rootFunc(ym) <= 0.0) return true;
 
-			if (v1 * v2 <= 0.0) return true;
-
-			const double v3 = rootFunc(-ym);
-
-			if (v2 * v3 <= 0.0) return true;
+			if (rootFunc(-ym) <= 0.0) return true;
 		}
 
-		const double ym = localMinima(rootFunc, { -limit, limit });
+		const double ym = localMinima(rootFunc, { -limit, limit }, 1e-5, 0.0);
 
 		if (rootFunc(ym) <= 0.0) return true;
 
@@ -188,6 +179,21 @@ public:
 
 	double swirlRatio() {
 		return Vt / Vr;
+	}
+
+	double vgust(double Vc, double Rmax) {
+		const double x0 = Vt / hypot(Vr, Vt);
+		const double y0 = -Vr / hypot(Vr, Vt);
+
+		const double Vs_r = Vc * Vs / Rmax;
+
+		const double s = 1.5 * Vs_r;
+
+		const double i = integral2D([&](double x, double y) {return magAt(x, y); }, { x0 - s, x0 + s, y0 - s, y0 + s });
+
+		const double area = 9.0 * Vs_r * Vs_r;
+
+		return i / area;
 	}
 
 	std::vector<double> field(double minX, double maxX, double minY, double maxY, int N) {

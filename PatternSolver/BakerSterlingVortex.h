@@ -7,7 +7,7 @@
 EXPORT class BakerSterlingVortex : public VortexModel {
 
 private:
-	std::array<DComplex, 4> solveRoots(double x) {
+	double solveGreatestRoot(double x) {
 		constexpr double Rmax = 1.0;
 		constexpr double Vc = 1.0;
 
@@ -35,7 +35,7 @@ private:
 		const double a1 = d * a3;
 		const double a0 = x2 * (b3 + b1) + Vs2 * Rmax2 * Rmax2 + d * (b4 - b2);
 
-		return solve_quartic(a3 / a4, a2 / a4, a1 / a4, a0 / a4);
+		return quartic_greatest_root(a3 / a4, a2 / a4, a1 / a4, a0 / a4);
 	}
 
 public:
@@ -53,25 +53,25 @@ public:
 	}
 
 	double patternLocation(double x) override {
-
-		std::array<DComplex, 4> solutions = solveRoots(x);
-
-		double y = std::numeric_limits<double>::lowest();
-
-		y = fabs(imag(solutions[0])) < 1e-10 ? std::max(y, real(solutions[0])) : y;
-		y = fabs(imag(solutions[1])) < 1e-10 ? std::max(y, real(solutions[1])) : y;
-		y = fabs(imag(solutions[2])) < 1e-10 ? std::max(y, real(solutions[2])) : y;
-		y = fabs(imag(solutions[3])) < 1e-10 ? std::max(y, real(solutions[3])) : y;
-
-		return y;
+		return solveGreatestRoot(x);
 	}
 
 	bool patternLocationExists(double x) override {
-		std::array<DComplex, 4> solutions = solveRoots(x);
 
-		return fabs(imag(solutions[0])) < 1e-10 ||
-			   fabs(imag(solutions[1])) < 1e-10 ||
-			   fabs(imag(solutions[2])) < 1e-10 ||
-			   fabs(imag(solutions[3])) < 1e-10;
+		constexpr double Rmax = 1.0;
+		constexpr double Vc2 = 1.0;
+		constexpr double limit = 100.0;
+
+		const auto rootFunc = [&](double y) { return Vc2 - vecAt(x, y).magSq(); };
+
+		if (fabs(x) < Rmax) {
+			const double ym = sqrt(Rmax * Rmax - x * x);
+
+			if (rootFunc(ym) <= 0.0) return true;
+
+			if (rootFunc(-ym) <= 0.0) return true;
+		}
+
+		return solveGreatestRoot(x) > std::numeric_limits<double>::lowest();
 	}
 };
