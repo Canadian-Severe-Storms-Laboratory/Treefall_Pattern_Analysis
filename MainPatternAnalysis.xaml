@@ -71,7 +71,7 @@
             <TabItem Header="Analysis" Width="150">
                 <Grid Background="#FFE5E5E5" Margin="-2,0,2,0">
 
-                    <ListBox x:Name="modelTypeListView" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" HorizontalContentAlignment="Center" SelectionMode="Multiple" Margin="10,290,0,10" Width="200" Loaded="ModelTypeListView_Loaded">
+                    <ListBox x:Name="modelTypeListView" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" HorizontalContentAlignment="Center" SelectionMode="Multiple" Margin="10,295,0,10" Width="200" Loaded="ModelTypeListView_Loaded">
                         <ListBoxItem Content="Modified Rankine" FontSize="20" Padding="10" Margin="5,10,5,0" BorderBrush="Black"/>
                         <ListBoxItem Content="Baker-Sterling" FontSize="20"  Padding="10" Margin="5,10,5,0" BorderBrush="Black"/>
                         <ListBoxItem Content="Burgers-Rott" FontSize="20"  Padding="10" Margin="5,10,5,0" BorderBrush="Black"/>
@@ -79,8 +79,8 @@
                         <ListBoxItem Content="Burgers-Rott (RR)" FontSize="20"  Padding="10" Margin="5,10,5,0" BorderBrush="Black"/>
                         <ListBoxItem Content="Sullivan (RR)" FontSize="20"  Padding="10" Margin="5,10,5,0" BorderBrush="Black"/>
                     </ListBox>
-                    <Label Content="Parameter Ranges" Foreground="Black" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Height="45" Margin="397,480,0,0" VerticalAlignment="Top" Width="190"/>
-                    <Label Content="Vortex Models" Foreground="Black" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="37" Margin="49,260,0,0" VerticalAlignment="Top" Width="122"/>
+                    <Label Content="Parameter Ranges (m/s)" Foreground="Black" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Height="45" Margin="367,478,0,0" VerticalAlignment="Top" Width="243"/>
+                    <Label Content="Vortex Models" Foreground="Black" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="37" Margin="49,270,0,0" VerticalAlignment="Top" Width="122"/>
                     <Label Content="Vt" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="332,523,0,0" VerticalAlignment="Top" Width="30"/>
                     <Label Content="Vr" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="428,523,0,0" VerticalAlignment="Top" Width="30"/>
                     <Label Content="Vs" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="528,523,0,0" VerticalAlignment="Top" Width="30"/>
@@ -95,10 +95,23 @@
                     <local:NumberBox x:Name="vsmax" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="516,652,0,0" NumberString="20" VerticalAlignment="Top" Width="54"/>
                     <local:NumberBox x:Name="vcmax" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="616,652,0,0" NumberString="50" VerticalAlignment="Top" Width="54"/>
                     <local:NumberBox x:Name="vcmin" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="616,577,0,0" NumberString="30" VerticalAlignment="Top" Width="54"/>
-                    <Label FontSize="16" Content="Cutoff:" HorizontalAlignment="Left" Height="30" Margin="738,645,0,0" VerticalAlignment="Top" Width="140"/>
+
+                    <Label FontSize="16" Content="Cutoff:" HorizontalAlignment="Left" Height="30" Margin="738,610,0,0" VerticalAlignment="Top" Width="140"/>
                     <Label FontSize="16" Content="#Simulations:" HorizontalAlignment="Left" Height="30" Margin="737,570,0,0" VerticalAlignment="Top" Width="110"/>
-                    <local:NumberBox x:Name="cutoffThreshold" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="868,648,0,0" NumberString="0.10" VerticalAlignment="Top" Width="54" RenderTransformOrigin="0.712,0.633"/>
+                    <Label FontSize="16" Content="3s-Gust Vel:" HorizontalAlignment="Left" Height="30" Margin="738,650,0,0" VerticalAlignment="Top" Width="140"/>
+                    <local:NumberBox x:Name="cutoffThreshold" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="852,613,0,0" NumberString="0.10" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.712,0.633"/>
                     <local:NumberBox x:Name="numberOfSimulations" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="852,573,0,0" NumberString="1000" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.5,0.5"/>
+                    <CheckBox x:Name="gustVelCheckBox" IsChecked="True" HorizontalAlignment="Left" Margin="879,657,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                        <CheckBox.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
+
                     <WpfPlot x:Name="vmaxHistogramPlot" Width="350" Height="350" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="226,17,0,0"></WpfPlot>
                     <WpfPlot x:Name="swirlHistogramPlot" Width="350" Height="350" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="576,17,0,0"></WpfPlot>
 
@@ -128,6 +141,7 @@
                         <ComboBoxItem Content="Swirl Ratio"/>
                         <ComboBoxItem Content="Core Radius (Rmax)"/>
                     </ComboBox>
+
                 </Grid>
             </TabItem>
 

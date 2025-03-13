@@ -152,6 +152,16 @@ public partial class PatternMatcher : global::System.IDisposable {
     } 
   }
 
+  public bool useGustVel {
+    set {
+      PatternSolverPINVOKE.PatternMatcher_useGustVel_set(swigCPtr, value);
+    } 
+    get {
+      bool ret = PatternSolverPINVOKE.PatternMatcher_useGustVel_get(swigCPtr);
+      return ret;
+    } 
+  }
+
   public double bestMatchScale {
     set {
       PatternSolverPINVOKE.PatternMatcher_bestMatchScale_set(swigCPtr, value);

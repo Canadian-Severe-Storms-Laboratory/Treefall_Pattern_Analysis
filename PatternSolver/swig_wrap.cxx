@@ -4009,6 +4009,28 @@ SWIGEXPORT int SWIGSTDCALL CSharp_PatternMatcher_numSimulations_get(void * jarg1
 }
 
 
+SWIGEXPORT void SWIGSTDCALL CSharp_PatternMatcher_useGustVel_set(void * jarg1, unsigned int jarg2) {
+  PatternMatcher *arg1 = (PatternMatcher *) 0 ;
+  bool arg2 ;
+  
+  arg1 = (PatternMatcher *)jarg1; 
+  arg2 = jarg2 ? true : false; 
+  if (arg1) (arg1)->useGustVel = arg2;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_PatternMatcher_useGustVel_get(void * jarg1) {
+  unsigned int jresult ;
+  PatternMatcher *arg1 = (PatternMatcher *) 0 ;
+  bool result;
+  
+  arg1 = (PatternMatcher *)jarg1; 
+  result = (bool) ((arg1)->useGustVel);
+  jresult = result; 
+  return jresult;
+}
+
+
 SWIGEXPORT void SWIGSTDCALL CSharp_PatternMatcher_bestMatchScale_set(void * jarg1, double jarg2) {
   PatternMatcher *arg1 = (PatternMatcher *) 0 ;
   double arg2 ;

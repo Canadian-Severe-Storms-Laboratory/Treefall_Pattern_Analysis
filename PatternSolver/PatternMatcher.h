@@ -128,6 +128,7 @@ public:
 	double matchThreshold = 0.1;
 	int patternType = 0;
 	int numSimulations = 10000;
+	bool useGustVel = true;
 
 	double bestMatchScale = 1.0;
 
@@ -285,12 +286,11 @@ public:
 
 					if (error > matchThreshold) continue;
 
-					//const double Vmax = model->vmax() * Vc;
-					const double Vgust = model->vgust(Vc, Rmax) * Vc;
+					const double Vmax = (useGustVel ? model->vgust(Vc, Rmax) : model->vmax()) * Vc;
 
 					#pragma omp critical 
 					{	
-						minVel = std::min(Vgust, minVel);
+						minVel = std::min(Vmax, minVel);
 
 						if (error < minError) {
 							minError = error;

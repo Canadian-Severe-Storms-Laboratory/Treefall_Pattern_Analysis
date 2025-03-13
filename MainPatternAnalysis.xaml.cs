@@ -390,6 +390,7 @@ namespace TreefallPatternAnalysis
                 numSimulations = numberOfSimulations.GetIntNumber(),
                 matchThreshold = cutoffThreshold.GetNumber(),
                 patternType = patternTypeComboBox.SelectedIndex,
+                useGustVel = (bool)gustVelCheckBox.IsChecked,
                 models = modelTypeListView.SelectedItems.Cast<object>().Select(item => (double)modelTypeListView.Items.IndexOf(item)).ToArray()
             };
 

@@ -1035,6 +1035,12 @@ class PatternSolverPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_numSimulations_get")]
   public static extern int PatternMatcher_numSimulations_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_useGustVel_set")]
+  public static extern void PatternMatcher_useGustVel_set(global::System.Runtime.InteropServices.HandleRef jarg1, bool jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_useGustVel_get")]
+  public static extern bool PatternMatcher_useGustVel_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_bestMatchScale_set")]
   public static extern void PatternMatcher_bestMatchScale_set(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
 
