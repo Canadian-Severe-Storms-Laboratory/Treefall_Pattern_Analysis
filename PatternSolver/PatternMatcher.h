@@ -6,8 +6,7 @@
 #include <thread>
 #include "CPP_CS_Interop.h"
 #include "VortexFactory.h"
-#include "ObservedPattern.h"
-#include "Utils.h"
+#include "TransectRandomizer.h"
 #include "Monitor.h"
 
 using namespace Utils;
@@ -129,8 +128,10 @@ public:
 	int patternType = 0;
 	int numSimulations = 10000;
 	bool useGustVel = true;
+	bool randomizeTransects = true;
 
 	double bestMatchScale = 1.0;
+	double bestError = 100.0;
 
 	PatternMatcher(Range VrRange, Range VtRange, Range VsRange, Range VcRange) : VrRange(VrRange), VtRange(VtRange), VsRange(VsRange), VcRange(VcRange) {}
 
@@ -225,13 +226,14 @@ public:
 
 		if (!bestModel->hasPattern()) return Pattern();
 
+		bestError = minError;
 		bestMatchScale = obsPattern.length() / bestModel->length();
 
 		return bestModel->pattern(obsPattern.spacing / bestMatchScale);
 	}
 
 
-	MatchResult monteCarloMatching(ObservedPattern obsPattern) {
+	MatchResult monteCarloMatching(Transect& transect, VecHashGrid& vectorHashGrid, ConvergenceLine& convergenceLine) {
 
 		const int ITERS = numSimulations;
 
@@ -244,12 +246,24 @@ public:
 
 		results.reserve(ITERS);
 
+		TransectRandomizer trandomizer = TransectRandomizer(transect, vectorHashGrid, convergenceLine);
+
+		
+
 		#pragma omp parallel num_threads((int)(std::thread::hardware_concurrency()*0.8))
 		while (results.minVels.size() < ITERS && !monitor.cancelled) {
 
 			std::random_device rd;
 			std::mt19937 gen(rd());
 			std::uniform_real_distribution<double> dist(0.0, 1.0);
+
+			ObservedPattern obsPattern(transect.lengthAbove, transect.lengthBelow, transect.spacing, vectorHashGrid.query(transect));
+
+			if (randomizeTransects) {
+				obsPattern = trandomizer.rand(dist, gen);
+
+				if (obsPattern.lengthAbove < 0.0) continue;
+			}
 
 			const double Vc = VcRange.random(dist, gen);
 			const double Vs = VsRange.random(dist, gen) / Vc;

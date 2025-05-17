@@ -99,6 +99,9 @@
     <ClInclude Include="RationalPolynomialRRVortex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TransectRandomizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="swig.i">

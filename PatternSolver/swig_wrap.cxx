@@ -368,6 +368,7 @@ template <typename T> T SwigValueInit() {
 #include "ConvergenceLine.h"
 #include "Transect.h"
 #include "ObservedPattern.h"
+#include "TransectRandomizer.h"
 #include "AutoTransectFitter.h"
 #include "PatternMatcher.h"
 #include "Monitor.h"
@@ -3287,7 +3288,17 @@ SWIGEXPORT double SWIGSTDCALL CSharp_ObservedPattern_spacing_get(void * jarg1) {
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_new_ObservedPattern(double jarg1, double jarg2, double jarg3, void * jarg4) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_ObservedPattern__SWIG_0() {
+  void * jresult ;
+  ObservedPattern *result = 0 ;
+  
+  result = (ObservedPattern *)new ObservedPattern();
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_ObservedPattern__SWIG_1(double jarg1, double jarg2, double jarg3, void * jarg4) {
   void * jresult ;
   double arg1 ;
   double arg2 ;
@@ -3427,157 +3438,239 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_ObservedPattern(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_AutoTransectFitter_positionOffsetRange_set(void * jarg1, void * jarg2) {
-  AutoTransectFitter *arg1 = (AutoTransectFitter *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_TransectRandomizer_positionOffsetRange_set(void * jarg1, void * jarg2) {
+  TransectRandomizer *arg1 = (TransectRandomizer *) 0 ;
   Utils::Range *arg2 = (Utils::Range *) 0 ;
   
-  arg1 = (AutoTransectFitter *)jarg1; 
+  arg1 = (TransectRandomizer *)jarg1; 
   arg2 = (Utils::Range *)jarg2; 
   if (arg1) (arg1)->positionOffsetRange = *arg2;
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_AutoTransectFitter_positionOffsetRange_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_TransectRandomizer_positionOffsetRange_get(void * jarg1) {
   void * jresult ;
-  AutoTransectFitter *arg1 = (AutoTransectFitter *) 0 ;
+  TransectRandomizer *arg1 = (TransectRandomizer *) 0 ;
   Utils::Range *result = 0 ;
   
-  arg1 = (AutoTransectFitter *)jarg1; 
+  arg1 = (TransectRandomizer *)jarg1; 
   result = (Utils::Range *)& ((arg1)->positionOffsetRange);
   jresult = (void *)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_AutoTransectFitter_lengthAboveRange_set(void * jarg1, void * jarg2) {
-  AutoTransectFitter *arg1 = (AutoTransectFitter *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_TransectRandomizer_lengthAboveRange_set(void * jarg1, void * jarg2) {
+  TransectRandomizer *arg1 = (TransectRandomizer *) 0 ;
   Utils::Range *arg2 = (Utils::Range *) 0 ;
   
-  arg1 = (AutoTransectFitter *)jarg1; 
+  arg1 = (TransectRandomizer *)jarg1; 
   arg2 = (Utils::Range *)jarg2; 
   if (arg1) (arg1)->lengthAboveRange = *arg2;
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_AutoTransectFitter_lengthAboveRange_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_TransectRandomizer_lengthAboveRange_get(void * jarg1) {
   void * jresult ;
-  AutoTransectFitter *arg1 = (AutoTransectFitter *) 0 ;
+  TransectRandomizer *arg1 = (TransectRandomizer *) 0 ;
   Utils::Range *result = 0 ;
   
-  arg1 = (AutoTransectFitter *)jarg1; 
+  arg1 = (TransectRandomizer *)jarg1; 
   result = (Utils::Range *)& ((arg1)->lengthAboveRange);
   jresult = (void *)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_AutoTransectFitter_lengthBelowRange_set(void * jarg1, void * jarg2) {
-  AutoTransectFitter *arg1 = (AutoTransectFitter *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_TransectRandomizer_lengthBelowRange_set(void * jarg1, void * jarg2) {
+  TransectRandomizer *arg1 = (TransectRandomizer *) 0 ;
   Utils::Range *arg2 = (Utils::Range *) 0 ;
   
-  arg1 = (AutoTransectFitter *)jarg1; 
+  arg1 = (TransectRandomizer *)jarg1; 
   arg2 = (Utils::Range *)jarg2; 
   if (arg1) (arg1)->lengthBelowRange = *arg2;
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_AutoTransectFitter_lengthBelowRange_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_TransectRandomizer_lengthBelowRange_get(void * jarg1) {
   void * jresult ;
-  AutoTransectFitter *arg1 = (AutoTransectFitter *) 0 ;
+  TransectRandomizer *arg1 = (TransectRandomizer *) 0 ;
   Utils::Range *result = 0 ;
   
-  arg1 = (AutoTransectFitter *)jarg1; 
+  arg1 = (TransectRandomizer *)jarg1; 
   result = (Utils::Range *)& ((arg1)->lengthBelowRange);
   jresult = (void *)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_AutoTransectFitter_angleOffsetRange_set(void * jarg1, void * jarg2) {
-  AutoTransectFitter *arg1 = (AutoTransectFitter *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_TransectRandomizer_angleOffsetRange_set(void * jarg1, void * jarg2) {
+  TransectRandomizer *arg1 = (TransectRandomizer *) 0 ;
   Utils::Range *arg2 = (Utils::Range *) 0 ;
   
-  arg1 = (AutoTransectFitter *)jarg1; 
+  arg1 = (TransectRandomizer *)jarg1; 
   arg2 = (Utils::Range *)jarg2; 
   if (arg1) (arg1)->angleOffsetRange = *arg2;
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_AutoTransectFitter_angleOffsetRange_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_TransectRandomizer_angleOffsetRange_get(void * jarg1) {
   void * jresult ;
-  AutoTransectFitter *arg1 = (AutoTransectFitter *) 0 ;
+  TransectRandomizer *arg1 = (TransectRandomizer *) 0 ;
   Utils::Range *result = 0 ;
   
-  arg1 = (AutoTransectFitter *)jarg1; 
+  arg1 = (TransectRandomizer *)jarg1; 
   result = (Utils::Range *)& ((arg1)->angleOffsetRange);
   jresult = (void *)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_AutoTransectFitter_heightOffsetRange_set(void * jarg1, void * jarg2) {
-  AutoTransectFitter *arg1 = (AutoTransectFitter *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_TransectRandomizer_heightOffsetRange_set(void * jarg1, void * jarg2) {
+  TransectRandomizer *arg1 = (TransectRandomizer *) 0 ;
   Utils::Range *arg2 = (Utils::Range *) 0 ;
   
-  arg1 = (AutoTransectFitter *)jarg1; 
+  arg1 = (TransectRandomizer *)jarg1; 
   arg2 = (Utils::Range *)jarg2; 
   if (arg1) (arg1)->heightOffsetRange = *arg2;
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_AutoTransectFitter_heightOffsetRange_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_TransectRandomizer_heightOffsetRange_get(void * jarg1) {
   void * jresult ;
-  AutoTransectFitter *arg1 = (AutoTransectFitter *) 0 ;
+  TransectRandomizer *arg1 = (TransectRandomizer *) 0 ;
   Utils::Range *result = 0 ;
   
-  arg1 = (AutoTransectFitter *)jarg1; 
+  arg1 = (TransectRandomizer *)jarg1; 
   result = (Utils::Range *)& ((arg1)->heightOffsetRange);
   jresult = (void *)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_AutoTransectFitter_widthRange_set(void * jarg1, void * jarg2) {
-  AutoTransectFitter *arg1 = (AutoTransectFitter *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_TransectRandomizer_widthRange_set(void * jarg1, void * jarg2) {
+  TransectRandomizer *arg1 = (TransectRandomizer *) 0 ;
   Utils::Range *arg2 = (Utils::Range *) 0 ;
   
-  arg1 = (AutoTransectFitter *)jarg1; 
+  arg1 = (TransectRandomizer *)jarg1; 
   arg2 = (Utils::Range *)jarg2; 
   if (arg1) (arg1)->widthRange = *arg2;
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_AutoTransectFitter_widthRange_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_TransectRandomizer_widthRange_get(void * jarg1) {
   void * jresult ;
-  AutoTransectFitter *arg1 = (AutoTransectFitter *) 0 ;
+  TransectRandomizer *arg1 = (TransectRandomizer *) 0 ;
   Utils::Range *result = 0 ;
   
-  arg1 = (AutoTransectFitter *)jarg1; 
+  arg1 = (TransectRandomizer *)jarg1; 
   result = (Utils::Range *)& ((arg1)->widthRange);
   jresult = (void *)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_AutoTransectFitter_spacingRange_set(void * jarg1, void * jarg2) {
-  AutoTransectFitter *arg1 = (AutoTransectFitter *) 0 ;
+SWIGEXPORT void SWIGSTDCALL CSharp_TransectRandomizer_spacingRange_set(void * jarg1, void * jarg2) {
+  TransectRandomizer *arg1 = (TransectRandomizer *) 0 ;
   Utils::Range *arg2 = (Utils::Range *) 0 ;
   
-  arg1 = (AutoTransectFitter *)jarg1; 
+  arg1 = (TransectRandomizer *)jarg1; 
   arg2 = (Utils::Range *)jarg2; 
   if (arg1) (arg1)->spacingRange = *arg2;
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_AutoTransectFitter_spacingRange_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_TransectRandomizer_spacingRange_get(void * jarg1) {
   void * jresult ;
-  AutoTransectFitter *arg1 = (AutoTransectFitter *) 0 ;
+  TransectRandomizer *arg1 = (TransectRandomizer *) 0 ;
   Utils::Range *result = 0 ;
   
-  arg1 = (AutoTransectFitter *)jarg1; 
+  arg1 = (TransectRandomizer *)jarg1; 
   result = (Utils::Range *)& ((arg1)->spacingRange);
   jresult = (void *)result; 
   return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_TransectRandomizer__SWIG_0(void * jarg1, void * jarg2) {
+  void * jresult ;
+  VecHashGrid *arg1 = 0 ;
+  ConvergenceLine *arg2 = 0 ;
+  TransectRandomizer *result = 0 ;
+  
+  arg1 = (VecHashGrid *)jarg1;
+  if (!arg1) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "VecHashGrid & is null", 0);
+    return 0;
+  } 
+  arg2 = (ConvergenceLine *)jarg2;
+  if (!arg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "ConvergenceLine & is null", 0);
+    return 0;
+  } 
+  result = (TransectRandomizer *)new TransectRandomizer(*arg1,*arg2);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_TransectRandomizer__SWIG_1(void * jarg1, void * jarg2, void * jarg3) {
+  void * jresult ;
+  Transect *arg1 = 0 ;
+  VecHashGrid *arg2 = 0 ;
+  ConvergenceLine *arg3 = 0 ;
+  TransectRandomizer *result = 0 ;
+  
+  arg1 = (Transect *)jarg1;
+  if (!arg1) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "Transect & is null", 0);
+    return 0;
+  } 
+  arg2 = (VecHashGrid *)jarg2;
+  if (!arg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "VecHashGrid & is null", 0);
+    return 0;
+  } 
+  arg3 = (ConvergenceLine *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "ConvergenceLine & is null", 0);
+    return 0;
+  } 
+  result = (TransectRandomizer *)new TransectRandomizer(*arg1,*arg2,*arg3);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_TransectRandomizer_rand(void * jarg1, void * jarg2, void * jarg3) {
+  void * jresult ;
+  TransectRandomizer *arg1 = (TransectRandomizer *) 0 ;
+  std::uniform_real_distribution< double > *arg2 = 0 ;
+  std::mt19937 *arg3 = 0 ;
+  ObservedPattern result;
+  
+  arg1 = (TransectRandomizer *)jarg1; 
+  arg2 = (std::uniform_real_distribution< double > *)jarg2;
+  if (!arg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::uniform_real_distribution< double > & is null", 0);
+    return 0;
+  } 
+  arg3 = (std::mt19937 *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "std::mt19937 & is null", 0);
+    return 0;
+  } 
+  result = (arg1)->rand(*arg2,*arg3);
+  jresult = new ObservedPattern(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_TransectRandomizer(void * jarg1) {
+  TransectRandomizer *arg1 = (TransectRandomizer *) 0 ;
+  
+  arg1 = (TransectRandomizer *)jarg1; 
+  delete arg1;
 }
 
 
@@ -4081,6 +4174,28 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_PatternMatcher_useGustVel_get(void * 
 }
 
 
+SWIGEXPORT void SWIGSTDCALL CSharp_PatternMatcher_randomizeTransects_set(void * jarg1, unsigned int jarg2) {
+  PatternMatcher *arg1 = (PatternMatcher *) 0 ;
+  bool arg2 ;
+  
+  arg1 = (PatternMatcher *)jarg1; 
+  arg2 = jarg2 ? true : false; 
+  if (arg1) (arg1)->randomizeTransects = arg2;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_PatternMatcher_randomizeTransects_get(void * jarg1) {
+  unsigned int jresult ;
+  PatternMatcher *arg1 = (PatternMatcher *) 0 ;
+  bool result;
+  
+  arg1 = (PatternMatcher *)jarg1; 
+  result = (bool) ((arg1)->randomizeTransects);
+  jresult = result; 
+  return jresult;
+}
+
+
 SWIGEXPORT void SWIGSTDCALL CSharp_PatternMatcher_bestMatchScale_set(void * jarg1, double jarg2) {
   PatternMatcher *arg1 = (PatternMatcher *) 0 ;
   double arg2 ;
@@ -4098,6 +4213,28 @@ SWIGEXPORT double SWIGSTDCALL CSharp_PatternMatcher_bestMatchScale_get(void * ja
   
   arg1 = (PatternMatcher *)jarg1; 
   result = (double) ((arg1)->bestMatchScale);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_PatternMatcher_bestError_set(void * jarg1, double jarg2) {
+  PatternMatcher *arg1 = (PatternMatcher *) 0 ;
+  double arg2 ;
+  
+  arg1 = (PatternMatcher *)jarg1; 
+  arg2 = (double)jarg2; 
+  if (arg1) (arg1)->bestError = arg2;
+}
+
+
+SWIGEXPORT double SWIGSTDCALL CSharp_PatternMatcher_bestError_get(void * jarg1) {
+  double jresult ;
+  PatternMatcher *arg1 = (PatternMatcher *) 0 ;
+  double result;
+  
+  arg1 = (PatternMatcher *)jarg1; 
+  result = (double) ((arg1)->bestError);
   jresult = result; 
   return jresult;
 }
@@ -4148,7 +4285,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_new_PatternMatcher(void * jarg1, void * jar
 SWIGEXPORT double SWIGSTDCALL CSharp_PatternMatcher_bestMatchError(void * jarg1, void * jarg2) {
   double jresult ;
   PatternMatcher *arg1 = (PatternMatcher *) 0 ;
-  SwigValueWrapper< ObservedPattern > arg2 ;
+  ObservedPattern arg2 ;
   ObservedPattern *argp2 ;
   double result;
   
@@ -4168,7 +4305,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_PatternMatcher_bestMatchError(void * jarg1,
 SWIGEXPORT void * SWIGSTDCALL CSharp_PatternMatcher_bestMatch(void * jarg1, void * jarg2) {
   void * jresult ;
   PatternMatcher *arg1 = (PatternMatcher *) 0 ;
-  SwigValueWrapper< ObservedPattern > arg2 ;
+  ObservedPattern arg2 ;
   ObservedPattern *argp2 ;
   Pattern result;
   
@@ -4185,21 +4322,31 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_PatternMatcher_bestMatch(void * jarg1, void
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_PatternMatcher_monteCarloMatching(void * jarg1, void * jarg2) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_PatternMatcher_monteCarloMatching(void * jarg1, void * jarg2, void * jarg3, void * jarg4) {
   void * jresult ;
   PatternMatcher *arg1 = (PatternMatcher *) 0 ;
-  SwigValueWrapper< ObservedPattern > arg2 ;
-  ObservedPattern *argp2 ;
+  Transect *arg2 = 0 ;
+  VecHashGrid *arg3 = 0 ;
+  ConvergenceLine *arg4 = 0 ;
   MatchResult result;
   
   arg1 = (PatternMatcher *)jarg1; 
-  argp2 = (ObservedPattern *)jarg2; 
-  if (!argp2) {
-    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "Attempt to dereference null ObservedPattern", 0);
+  arg2 = (Transect *)jarg2;
+  if (!arg2) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "Transect & is null", 0);
     return 0;
-  }
-  arg2 = *argp2; 
-  result = (arg1)->monteCarloMatching(arg2);
+  } 
+  arg3 = (VecHashGrid *)jarg3;
+  if (!arg3) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "VecHashGrid & is null", 0);
+    return 0;
+  } 
+  arg4 = (ConvergenceLine *)jarg4;
+  if (!arg4) {
+    SWIG_CSharpSetPendingExceptionArgument(SWIG_CSharpArgumentNullException, "ConvergenceLine & is null", 0);
+    return 0;
+  } 
+  result = (arg1)->monteCarloMatching(*arg2,*arg3,*arg4);
   jresult = new MatchResult(result); 
   return jresult;
 }
@@ -4410,6 +4557,10 @@ SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_BakerSterlingVortex_SWIGUpcast(Baker
 
 SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_ModifiedRankineVortex_SWIGUpcast(ModifiedRankineVortex *jarg1) {
     return (VortexModel *)jarg1;
+}
+
+SWIGEXPORT TransectRandomizer * SWIGSTDCALL CSharp_AutoTransectFitter_SWIGUpcast(AutoTransectFitter *jarg1) {
+    return (TransectRandomizer *)jarg1;
 }
 
 #ifdef __cplusplus

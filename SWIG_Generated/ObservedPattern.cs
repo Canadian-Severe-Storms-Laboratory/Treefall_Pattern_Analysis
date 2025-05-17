@@ -97,7 +97,10 @@ public partial class ObservedPattern : global::System.IDisposable {
     } 
   }
 
-  public ObservedPattern(double lengthAbove_, double lengthBelow_, double spacing_, DoubleVector obsVecs) : this(PatternSolverPINVOKE.new_ObservedPattern(lengthAbove_, lengthBelow_, spacing_, DoubleVector.getCPtr(obsVecs)), true) {
+  public ObservedPattern() : this(PatternSolverPINVOKE.new_ObservedPattern__SWIG_0(), true) {
+  }
+
+  public ObservedPattern(double lengthAbove_, double lengthBelow_, double spacing_, DoubleVector obsVecs) : this(PatternSolverPINVOKE.new_ObservedPattern__SWIG_1(lengthAbove_, lengthBelow_, spacing_, DoubleVector.getCPtr(obsVecs)), true) {
     if (PatternSolverPINVOKE.SWIGPendingException.Pending) throw PatternSolverPINVOKE.SWIGPendingException.Retrieve();
   }
 

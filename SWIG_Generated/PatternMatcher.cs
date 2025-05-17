@@ -162,12 +162,32 @@ public partial class PatternMatcher : global::System.IDisposable {
     } 
   }
 
+  public bool randomizeTransects {
+    set {
+      PatternSolverPINVOKE.PatternMatcher_randomizeTransects_set(swigCPtr, value);
+    } 
+    get {
+      bool ret = PatternSolverPINVOKE.PatternMatcher_randomizeTransects_get(swigCPtr);
+      return ret;
+    } 
+  }
+
   public double bestMatchScale {
     set {
       PatternSolverPINVOKE.PatternMatcher_bestMatchScale_set(swigCPtr, value);
     } 
     get {
       double ret = PatternSolverPINVOKE.PatternMatcher_bestMatchScale_get(swigCPtr);
+      return ret;
+    } 
+  }
+
+  public double bestError {
+    set {
+      PatternSolverPINVOKE.PatternMatcher_bestError_set(swigCPtr, value);
+    } 
+    get {
+      double ret = PatternSolverPINVOKE.PatternMatcher_bestError_get(swigCPtr);
       return ret;
     } 
   }
@@ -188,8 +208,8 @@ public partial class PatternMatcher : global::System.IDisposable {
     return ret;
   }
 
-  public MatchResult monteCarloMatching(ObservedPattern obsPattern) {
-    MatchResult ret = new MatchResult(PatternSolverPINVOKE.PatternMatcher_monteCarloMatching(swigCPtr, ObservedPattern.getCPtr(obsPattern)), true);
+  public MatchResult monteCarloMatching(Transect transect, VecHashGrid vectorHashGrid, ConvergenceLine convergenceLine) {
+    MatchResult ret = new MatchResult(PatternSolverPINVOKE.PatternMatcher_monteCarloMatching(swigCPtr, Transect.getCPtr(transect), VecHashGrid.getCPtr(vectorHashGrid), ConvergenceLine.getCPtr(convergenceLine)), true);
     if (PatternSolverPINVOKE.SWIGPendingException.Pending) throw PatternSolverPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }

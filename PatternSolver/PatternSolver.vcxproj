@@ -73,6 +73,7 @@
     <ClInclude Include="SullivanRRVortex.h" />
     <ClInclude Include="SullivanVortex.h" />
     <ClInclude Include="Transect.h" />
+    <ClInclude Include="TransectRandomizer.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="VecHashGrid.h" />
@@ -279,7 +280,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <OpenMPSupport>true</OpenMPSupport>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>

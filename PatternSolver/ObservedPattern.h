@@ -102,6 +102,12 @@ public:
 	double lengthBelow;
 	double spacing;
 
+	ObservedPattern() {
+		lengthAbove = -1;
+		lengthBelow = -1;
+		spacing = -1;
+	}
+
 	ObservedPattern(double lengthAbove_, double lengthBelow_, double spacing_, std::vector<double> obsVecs) {
 		this->lengthAbove = floor((lengthAbove_ + 0.5 * spacing_) / spacing_) * spacing_;
 		this->lengthBelow = floor((lengthBelow_ + 0.5 * spacing_) / spacing_) * spacing_;

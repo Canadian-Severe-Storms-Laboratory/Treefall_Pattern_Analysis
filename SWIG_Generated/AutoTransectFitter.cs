@@ -9,12 +9,10 @@
 //------------------------------------------------------------------------------
 
 
-public partial class AutoTransectFitter : global::System.IDisposable {
+public partial class AutoTransectFitter : TransectRandomizer {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
-  protected bool swigCMemOwn;
 
-  internal AutoTransectFitter(global::System.IntPtr cPtr, bool cMemoryOwn) {
-    swigCMemOwn = cMemoryOwn;
+  internal AutoTransectFitter(global::System.IntPtr cPtr, bool cMemoryOwn) : base(PatternSolverPINVOKE.AutoTransectFitter_SWIGUpcast(cPtr), cMemoryOwn) {
     swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
   }
 
@@ -35,16 +33,7 @@ public partial class AutoTransectFitter : global::System.IDisposable {
     }
   }
 
-  ~AutoTransectFitter() {
-    Dispose(false);
-  }
-
-  public void Dispose() {
-    Dispose(true);
-    global::System.GC.SuppressFinalize(this);
-  }
-
-  protected virtual void Dispose(bool disposing) {
+  protected override void Dispose(bool disposing) {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
@@ -53,84 +42,8 @@ public partial class AutoTransectFitter : global::System.IDisposable {
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
+      base.Dispose(disposing);
     }
-  }
-
-  public Range positionOffsetRange {
-    set {
-      PatternSolverPINVOKE.AutoTransectFitter_positionOffsetRange_set(swigCPtr, Range.getCPtr(value));
-    } 
-    get {
-      global::System.IntPtr cPtr = PatternSolverPINVOKE.AutoTransectFitter_positionOffsetRange_get(swigCPtr);
-      Range ret = (cPtr == global::System.IntPtr.Zero) ? null : new Range(cPtr, false);
-      return ret;
-    } 
-  }
-
-  public Range lengthAboveRange {
-    set {
-      PatternSolverPINVOKE.AutoTransectFitter_lengthAboveRange_set(swigCPtr, Range.getCPtr(value));
-    } 
-    get {
-      global::System.IntPtr cPtr = PatternSolverPINVOKE.AutoTransectFitter_lengthAboveRange_get(swigCPtr);
-      Range ret = (cPtr == global::System.IntPtr.Zero) ? null : new Range(cPtr, false);
-      return ret;
-    } 
-  }
-
-  public Range lengthBelowRange {
-    set {
-      PatternSolverPINVOKE.AutoTransectFitter_lengthBelowRange_set(swigCPtr, Range.getCPtr(value));
-    } 
-    get {
-      global::System.IntPtr cPtr = PatternSolverPINVOKE.AutoTransectFitter_lengthBelowRange_get(swigCPtr);
-      Range ret = (cPtr == global::System.IntPtr.Zero) ? null : new Range(cPtr, false);
-      return ret;
-    } 
-  }
-
-  public Range angleOffsetRange {
-    set {
-      PatternSolverPINVOKE.AutoTransectFitter_angleOffsetRange_set(swigCPtr, Range.getCPtr(value));
-    } 
-    get {
-      global::System.IntPtr cPtr = PatternSolverPINVOKE.AutoTransectFitter_angleOffsetRange_get(swigCPtr);
-      Range ret = (cPtr == global::System.IntPtr.Zero) ? null : new Range(cPtr, false);
-      return ret;
-    } 
-  }
-
-  public Range heightOffsetRange {
-    set {
-      PatternSolverPINVOKE.AutoTransectFitter_heightOffsetRange_set(swigCPtr, Range.getCPtr(value));
-    } 
-    get {
-      global::System.IntPtr cPtr = PatternSolverPINVOKE.AutoTransectFitter_heightOffsetRange_get(swigCPtr);
-      Range ret = (cPtr == global::System.IntPtr.Zero) ? null : new Range(cPtr, false);
-      return ret;
-    } 
-  }
-
-  public Range widthRange {
-    set {
-      PatternSolverPINVOKE.AutoTransectFitter_widthRange_set(swigCPtr, Range.getCPtr(value));
-    } 
-    get {
-      global::System.IntPtr cPtr = PatternSolverPINVOKE.AutoTransectFitter_widthRange_get(swigCPtr);
-      Range ret = (cPtr == global::System.IntPtr.Zero) ? null : new Range(cPtr, false);
-      return ret;
-    } 
-  }
-
-  public Range spacingRange {
-    set {
-      PatternSolverPINVOKE.AutoTransectFitter_spacingRange_set(swigCPtr, Range.getCPtr(value));
-    } 
-    get {
-      global::System.IntPtr cPtr = PatternSolverPINVOKE.AutoTransectFitter_spacingRange_get(swigCPtr);
-      Range ret = (cPtr == global::System.IntPtr.Zero) ? null : new Range(cPtr, false);
-      return ret;
-    } 
   }
 
   public Monitor monitor {

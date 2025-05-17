@@ -396,6 +396,7 @@ namespace TreefallPatternAnalysis
                 matchThreshold = cutoffThreshold.GetNumber(),
                 patternType = patternTypeComboBox.SelectedIndex,
                 useGustVel = (bool)gustVelCheckBox.IsChecked,
+                randomizeTransects = (bool)randomizeTransectsCheckBox.IsChecked,
                 models = modelTypeListView.SelectedItems.Cast<object>().Select(item => (double)modelTypeListView.Items.IndexOf(item)).ToArray()
             };
 
@@ -410,8 +411,8 @@ namespace TreefallPatternAnalysis
 
             await QueuedTask.Run(() => 
             {
-                error = matcher.bestMatchError(obsPattern);
                 simPattern = matcher.bestMatch(obsPattern);
+                error = matcher.bestError;
             });
 
             if (simPattern.vecs.Count == 0)
@@ -433,7 +434,7 @@ namespace TreefallPatternAnalysis
 
             selectedTransect.bestMatchError = error;
 
-            MatchResult results = await QueuedTask.Run(() => matcher.monteCarloMatching(obsPattern));
+            MatchResult results = await QueuedTask.Run(() => matcher.monteCarloMatching(selectedTransect, vecHashGrid, convergenceLine));
 
             monitor.Stop();
 

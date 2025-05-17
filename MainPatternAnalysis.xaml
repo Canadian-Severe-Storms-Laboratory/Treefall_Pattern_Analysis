@@ -96,11 +96,11 @@
                     <local:NumberBox x:Name="vcmax" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="616,652,0,0" NumberString="50" VerticalAlignment="Top" Width="54"/>
                     <local:NumberBox x:Name="vcmin" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="616,577,0,0" NumberString="30" VerticalAlignment="Top" Width="54"/>
 
-                    <Label FontSize="16" Content="Cutoff:" HorizontalAlignment="Left" Height="30" Margin="738,610,0,0" VerticalAlignment="Top" Width="140"/>
-                    <Label FontSize="16" Content="#Simulations:" HorizontalAlignment="Left" Height="30" Margin="737,570,0,0" VerticalAlignment="Top" Width="110"/>
+                    <Label FontSize="16" Content="Cutoff:" HorizontalAlignment="Left" Height="30" Margin="738,586,0,0" VerticalAlignment="Top" Width="140"/>
+                    <Label FontSize="16" Content="#Simulations:" HorizontalAlignment="Left" Height="30" Margin="737,528,0,0" VerticalAlignment="Top" Width="110"/>
                     <Label FontSize="16" Content="3s-Gust Vel:" HorizontalAlignment="Left" Height="30" Margin="738,650,0,0" VerticalAlignment="Top" Width="140"/>
-                    <local:NumberBox x:Name="cutoffThreshold" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="852,613,0,0" NumberString="0.10" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.712,0.633"/>
-                    <local:NumberBox x:Name="numberOfSimulations" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="852,573,0,0" NumberString="1000" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.5,0.5"/>
+                    <local:NumberBox x:Name="cutoffThreshold" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="852,589,0,0" NumberString="0.10" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.712,0.633"/>
+                    <local:NumberBox x:Name="numberOfSimulations" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="852,531,0,0" NumberString="1000" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.5,0.5"/>
                     <CheckBox x:Name="gustVelCheckBox" IsChecked="True" HorizontalAlignment="Left" Margin="879,657,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                         <CheckBox.RenderTransform>
                             <TransformGroup>
@@ -129,8 +129,8 @@
                     <TextBlock x:Name="resultStatsText" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Height="250" Margin="18,40,0,0"/>
 
 
-                    <Label Content="Pattern Type" Width="95" Height="34" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="980,573,0,0"/>
-                    <ComboBox x:Name="patternTypeComboBox" SelectedIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="25" Margin="1080,573,0,0">
+                    <Label Content="Pattern Type" Width="95" Height="34" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="981,529,0,0"/>
+                    <ComboBox x:Name="patternTypeComboBox" SelectedIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="25" Margin="1081,529,0,0">
                         <ComboBoxItem Content="All Types"/>
                         <ComboBoxItem Content="Outer Only"/>
                         <ComboBoxItem Content="Not Outer"/>
@@ -140,6 +140,17 @@
                         <ComboBoxItem Content="Swirl Ratio"/>
                         <ComboBoxItem Content="Core Radius (Rmax)"/>
                     </ComboBox>
+                    <Label FontSize="16" Content="Randomize Transects:" HorizontalAlignment="Left" Height="30" Margin="982,586,0,0" VerticalAlignment="Top" Width="163"/>
+                    <CheckBox x:Name="randomizeTransectsCheckBox" IsChecked="True" HorizontalAlignment="Left" Margin="1174,594,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                        <CheckBox.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
 
                 </Grid>
             </TabItem>

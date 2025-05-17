@@ -11,53 +11,26 @@
 #include "VecHashGrid.h"
 #include "Utils.h"
 #include "PatternMatcher.h"
+#include "TransectRandomizer.h"
 #include "dbscan.h"
 #include "Monitor.h"
 
 using namespace Utils;
 
-EXPORT class AutoTransectFitter
+EXPORT class AutoTransectFitter : public TransectRandomizer
 {
 private:
-	VecHashGrid& vectorHashGrid;
-	ConvergenceLine& convergenceLine;
-
 	std::vector<Transect> foundTransects;
-
-	Transect randomTransect(std::uniform_real_distribution<double>& dist, std::mt19937& gen) {
-
-		double positionOffset = positionOffsetRange.random(dist, gen);
-
-		auto position = convergenceLine.query(positionOffset);
-
-		Transect transect(position[0], position[1], lengthAboveRange.random(dist, gen), lengthBelowRange.random(dist, gen), widthRange.random(dist, gen));
-
-		transect.positionOffset = positionOffset;
-		transect.angleOffset = angleOffsetRange.random(dist, gen);
-		transect.heightOffset = heightOffsetRange.random(dist, gen);
-		transect.spacing = floor(spacingRange.random(dist, gen) + 0.5);
-
-		transect.setPerpendicularAngle(position[2]);
-
-		return transect;
-	}
 
 public:
 
-	Range positionOffsetRange;
-	Range lengthAboveRange{ 200.0, 400.0 };
-	Range lengthBelowRange{ 200.0, 400.0 };
-	Range angleOffsetRange{ -22.5, 22.5 };
-	Range heightOffsetRange{ -50.0, 50.0 };
-	Range widthRange{50.0, 100.0};
-	Range spacingRange{30.0, 50.0};
 	Monitor monitor;
 	double matchThreshold = 0.1;
 	int maxIters = 1000000;
 	bool failed = false;
 
-	AutoTransectFitter(VecHashGrid& vectorHashGrid, ConvergenceLine& convergenceLine) : vectorHashGrid(vectorHashGrid), convergenceLine(convergenceLine) {
-		positionOffsetRange = Range{ 0.0, convergenceLine.length() };
+	AutoTransectFitter(VecHashGrid& vectorHashGrid, ConvergenceLine& convergenceLine) : TransectRandomizer(vectorHashGrid, convergenceLine) {
+		positionOffsetRange = { 0.0, convergenceLine.length() };
 	}
 
 	int resultsSize() {

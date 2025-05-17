@@ -840,8 +840,11 @@ class PatternSolverPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_ObservedPattern_spacing_get")]
   public static extern double ObservedPattern_spacing_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_ObservedPattern")]
-  public static extern global::System.IntPtr new_ObservedPattern(double jarg1, double jarg2, double jarg3, global::System.Runtime.InteropServices.HandleRef jarg4);
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_ObservedPattern__SWIG_0")]
+  public static extern global::System.IntPtr new_ObservedPattern__SWIG_0();
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_ObservedPattern__SWIG_1")]
+  public static extern global::System.IntPtr new_ObservedPattern__SWIG_1(double jarg1, double jarg2, double jarg3, global::System.Runtime.InteropServices.HandleRef jarg4);
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_ObservedPattern_length")]
   public static extern double ObservedPattern_length(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -873,47 +876,59 @@ class PatternSolverPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_ObservedPattern")]
   public static extern void delete_ObservedPattern(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_positionOffsetRange_set")]
-  public static extern void AutoTransectFitter_positionOffsetRange_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_TransectRandomizer_positionOffsetRange_set")]
+  public static extern void TransectRandomizer_positionOffsetRange_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_positionOffsetRange_get")]
-  public static extern global::System.IntPtr AutoTransectFitter_positionOffsetRange_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_TransectRandomizer_positionOffsetRange_get")]
+  public static extern global::System.IntPtr TransectRandomizer_positionOffsetRange_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_lengthAboveRange_set")]
-  public static extern void AutoTransectFitter_lengthAboveRange_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_TransectRandomizer_lengthAboveRange_set")]
+  public static extern void TransectRandomizer_lengthAboveRange_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_lengthAboveRange_get")]
-  public static extern global::System.IntPtr AutoTransectFitter_lengthAboveRange_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_TransectRandomizer_lengthAboveRange_get")]
+  public static extern global::System.IntPtr TransectRandomizer_lengthAboveRange_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_lengthBelowRange_set")]
-  public static extern void AutoTransectFitter_lengthBelowRange_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_TransectRandomizer_lengthBelowRange_set")]
+  public static extern void TransectRandomizer_lengthBelowRange_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_lengthBelowRange_get")]
-  public static extern global::System.IntPtr AutoTransectFitter_lengthBelowRange_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_TransectRandomizer_lengthBelowRange_get")]
+  public static extern global::System.IntPtr TransectRandomizer_lengthBelowRange_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_angleOffsetRange_set")]
-  public static extern void AutoTransectFitter_angleOffsetRange_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_TransectRandomizer_angleOffsetRange_set")]
+  public static extern void TransectRandomizer_angleOffsetRange_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_angleOffsetRange_get")]
-  public static extern global::System.IntPtr AutoTransectFitter_angleOffsetRange_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_TransectRandomizer_angleOffsetRange_get")]
+  public static extern global::System.IntPtr TransectRandomizer_angleOffsetRange_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_heightOffsetRange_set")]
-  public static extern void AutoTransectFitter_heightOffsetRange_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_TransectRandomizer_heightOffsetRange_set")]
+  public static extern void TransectRandomizer_heightOffsetRange_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_heightOffsetRange_get")]
-  public static extern global::System.IntPtr AutoTransectFitter_heightOffsetRange_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_TransectRandomizer_heightOffsetRange_get")]
+  public static extern global::System.IntPtr TransectRandomizer_heightOffsetRange_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_widthRange_set")]
-  public static extern void AutoTransectFitter_widthRange_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_TransectRandomizer_widthRange_set")]
+  public static extern void TransectRandomizer_widthRange_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_widthRange_get")]
-  public static extern global::System.IntPtr AutoTransectFitter_widthRange_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_TransectRandomizer_widthRange_get")]
+  public static extern global::System.IntPtr TransectRandomizer_widthRange_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_spacingRange_set")]
-  public static extern void AutoTransectFitter_spacingRange_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_TransectRandomizer_spacingRange_set")]
+  public static extern void TransectRandomizer_spacingRange_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_spacingRange_get")]
-  public static extern global::System.IntPtr AutoTransectFitter_spacingRange_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_TransectRandomizer_spacingRange_get")]
+  public static extern global::System.IntPtr TransectRandomizer_spacingRange_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_TransectRandomizer__SWIG_0")]
+  public static extern global::System.IntPtr new_TransectRandomizer__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_TransectRandomizer__SWIG_1")]
+  public static extern global::System.IntPtr new_TransectRandomizer__SWIG_1(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_TransectRandomizer_rand")]
+  public static extern global::System.IntPtr TransectRandomizer_rand(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_TransectRandomizer")]
+  public static extern void delete_TransectRandomizer(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_monitor_set")]
   public static extern void AutoTransectFitter_monitor_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
@@ -1050,11 +1065,23 @@ class PatternSolverPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_useGustVel_get")]
   public static extern bool PatternMatcher_useGustVel_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_randomizeTransects_set")]
+  public static extern void PatternMatcher_randomizeTransects_set(global::System.Runtime.InteropServices.HandleRef jarg1, bool jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_randomizeTransects_get")]
+  public static extern bool PatternMatcher_randomizeTransects_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_bestMatchScale_set")]
   public static extern void PatternMatcher_bestMatchScale_set(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_bestMatchScale_get")]
   public static extern double PatternMatcher_bestMatchScale_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_bestError_set")]
+  public static extern void PatternMatcher_bestError_set(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_bestError_get")]
+  public static extern double PatternMatcher_bestError_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_PatternMatcher")]
   public static extern global::System.IntPtr new_PatternMatcher(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, global::System.Runtime.InteropServices.HandleRef jarg3, global::System.Runtime.InteropServices.HandleRef jarg4);
@@ -1066,7 +1093,7 @@ class PatternSolverPINVOKE {
   public static extern global::System.IntPtr PatternMatcher_bestMatch(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_PatternMatcher_monteCarloMatching")]
-  public static extern global::System.IntPtr PatternMatcher_monteCarloMatching(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  public static extern global::System.IntPtr PatternMatcher_monteCarloMatching(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, global::System.Runtime.InteropServices.HandleRef jarg3, global::System.Runtime.InteropServices.HandleRef jarg4);
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_PatternMatcher")]
   public static extern void delete_PatternMatcher(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -1127,4 +1154,7 @@ class PatternSolverPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_ModifiedRankineVortex_SWIGUpcast")]
   public static extern global::System.IntPtr ModifiedRankineVortex_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_SWIGUpcast")]
+  public static extern global::System.IntPtr AutoTransectFitter_SWIGUpcast(global::System.IntPtr jarg1);
 }
