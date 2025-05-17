@@ -224,12 +224,20 @@ namespace TreefallPatternAnalysis
             autoFitTransectsButton.IsEnabled = false;
             AutoTransectFitter atf = new(vecHashGrid, convergenceLine);
 
+            atf.positionOffsetRange.min = 0.0;
+            atf.positionOffsetRange.max = convergenceLine.length();
             atf.lengthBelowRange.min = transectLengthBelowSlider.GetValue() * 0.75;
             atf.lengthBelowRange.max = transectLengthBelowSlider.GetValue() * 1.25;
             atf.lengthAboveRange.min = transectLengthAboveSlider.GetValue() * 0.75;
             atf.lengthAboveRange.max = transectLengthAboveSlider.GetValue() * 1.25;
             atf.spacingRange.min = vectorSpacing.GetNumber() * 0.75;
             atf.spacingRange.max = vectorSpacing.GetNumber() * 1.25;
+            atf.angleOffsetRange.min = -22.5;
+            atf.angleOffsetRange.max = 22.5;
+            atf.widthRange.min = 50.0;
+            atf.widthRange.max = 100.0;
+            atf.heightOffsetRange.min = -vectorSpacing.GetNumber();
+            atf.heightOffsetRange.max = vectorSpacing.GetNumber();
             atf.matchThreshold = cutoffThreshold.GetNumber() / 2.0;
 
             Monitor monitor = atf.monitor;

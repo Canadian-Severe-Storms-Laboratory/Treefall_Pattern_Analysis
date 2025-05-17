@@ -29,9 +29,7 @@ public:
 	int maxIters = 1000000;
 	bool failed = false;
 
-	AutoTransectFitter(VecHashGrid& vectorHashGrid, ConvergenceLine& convergenceLine) : TransectRandomizer(vectorHashGrid, convergenceLine) {
-		positionOffsetRange = { 0.0, convergenceLine.length() };
-	}
+	AutoTransectFitter(VecHashGrid& vectorHashGrid, ConvergenceLine& convergenceLine) : TransectRandomizer(vectorHashGrid, convergenceLine) {}
 
 	int resultsSize() {
 		return foundTransects.size();
