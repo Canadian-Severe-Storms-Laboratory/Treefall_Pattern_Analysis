@@ -16,4 +16,4 @@ This software is an Add-on for ArcGIS-Pro (3.3+), to install, download the Treef
 
 ![image](https://github.com/Canadian-Severe-Storms-Laboratory/Treefall_Pattern_Analysis/blob/v2/Screenshot%202024-11-18%20155645.png)
 ![image](https://github.com/Canadian-Severe-Storms-Laboratory/Treefall_Pattern_Analysis/blob/v2/Screenshot%202024-11-18%20155914.png)
-![image](https://github.com/Canadian-Severe-Storms-Laboratory/Treefall_Pattern_Analysis/blob/v2/Screenshot%202024-11-18%20160336.png)
+![image](https://github.com/Canadian-Severe-Storms-Laboratory/Treefall_Pattern_Analysis/blob/v2/Screenshot%2024-11-18%160336.png)
