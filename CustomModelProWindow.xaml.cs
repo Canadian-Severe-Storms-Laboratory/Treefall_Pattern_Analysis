@@ -5,6 +5,8 @@ using System.Windows;
 using System;
 using ScottPlot.Statistics;
 using ScottPlot.Drawing;
+using System.Windows.Documents;
+using System.Collections.Generic;
 
 namespace TreefallPatternAnalysis
 {
@@ -88,6 +90,13 @@ namespace TreefallPatternAnalysis
 
             int n = modelParams.n;
 
+            //model = new BakerSterlingVortex()
+            //{
+            //    Vr = modelParams.vr,
+            //    Vt = modelParams.vt,
+            //    Vs = modelParams.vs,
+            //};
+
             model = new LinearPiecewiseVortex(vrLines, vtLines)
             {
                 Vr = modelParams.vr,
@@ -111,7 +120,8 @@ namespace TreefallPatternAnalysis
 
             if (modelParams.displayCurve)
             {
-                var curve = model.patternCurve(500);
+                //var curve = model.maxVelCurve(-5.0, 5.0, 500);
+                var curve = model.patternCurve(5000);
 
                 double[] xs = curve.xs;
                 double[] ys = curve.ys;
@@ -141,7 +151,7 @@ namespace TreefallPatternAnalysis
 
             for (int i = 0; i < p.Length; i += 4)
             {
-                vfp.RootedVectors.Add((new Coordinate(p[i], p[i+1]), new CoordinateVector(p[i+2]*0.2, p[i+3]*0.2)));
+                vfp.RootedVectors.Add((new Coordinate(p[i], p[i + 1]), new CoordinateVector(p[i + 2] * 0.2, p[i + 3] * 0.2)));
             }
 
 

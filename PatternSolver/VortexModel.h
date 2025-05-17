@@ -103,7 +103,7 @@ public:
 			if (rootFunc(-ym) <= 0.0) return localRoot(rootFunc, { -ym, ym });
 		}
 
-		const double ym = localMinima(rootFunc, { -limit, limit }, 1e-5, 0.0); //Test this more...
+		const double ym = localMinima(rootFunc, { -limit, limit }, 1e-5, 0.0); // upper = 0.0?
 
 		if (rootFunc(ym) <= 0.0) return localRoot(rootFunc, { ym, limit });
 
@@ -130,6 +130,19 @@ public:
 		if (rootFunc(ym) <= 0.0) return true;
 
 		return false;
+	}
+
+	double maxVelLocation(double x) {
+		constexpr double Rmax = 1.0;
+		constexpr double limit = 10.0;
+
+		const auto func = [&](double y) { return -magAt(x, y); };
+
+		/*if (fabs(x) <= Rmax) {
+			return globalMinimum(func, { -limit, limit })[1];
+		}*/
+
+		return localMinima(func, { -limit, 0.0 }, 1e-5);
 	}
 
 	void solveAxesOfInterest() {
@@ -189,7 +202,7 @@ public:
 
 		const double s = 1.5 * Vs_r;
 
-		const double i = integral2D([&](double x, double y) {return magAt(x, y); }, { x0 - s, x0 + s, y0 - s, y0 + s });
+		const double i = integrate2D([&](double x, double y) {return magAt(x, y); }, { x0 - s, x0 + s, y0 - s, y0 + s });
 
 		const double area = 9.0 * Vs_r * Vs_r;
 
@@ -265,6 +278,38 @@ public:
 		for (double x = lower + 0.001; x <= upper - 0.001; x += dx) {
 			curve.xs.push_back(x);
 			curve.ys.push_back(patternLocation(x));
+		}
+
+		return curve;
+	}
+
+	Curve maxVelCurve(double min, double max, int numPoints) {
+		Curve curve;
+		curve.reserve(numPoints);
+
+		const double dx = (max - min) / (double)(numPoints - 1);
+
+		for (int i = 0; i < numPoints; i++) {
+			const double x = min + (double)i * dx;
+
+			curve.xs.push_back(x);
+			curve.ys.push_back(maxVelLocation(x));
+		}
+
+		return curve;
+	}
+
+	Curve maxVelMagCurve(double min, double max, int numPoints) {
+		Curve curve;
+		curve.reserve(numPoints);
+
+		const double dx = (max - min) / (double)(numPoints - 1);
+
+		for (int i = 0; i < numPoints; i++) {
+			const double x = min + (double)i * dx;
+
+			curve.xs.push_back(x);
+			curve.ys.push_back(magAt(x, maxVelLocation(x)));
 		}
 
 		return curve;

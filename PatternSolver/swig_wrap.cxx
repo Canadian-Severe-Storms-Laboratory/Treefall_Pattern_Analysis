@@ -1564,6 +1564,20 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_VortexModel_patternLocationExists(voi
 }
 
 
+SWIGEXPORT double SWIGSTDCALL CSharp_VortexModel_maxVelLocation(void * jarg1, double jarg2) {
+  double jresult ;
+  VortexModel *arg1 = (VortexModel *) 0 ;
+  double arg2 ;
+  double result;
+  
+  arg1 = (VortexModel *)jarg1; 
+  arg2 = (double)jarg2; 
+  result = (double)(arg1)->maxVelLocation(arg2);
+  jresult = result; 
+  return jresult;
+}
+
+
 SWIGEXPORT void SWIGSTDCALL CSharp_VortexModel_solveAxesOfInterest(void * jarg1) {
   VortexModel *arg1 = (VortexModel *) 0 ;
   
@@ -1771,6 +1785,42 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_VortexModel_patternCurve(void * jarg1, int 
   arg1 = (VortexModel *)jarg1; 
   arg2 = (int)jarg2; 
   result = (arg1)->patternCurve(arg2);
+  jresult = new Curve(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_VortexModel_maxVelCurve(void * jarg1, double jarg2, double jarg3, int jarg4) {
+  void * jresult ;
+  VortexModel *arg1 = (VortexModel *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  int arg4 ;
+  Curve result;
+  
+  arg1 = (VortexModel *)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  arg4 = (int)jarg4; 
+  result = (arg1)->maxVelCurve(arg2,arg3,arg4);
+  jresult = new Curve(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_VortexModel_maxVelMagCurve(void * jarg1, double jarg2, double jarg3, int jarg4) {
+  void * jresult ;
+  VortexModel *arg1 = (VortexModel *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  int arg4 ;
+  Curve result;
+  
+  arg1 = (VortexModel *)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  arg4 = (int)jarg4; 
+  result = (arg1)->maxVelMagCurve(arg2,arg3,arg4);
   jresult = new Curve(result); 
   return jresult;
 }

@@ -12,6 +12,8 @@ using ScottPlot;
 using ArcGIS.Desktop.Internal.Mapping;
 using System.Linq;
 using System.Windows.Input;
+using System.Xaml.Schema;
+using ArcGIS.Core.Data.UtilityNetwork.Trace;
 
 namespace TreefallPatternAnalysis
 {
@@ -25,14 +27,17 @@ namespace TreefallPatternAnalysis
         {
             InitializeComponent();
 
-            vmaxHistogramPlot.Plot.Style(figureBackground: System.Drawing.Color.FromArgb(255, 229, 229, 229));
-            swirlHistogramPlot.Plot.Style(figureBackground: System.Drawing.Color.FromArgb(255, 229, 229, 229));
+            vmaxPlot.Plot.Style(figureBackground: System.Drawing.Color.FromArgb(255, 229, 229, 229));
+            otherPlot.Plot.Style(figureBackground: System.Drawing.Color.FromArgb(255, 229, 229, 229));
 
-            vmaxHistogramPlot.Plot.Layout(left: 0, right: 0, bottom: 0, top: 0);
-            swirlHistogramPlot.Plot.Layout(left: 0, right: 0, bottom: 0, top: 0);
+            vmaxPlot.Plot.Layout(left: 0, right: 0, bottom: 0, top: 0);
+            otherPlot.Plot.Layout(left: 0, right: 0, bottom: 0, top: 0);
 
-            vmaxHistogramPlot.Plot.Title("Estimated Vmax");
-            swirlHistogramPlot.Plot.Title("Estimated Swirl Ratio");
+            vmaxPlot.Plot.XLabel("Min Required, V₃₋ₘₐₓ (ms⁻¹)");
+            vmaxPlot.Plot.YLabel("Probability");
+
+            otherPlot.Plot.XLabel("Swirl Ratio (S)");
+            otherPlot.Plot.YLabel("Probability");
         }
 
         private bool loaded = false;
@@ -449,24 +454,25 @@ namespace TreefallPatternAnalysis
 
             if (transect.vmaxResults.IsNullOrEmpty() || transect.swirlResults.IsNullOrEmpty())
             {
-                vmaxHistogramPlot.Plot.Clear();
-                swirlHistogramPlot.Plot.Clear();
-                vmaxHistogramPlot.Refresh();
-                swirlHistogramPlot.Refresh();
+                vmaxPlot.Plot.Clear();
+                otherPlot.Plot.Clear();
+                vmaxPlot.Refresh();
+                otherPlot.Refresh();
                 resultStatsText.Text = "";
                 return;
             }
 
-            PlotHist(vmaxHistogramPlot, transect.vmaxResults, (int)numVmaxHistBoxes.GetValue());
+            //PlotHist(vmaxPlot, transect.vmaxResults, (int)numVmaxHistBoxes.GetValue());
+            PlotCDF(vmaxPlot, transect.vmaxResults);
 
             switch (resultGraphComboBox.SelectedIndex)
             {
                 case 0:
-                    PlotHist(swirlHistogramPlot, transect.swirlResults, (int)numSwirlHistBoxes.GetValue());
+                    PlotHist(otherPlot, transect.swirlResults, (int)numSwirlHistBoxes.GetValue());
                     break;
                 case 1:
-                    PlotHist(swirlHistogramPlot, transect.rmaxResults, (int)numSwirlHistBoxes.GetValue());
-                    AddRmaxLimitLines(swirlHistogramPlot, transect);
+                    PlotHist(otherPlot, transect.rmaxResults, (int)numSwirlHistBoxes.GetValue());
+                    AddRmaxLimitLines(otherPlot, transect);
                     break;
             }
 
@@ -485,6 +491,44 @@ namespace TreefallPatternAnalysis
             plot.Refresh();
         }
 
+        private void PlotEFLine(Plot plt, (double, double) xRange, (double, double) vRange, int index, System.Drawing.Color color)
+        {
+            if (xRange.Item1 > vRange.Item2 || xRange.Item2 < vRange.Item1) return;
+            
+            var line = plt.AddVerticalLine(vRange.Item1, System.Drawing.Color.Black, style: LineStyle.Dash);
+            line.PositionLabel = true;
+            line.PositionLabelOppositeAxis = true;
+            line.PositionFormatter = x => "EF" + index;
+            line.PositionLabelBackground = color;
+            line.PositionLabelFont.Color = System.Drawing.Color.Black;
+        }
+
+        private void PlotCDF(WpfPlot plot, double[] data)
+        {
+            Plot plt = plot.Plot;
+            plt.Clear();
+            double[] ys = new double[data.Length];
+
+            double xMin = data[0];
+            double xMax = data[data.Length - 1];
+
+            PlotEFLine(plt, (xMin, xMax), (25, 36), 0, System.Drawing.Color.Blue);
+            PlotEFLine(plt, (xMin, xMax), (37, 49), 1, System.Drawing.Color.Green);
+            PlotEFLine(plt, (xMin, xMax), (50, 61), 2, System.Drawing.Color.Gold);
+            PlotEFLine(plt, (xMin, xMax), (62, 74), 3, System.Drawing.Color.Orange);
+            PlotEFLine(plt, (xMin, xMax), (75, 86), 4, System.Drawing.Color.IndianRed);
+            PlotEFLine(plt, (xMin, xMax), (87, 1000), 5, System.Drawing.Color.MediumPurple);
+
+            plt.AddHorizontalLine(0.5, System.Drawing.Color.Black, style: LineStyle.Dash);
+
+            //assumes data is sorted
+            for (int i = 0; i < data.Length; i++) ys[i] = (double)(i + 1) / (double)data.Length;
+            plt.AddScatter(data, ys, System.Drawing.Color.Blue, 3, 0, MarkerShape.none);
+            plt.SetAxisLimitsY(-0.05, 1.05);
+
+            plot.Refresh();
+        }
+
         private void PlotHist(WpfPlot plot, double[] data, int numBins)
         {
             Plot plt = plot.Plot;
@@ -498,6 +542,7 @@ namespace TreefallPatternAnalysis
 
             var bar = plt.AddBar(hist.GetProbability(), positions: hist.Bins);
             bar.BarWidth = (stats.Max - stats.Min) / numBins;
+            bar.PositionOffset = bar.BarWidth / 2;
 
             var medianLine = plt.AddVerticalLine(data[data.Length / 2], System.Drawing.Color.Black, 2, LineStyle.Dash);
             medianLine.PositionLabel = false;

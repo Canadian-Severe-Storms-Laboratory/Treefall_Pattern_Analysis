@@ -44,23 +44,23 @@ void show(double result, double expected)
 
 int main(){
 
-	double r = integral2D([&](double x, double y) { return x * x + y * y; }, { 0.0, 2.0, 0.0, 1.0 });
+	double r = integrate2D([&](double x, double y) { return x * x + y * y; }, { 0.0, 2.0, 0.0, 1.0 });
 	double e = 10.0 / 3.0;
 	show(r, e);
 
-	r = integral2D([&](double x, double y) { return exp(x + y); }, { 0.0, 1.0, 0.0, 1.0 });
+	r = integrate2D([&](double x, double y) { return exp(x + y); }, { 0.0, 1.0, 0.0, 1.0 });
 	e = pow(exp(1.0)-1.0, 2.0);
 	show(r, e);
 
-	r = integral2D([&](double x, double y) { return sin(x) * cos(y); }, { 0.0, PI / 2.0, 0.0, PI / 2.0 });
+	r = integrate2D([&](double x, double y) { return sin(x) * cos(y); }, { 0.0, PI / 2.0, 0.0, PI / 2.0 });
 	e = 1.0;
 	show(r, e);
 
-	r = integral2D([&](double x, double y) { return pow(1.0 + x * y, 3.0); }, { 0.0, 1.0, 0.0, 1.0 });
+	r = integrate2D([&](double x, double y) { return pow(1.0 + x * y, 3.0); }, { 0.0, 1.0, 0.0, 1.0 });
 	e = 103.0 / 48.0;
 	show(r, e);
 
-	r = integral2D([&](double x, double y) { return x * exp(y); }, { 1.0, 2.0, 0.0, 1.0 });
+	r = integrate2D([&](double x, double y) { return x * exp(y); }, { 1.0, 2.0, 0.0, 1.0 });
 	e = 3.0 * (exp(1.0) - 1.0) / 2.0;
 	show(r, e);
 

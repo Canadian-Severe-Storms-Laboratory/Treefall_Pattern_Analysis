@@ -131,6 +131,11 @@ public partial class VortexModel : global::System.IDisposable {
     return ret;
   }
 
+  public double maxVelLocation(double x) {
+    double ret = PatternSolverPINVOKE.VortexModel_maxVelLocation(swigCPtr, x);
+    return ret;
+  }
+
   public void solveAxesOfInterest() {
     PatternSolverPINVOKE.VortexModel_solveAxesOfInterest(swigCPtr);
   }
@@ -202,6 +207,16 @@ public partial class VortexModel : global::System.IDisposable {
 
   public Curve patternCurve(int numPoints) {
     Curve ret = new Curve(PatternSolverPINVOKE.VortexModel_patternCurve(swigCPtr, numPoints), true);
+    return ret;
+  }
+
+  public Curve maxVelCurve(double min, double max, int numPoints) {
+    Curve ret = new Curve(PatternSolverPINVOKE.VortexModel_maxVelCurve(swigCPtr, min, max, numPoints), true);
+    return ret;
+  }
+
+  public Curve maxVelMagCurve(double min, double max, int numPoints) {
+    Curve ret = new Curve(PatternSolverPINVOKE.VortexModel_maxVelMagCurve(swigCPtr, min, max, numPoints), true);
     return ret;
   }
 

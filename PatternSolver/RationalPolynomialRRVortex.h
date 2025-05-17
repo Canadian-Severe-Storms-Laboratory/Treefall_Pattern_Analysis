@@ -2,6 +2,7 @@
 #include "VortexModel.h"
 #include <array>
 
+
 template<double k0, double k1, double k2, double k3, double k4>
 class RationalPolynomialRRVortex : public VortexModel
 {

@@ -51,14 +51,14 @@ private:
 		
 			min = range.min / divisor;
 			max = range.max / divisor;
-			step = (max - min) / 31; //32 iterations	
+			step = (max - min) / 63; //64 iterations	
 		}
 
 		RatioRange(Range range, Range divisor) {
 
 			min = range.min / divisor.max;
 			max = range.max / divisor.min;
-			step = (max - min) / 31; //32 iterations	
+			step = (max - min) / 63; //64 iterations	
 		}
 	};
 
@@ -142,7 +142,7 @@ public:
 		double minError = 1E100;
 
 		#pragma omp parallel for schedule(dynamic) num_threads((int)(std::thread::hardware_concurrency()*0.8))
-		for (int i = 0; i < 32; i++) {
+		for (int i = 0; i < 64; i++) {
 
 			const double Vr = VrRatioRange.min + VrRatioRange.step * i;
 
@@ -188,7 +188,7 @@ public:
 		std::unique_ptr<VortexModel> bestModel;
 
 		#pragma omp parallel for schedule(dynamic) num_threads((int)(std::thread::hardware_concurrency()*0.8))
-		for (int i = 0; i < 32; i++) {
+		for (int i = 0; i < 64; i++) {
 
 			const double Vr = VrRatioRange.min + VrRatioRange.step * i;
 

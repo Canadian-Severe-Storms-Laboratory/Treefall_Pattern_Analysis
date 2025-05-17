@@ -71,7 +71,7 @@ public:
 
 	VecHashGrid(std::vector<double> vecs) {
 
-		Utils::writeBinaryFile(vecs, "C:\\Users\\danie\\Documents\\Treefall Pattern Analysis\\TreefallPatternAnalysisV2\\PatternSolver\\Vecs.bin");
+		//Utils::writeBinaryFile(vecs, "C:\\Users\\danie\\Documents\\Treefall Pattern Analysis\\TreefallPatternAnalysisV2\\PatternSolver\\Vecs.bin");
 
 		computeExtent(vecs);
 

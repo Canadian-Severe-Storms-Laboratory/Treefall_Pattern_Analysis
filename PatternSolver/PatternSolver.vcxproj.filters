@@ -115,8 +115,5 @@
     <ClCompile Include="dbscan.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="quartic.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

@@ -93,7 +93,6 @@
   <ItemGroup>
     <ClCompile Include="dbscan.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="quartic.cpp" />
     <ClCompile Include="swig_wrap.cxx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

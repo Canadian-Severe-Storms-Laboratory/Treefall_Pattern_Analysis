@@ -24,14 +24,12 @@ double binarySearch(std::function<bool(double)> func, std::array<double, 2> I, d
 }
 
 double localRoot(std::function<double(double)> func, std::array<double, 2> I, double tol = 1e-5) {
-    int iter;
-
     double a = I[0], b = I[1], c = I[1], d = 0.0, e = 0.0, min1, min2;
     double fa = func(a), fb = func(b), fc, p, q, r, s, tol1, xm;
 
     fc = fb;
 
-    for (iter = 1; iter <= 1000; iter++) {
+    for (int iter = 0; iter < 1000; iter++) {
         // if sign(fb) = sign(fc)
         if (fb * fc > 0.0) {
             c = a;
@@ -131,10 +129,7 @@ double localMinima(std::function<double(double)> f, std::array<double, 2> I, con
         t2 = 2.0 * tol;
 
         // Check the stopping criterion.
-        if (fabs(x - m) <= t2 - 0.5 * (sb - sa))
-        {
-            break;
-        }
+        if (fabs(x - m) <= t2 - 0.5 * (sb - sa)) break;
 
         // Fit a parabola.
         r = 0.0;
@@ -147,9 +142,7 @@ double localMinima(std::function<double(double)> f, std::array<double, 2> I, con
             p = (x - v) * q - (x - w) * r;
             q = 2.0 * (q - r);
 
-            if (0.0 < q) {
-                p = -p;
-            }
+            if (q > 0.0) p = -p;
 
             q = fabs(q);
             r = e;
@@ -164,23 +157,12 @@ double localMinima(std::function<double(double)> f, std::array<double, 2> I, con
 
             // F must not be evaluated too close to A or B.
             if ((u - sa) < t2 || (sb - u) < t2) {
-                if (x < m) {
-                    d = tol;
-                }
-                else {
-                    d = -tol;
-                }
+                d = x < m ? tol : -tol;
             }
         }
-
         // A golden-section step.
         else {
-            if (x < m) {
-                e = sb - x;
-            }
-            else {
-                e = sa - x;
-            }
+            e = x < m ? sb - x : sa - x;
             d = c * e;
         }
 
@@ -188,7 +170,7 @@ double localMinima(std::function<double(double)> f, std::array<double, 2> I, con
         if (tol <= fabs(d)) {
             u = x + d;
         }
-        else if (0.0 < d) {
+        else if (d > 0.0) {
             u = x + tol;
         }
         else {
@@ -239,17 +221,42 @@ double localMinima(std::function<double(double)> f, std::array<double, 2> I, con
     return x;
 }
 
+std::array<double, 2> globalMinimum(std::function<double(double)> f, std::array<double, 2> I, size_t iters = 100, double eps = 1E-7) {
+    const double dx = (I[1] - I[0]) / (double)(iters - 1);
+    double f0 = f(I[0]);
+    double f1 = f(I[0] + dx);
+
+    std::array<double, 2> result = { f0, I[0] };
+
+    for (size_t i = 1; i < iters - 1; i++) {
+        const double x = I[0] + i * dx;
+        const double f2 = f(x + dx);
+
+        if (f0 > f1 && f1 < f2) {
+            const double local_min = localMinima(f, { x - dx, x + dx }, eps);
+            const double local_min_value = f(local_min);
+
+            if (local_min_value < result[0]) result = { local_min_value, local_min };
+        }
+
+        f0 = f1;
+        f1 = f2;
+    }
+
+    if (f1 < result[0]) result = { f1, I[1] };
+
+    return result;
+}
 
 // integration using Simpson's method, N = number of function samples
 template<size_t N=10>
-double integral(std::function<double(double)> f, std::array<double, 2> I) {
+double integrate(std::function<double(double)> f, std::array<double, 2> I) {
 
     static_assert(N % 2 == 0); // N must be even
 
     const double a = I[0];
     const double b = I[1];
     const double h = (b - a) / N;
-    constexpr double s = 1.0 / 3.0;
     
     double sum_odds = f(a + h) + f(a + (N - 1) * h);
     double sum_evens = f(a + 2 * h);
@@ -259,20 +266,20 @@ double integral(std::function<double(double)> f, std::array<double, 2> I) {
         sum_evens += f(a + (i + 1) * h);
     }
 
-    return (f(a) + f(b) + 2.0 * sum_evens + 4.0 * sum_odds) * h * s;
+    return (f(a) + f(b) + 2.0 * sum_evens + 4.0 * sum_odds) * h / 3.0;
 }
 
 template<size_t N = 10>
-double integral2D(std::function<double(double, double)> f, std::array<double, 4> I) {
+double integrate2D(std::function<double(double, double)> f, std::array<double, 4> I) {
 
     const auto outerFunc = [&](double y) {
         
         const auto innerFunc = [&](double x) { return f(x, y); };
 
-        return integral<N>(innerFunc, {I[0], I[1]});
+        return integrate<N>(innerFunc, {I[0], I[1]});
     };
 
-    return integral<N>(outerFunc, { I[2], I[3] });
+    return integrate<N>(outerFunc, { I[2], I[3] });
 }
 
 

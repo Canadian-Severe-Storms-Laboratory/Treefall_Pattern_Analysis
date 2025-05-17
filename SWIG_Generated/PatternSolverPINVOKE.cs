@@ -429,6 +429,9 @@ class PatternSolverPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_VortexModel_patternLocationExists")]
   public static extern bool VortexModel_patternLocationExists(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
 
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_VortexModel_maxVelLocation")]
+  public static extern double VortexModel_maxVelLocation(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
+
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_VortexModel_solveAxesOfInterest")]
   public static extern void VortexModel_solveAxesOfInterest(global::System.Runtime.InteropServices.HandleRef jarg1);
 
@@ -473,6 +476,12 @@ class PatternSolverPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_VortexModel_patternCurve")]
   public static extern global::System.IntPtr VortexModel_patternCurve(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_VortexModel_maxVelCurve")]
+  public static extern global::System.IntPtr VortexModel_maxVelCurve(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, double jarg3, int jarg4);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_VortexModel_maxVelMagCurve")]
+  public static extern global::System.IntPtr VortexModel_maxVelMagCurve(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, double jarg3, int jarg4);
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_VortexModel_pattern__SWIG_0")]
   public static extern global::System.IntPtr VortexModel_pattern__SWIG_0(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);

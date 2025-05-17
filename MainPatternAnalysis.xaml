@@ -112,18 +112,17 @@
                         </CheckBox.RenderTransform>
                     </CheckBox>
 
-                    <WpfPlot x:Name="vmaxHistogramPlot" Width="350" Height="350" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="226,17,0,0"></WpfPlot>
-                    <WpfPlot x:Name="swirlHistogramPlot" Width="350" Height="350" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="576,17,0,0"></WpfPlot>
+                    <WpfPlot x:Name="vmaxPlot" Width="350" Height="350" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="226,17,0,0"></WpfPlot>
+                    <WpfPlot x:Name="otherPlot" Width="350" Height="350" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="576,17,0,0"></WpfPlot>
 
                     <Button Click="RunSimulation_" Width="70" Height="26" Content="Run" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="984,647,0,0" />
                     <Button Click="RunAllSimulations" Width="70" Height="26" Content="Run All" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1084,647,0,0" RenderTransformOrigin="0.186,0.715" />
                     <Button Click="SaveResults" Width="70" Height="26" Content="Save" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="1184,647,0,0" RenderTransformOrigin="0.186,0.715" />
 
-                    <local:SliderAndTextBox x:Name="numVmaxHistBoxes" OnChanged="PlotTransectResults" HorizontalAlignment="Left" Margin="266,340,0,0" VerticalAlignment="Top" Minimum="3" Maximum="12" InitialValue="8" TickFrequency="1" Width="330" Height="90"/>
-                    <local:SliderAndTextBox x:Name="numSwirlHistBoxes" OnChanged="PlotTransectResults" HorizontalAlignment="Left" Margin="616,340,0,0" VerticalAlignment="Top" Minimum="3" Maximum="12" InitialValue="5" TickFrequency="1" Width="330" Height="90"/>
+                    <local:SliderAndTextBox x:Name="numSwirlHistBoxes" OnChanged="PlotTransectResults" HorizontalAlignment="Left" Margin="616,355,0,0" VerticalAlignment="Top" Minimum="3" Maximum="12" InitialValue="5" TickFrequency="1" Width="330" Height="90"/>
 
-                    <Label Content="#Boxes" Width="100" Height="30" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="270,342,0,0"/>
-                    <Label Content="#Boxes" Width="100" Height="30" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="628,342,0,0"/>
+
+                    <Label Content="#Boxes" Width="100" Height="30" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="628,355,0,0"/>
                     <Button x:Name="testMatchButton2" Click="TestMatch"  Content="Test Match" FontSize="14" HorizontalAlignment="Left" Height="25" Margin="979,442,0,0" VerticalAlignment="Top" Width="80"/>
 
                     <Label Content="Result Statistics" Width="160" Height="34" Foreground="Black" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,11,0,0"/>
