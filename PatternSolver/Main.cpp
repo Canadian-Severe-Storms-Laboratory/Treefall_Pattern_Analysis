@@ -44,7 +44,7 @@ void show(double result, double expected)
 
 int main(){
 
-	double r = integrate2D([&](double x, double y) { return x * x + y * y; }, { 0.0, 2.0, 0.0, 1.0 });
+	/*double r = integrate2D([&](double x, double y) { return x * x + y * y; }, { 0.0, 2.0, 0.0, 1.0 });
 	double e = 10.0 / 3.0;
 	show(r, e);
 
@@ -62,15 +62,15 @@ int main(){
 
 	r = integrate2D([&](double x, double y) { return x * exp(y); }, { 1.0, 2.0, 0.0, 1.0 });
 	e = 3.0 * (exp(1.0) - 1.0) / 2.0;
-	show(r, e);
+	show(r, e);*/
 
 	double Vc = 40.0;
 
-	auto model = BakerSterlingVortex(60.0 / Vc, 20.0 / Vc, 10.0 / Vc);
+	auto model = BakerSterlingVortex(60.0 / Vc, 35.0 / Vc, 25.0 / Vc);
 	model.solveAxesOfInterest();
 
-	r = model.vgust(Vc, 70.0) * Vc;
-	e = model.vmax() * Vc;
+	double r = model.vgust(Vc, 20.0) * Vc;
+	double e = model.vmax() * Vc;
 	show(r, e);
 
 	//timeIt([&]() {model.solveAxesOfInterest(); auto p = model.patternCurve(15); }, 100000);

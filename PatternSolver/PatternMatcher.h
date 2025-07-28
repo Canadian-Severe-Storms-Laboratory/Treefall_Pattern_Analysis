@@ -40,6 +40,23 @@ EXPORT class PatternMatcher
 {
 private:
 
+	double median(std::vector<double>& data) {
+		size_t n = data.size();
+
+		if (n % 2 == 1) { // Odd number of elements
+			std::nth_element(data.begin(), data.begin() + n / 2, data.end());
+			return data[n / 2];
+		}
+
+		std::nth_element(data.begin(), data.begin() + n / 2, data.end());
+		double val1 = data[n / 2];
+
+		std::nth_element(data.begin(), data.begin() + (n - 1) / 2, data.begin() + n / 2);
+		double val2 = data[(n - 1) / 2];
+
+		return (val1 + val2) / 2.0;
+	}
+
 	struct RatioRange
 	{
 		double min;
@@ -246,9 +263,7 @@ public:
 
 		results.reserve(ITERS);
 
-		TransectRandomizer trandomizer = TransectRandomizer(transect, vectorHashGrid, convergenceLine);
-
-		
+		TransectRandomizer tRandomizer = TransectRandomizer(transect, vectorHashGrid, convergenceLine);
 
 		#pragma omp parallel num_threads((int)(std::thread::hardware_concurrency()*0.8))
 		while (results.minVels.size() < ITERS && !monitor.cancelled) {
@@ -260,7 +275,7 @@ public:
 			ObservedPattern obsPattern(transect.lengthAbove, transect.lengthBelow, transect.spacing, vectorHashGrid.query(transect));
 
 			if (randomizeTransects) {
-				obsPattern = trandomizer.rand(dist, gen);
+				obsPattern = tRandomizer.rand(dist, gen);
 
 				if (obsPattern.lengthAbove < 0.0) continue;
 			}
@@ -275,6 +290,7 @@ public:
 			double bestSwirl = 1E308;
 			double bestR = 1E308;
 			double minError = 1E308;
+			std::vector<double> maxVels;
 
 			auto model = VortexFactory::randomModel(models, dist, gen);
 			model->Vs = Vs;
@@ -302,16 +318,17 @@ public:
 
 					const double Vmax = (useGustVel ? model->vgust(Vc, Rmax) : model->vmax()) * Vc;
 
-					#pragma omp critical 
-					{	
-						minVel = std::min(Vmax, minVel);
+					//#pragma omp critical 
+					//{	
+					maxVels.push_back(Vmax);
+					minVel = std::min(Vmax, minVel);
 
-						if (error < minError) {
-							minError = error;
-							bestSwirl = model->swirlRatio();
-							bestR = Rmax;
-						}
+					if (error < minError) {
+						minError = error;
+						bestSwirl = model->swirlRatio();
+						bestR = Rmax;
 					}
+					//}
 				}
 			}
 
@@ -319,9 +336,13 @@ public:
 
 			if (minError > matchThreshold) continue; 
 
+			double medianMaxVel = median(maxVels);
+
+			double vel = patternType > 1 ? medianMaxVel : minVel;
+
 			#pragma omp critical
 			{
-				results.add(minVel, bestSwirl, bestR);
+				results.add(vel, bestSwirl, bestR);
 				monitor.value++;
 			}
 		}

@@ -269,7 +269,7 @@ double integrate(std::function<double(double)> f, std::array<double, 2> I) {
     return (f(a) + f(b) + 2.0 * sum_evens + 4.0 * sum_odds) * h / 3.0;
 }
 
-template<size_t N = 10>
+template<size_t N=10>
 double integrate2D(std::function<double(double, double)> f, std::array<double, 4> I) {
 
     const auto outerFunc = [&](double y) {
