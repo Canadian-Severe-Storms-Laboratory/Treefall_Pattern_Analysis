@@ -1,12 +1,13 @@
-﻿using ScottPlot.Plottable;
-using ScottPlot;
-using System.Windows.Input;
-using System.Windows;
-using System;
-using ScottPlot.Statistics;
+﻿using ScottPlot;
 using ScottPlot.Drawing;
-using System.Windows.Documents;
+using ScottPlot.Plottable;
+using ScottPlot.Statistics;
+using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Input;
 
 namespace TreefallPatternAnalysis
 {
@@ -28,17 +29,19 @@ namespace TreefallPatternAnalysis
             vrLpGraph.UpdateData += UpdateGraph;
             vtLpGraph.UpdateData += UpdateGraph;
             vtLpGraph.color = System.Drawing.Color.Green;
-            vtLpGraph.UpdateSpline();
+            vtLpGraph.UpdateGraph();
 
             plt = graphPlot.Plot;
             PixelPadding padding = new PixelPadding(120f, 170f, 20f, 10f);
             plt.ManualDataArea(padding);
 
-            plt.SetAxisLimits(-10.0, 10.0, -10.0, 10.0);
-
             graphPlot.Configuration.AllowDroppedFramesWhileDragging = true;
             graphPlot.Configuration.Quality = ScottPlot.Control.QualityMode.LowWhileDragging;
+        }
 
+        private void ProWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            plt.SetAxisLimits(-400.0, 500.0, -600.0, 300.0);
             UpdateGraph(null, null);
         }
 
@@ -67,6 +70,7 @@ namespace TreefallPatternAnalysis
             RenderFieldGraph();
 
             graphPlot.Refresh();
+           
         }
 
         private void MouseWheelChanged(object sender, MouseWheelEventArgs e)
@@ -84,38 +88,37 @@ namespace TreefallPatternAnalysis
 
         private void RenderFieldGraph()
         {
-            var modelParams = customModelParameters.GetParams();
+            vrLpGraph.displayLPModel = true;
+            vtLpGraph.displayLPModel = true;
             var vrLines = vrLpGraph.GetLines();
             var vtLines = vtLpGraph.GetLines();
 
+            var modelParams = customModelParameters.GetParams();
             int n = modelParams.n;
+            double rmax = modelParams.rmax;
 
-            //model = new BakerSterlingVortex()
-            //{
-            //    Vr = modelParams.vr,
-            //    Vt = modelParams.vt,
-            //    Vs = modelParams.vs,
-            //};
+            model = GetModel(modelParams, vrLines, vtLines);
 
-            model = new LinearPiecewiseVortex(vrLines, vtLines)
+            if (modelParams.modelType < 6)
             {
-                Vr = modelParams.vr,
-                Vt = modelParams.vt,
-                Vs = modelParams.vs,
-            };
+                SetCustomGraph(modelParams);
+            }
 
-            //model = new ModifiedRankineVortex(0.63662, modelParams.vr, modelParams.vt, modelParams.vs);
+            vrLpGraph.UpdateGraph();
+            vtLpGraph.UpdateGraph();
+            vrLpGraph.ResetAxes();
+            vtLpGraph.ResetAxes();
 
             if (model.hasPattern())
             {
                 model.solveAxesOfInterest();
             }
 
-            var limits = RenderHeatMap(n);
+            var limits = RenderHeatMap(n, rmax);
 
             if (modelParams.displayRmax)
             {
-                plt.AddCircle(0, 0, 1.0, System.Drawing.Color.Black, 1, lineStyle: LineStyle.DashDot);
+                plt.AddCircle(0, 0, rmax, System.Drawing.Color.Black, 1, lineStyle: LineStyle.DashDot);
             }
 
             if (modelParams.displayCurve)
@@ -128,6 +131,12 @@ namespace TreefallPatternAnalysis
 
                 if (xs.Length > 0)
                 {
+                    for (int i = 0; i < xs.Length; i++)
+                    {
+                        xs[i] *= rmax;
+                        ys[i] *= rmax;
+                    }
+
                     plt.AddScatter(xs, ys, System.Drawing.Color.White, 4, 1);
                 }
             }
@@ -151,7 +160,7 @@ namespace TreefallPatternAnalysis
 
             for (int i = 0; i < p.Length; i += 4)
             {
-                vfp.RootedVectors.Add((new Coordinate(p[i], p[i + 1]), new CoordinateVector(p[i + 2] * 0.2, p[i + 3] * 0.2)));
+                vfp.RootedVectors.Add((new Coordinate(p[i] * rmax, p[i + 1] * rmax), new CoordinateVector(p[i + 2] * 0.2 * rmax, p[i + 3] * 0.2 * rmax)));
             }
 
 
@@ -160,7 +169,7 @@ namespace TreefallPatternAnalysis
             plt.SetAxisLimits(limits);
         }
 
-        private AxisLimits RenderHeatMap(int n)
+        private AxisLimits RenderHeatMap(int n, double rmax)
         {
             var limits = plt.GetAxisLimits();
             double xMin = limits.XMin;
@@ -170,7 +179,7 @@ namespace TreefallPatternAnalysis
 
             plt.Clear();
 
-            Span<double> field = model.field(xMin, xMax, yMin, yMax, n);
+            Span<double> field = model.field(xMin / rmax, xMax / rmax, yMin / rmax, yMax / rmax, n);
 
             magnitudes = new double[n, n];
             unitVecs = new Vector2[n, n];
@@ -209,25 +218,77 @@ namespace TreefallPatternAnalysis
             }
 
             Heatmap hm = plt.AddHeatmap(magnitudes, Colormap.Jet);
-            hm.Update(magnitudes, Colormap.Jet, 0.0, 2.75); //120.0
             hm.OffsetX = xMin;
             hm.OffsetY = yMin;
             hm.CellHeight = dx;
             hm.CellWidth = dx;
             hm.Smooth = true;
             hm.UseParallel = true;
+            hm.Update(magnitudes, Colormap.Jet, 0.0, 2.75);
 
             Colorbar colorbar = plt.AddColorbar(hm);
             colorbar.MinValue = 0.0;
-            colorbar.MaxValue = 2.75; //120.0
+            colorbar.MaxValue = 2.75;
             colorbar.Label = "Wind Velocity (ratio to Vc)";
 
             return limits;
         }
 
-        private void ProWindow_Loaded(object sender, RoutedEventArgs e)
+        private static VortexModel GetModel(CustomModelParameters.Params modelParams, double[] vrLines, double[] vtLines)
         {
+            return modelParams.modelType switch
+            {
+                0 => new ModifiedRankineVortex(modelParams.phi, modelParams.vr, modelParams.vt, modelParams.vs),
+                1 => new BakerSterlingVortex(modelParams.vr, modelParams.vt, modelParams.vs),
+                2 => new BurgersRottVortex(modelParams.vr, modelParams.vt, modelParams.vs),
+                3 => new SullivanVortex(modelParams.vr, modelParams.vt, modelParams.vs),
+                4 => new BurgersRottRRVortex(modelParams.vr, modelParams.vt, modelParams.vs),
+                5 => new SullivanRRVortex(modelParams.vr, modelParams.vt, modelParams.vs),
+                _ => new LinearPiecewiseVortex(vrLines, vtLines)
+                {
+                    Vr = modelParams.vr,
+                    Vt = modelParams.vt,
+                    Vs = modelParams.vs,
+                },
+            };
+        }
 
+        private void SetCustomGraph(CustomModelParameters.Params modelParams)
+        {
+            vrLpGraph.displayLPModel = false;
+            vtLpGraph.displayLPModel = false;
+
+            switch (modelParams.modelType) {
+                case 1:
+                    vrLpGraph.customModelFunction = (x) => x < 0.0 ? null : 2.0 * x / (x * x + 1.0);
+                    vtLpGraph.customModelFunction = (x) => x < 0.0 ? null : 2.0 * x / (x * x + 1.0);
+                    break;
+
+                case 2:
+                    vrLpGraph.customModelFunction = (x) => x < 0.0 ? null : (311150184667e-11 * x + 1e0 * x * x * x) / (182417933e-8 + 151889411e-8 * x * x + 768428406667e-12 * x * x * x * x);
+                    vtLpGraph.customModelFunction = (x) => x < 0.0 ? null : (311150184667e-11 * x + 1e0 * x * x * x) / (182417933e-8 + 151889411e-8 * x * x + 768428406667e-12 * x * x * x * x);
+                    break;
+
+                case 3:
+                    vrLpGraph.customModelFunction = (x) => x < 0.0 ? null : (607023333333e-13 * x + 2290069e-6 * x * x * x) / (1118044e-6 + -1e0 * x * x + 223272733333e-11 * x * x * x * x);
+                    vtLpGraph.customModelFunction = (x) => x < 0.0 ? null : (607023333333e-13 * x + 2290069e-6 * x * x * x) / (1118044e-6 + -1e0 * x * x + 223272733333e-11 * x * x * x * x);
+                    break;
+
+                case 4:
+                    vrLpGraph.customModelFunction = (x) => x < 0.0 ? null : (x < 1.0 ? x : 1.0 / x);
+                    vtLpGraph.customModelFunction = (x) => x < 0.0 ? null : (311150184667e-11 * x + 1e0 * x * x * x) / (182417933e-8 + 151889411e-8 * x * x + 768428406667e-12 * x * x * x * x);
+                    break;
+
+                case 5:
+                    vrLpGraph.customModelFunction = (x) => x < 0.0 ? null : (x < 1.0 ? x : 1.0 / x);
+                    vtLpGraph.customModelFunction = (x) => x < 0.0 ? null : (607023333333e-13 * x + 2290069e-6 * x * x * x) / (1118044e-6 + -1e0 * x * x + 223272733333e-11 * x * x * x * x);
+                    break;
+
+                default:
+                    vrLpGraph.customModelFunction = (x) => x < 0.0 ? null : (x < 1.0 ? Math.Pow(x, modelParams.phi) : 1.0 / Math.Pow(x, modelParams.phi));
+                    vtLpGraph.customModelFunction = (x) => x < 0.0 ? null : (x < 1.0 ? Math.Pow(x, modelParams.phi) : 1.0 / Math.Pow(x, modelParams.phi));
+                    break;
+            } 
         }
     }
 }

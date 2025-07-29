@@ -46,15 +46,21 @@
 %include "CPP_CS_Interop.h"
 %include "Utils.h"
 %include "VortexModel.h"
-%include "RationalPolynomialVortex.h"
-%include "RationalPolynomialRRVortex.h"
 %include "LinearPiecewiseVortex.h"
 %include "BakerSterlingVortex.h"
+%include "ModifiedRankineVortex.h"
+%include "RationalPolynomialVortex.h"
+%include "RationalPolynomialRRVortex.h"
+
+%template(RPV_BR) RationalPolynomialVortex<182417933e-8, 311150184667e-11, 151889411e-8, 1e0, 768428406667e-12>;
+%template(RPV_BR_RR) RationalPolynomialRRVortex<182417933e-8, 311150184667e-11, 151889411e-8, 1e0, 768428406667e-12>;
+%template(RPV_S) RationalPolynomialVortex<1118044e-6, 607023333333e-13, -1e0, 2290069e-6, 223272733333e-11>;
+%template(RPV_S_RR) RationalPolynomialRRVortex<1118044e-6, 607023333333e-13, -1e0, 2290069e-6, 223272733333e-11>;
+
 %include "BurgersRottVortex.h"
 %include "BurgersRottRRVortex.h"
 %include "SullivanVortex.h"
 %include "SullivanRRVortex.h"
-%include "ModifiedRankineVortex.h"
 %include "VecHashGrid.h"
 %include "ConvergenceLine.h"
 %include "Transect.h"

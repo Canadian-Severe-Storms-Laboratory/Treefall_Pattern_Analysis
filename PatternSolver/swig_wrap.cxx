@@ -2079,6 +2079,416 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_BakerSterlingVortex(void * jarg1) {
 }
 
 
+SWIGEXPORT void SWIGSTDCALL CSharp_ModifiedRankineVortex_phi_set(void * jarg1, double jarg2) {
+  ModifiedRankineVortex *arg1 = (ModifiedRankineVortex *) 0 ;
+  double arg2 ;
+  
+  arg1 = (ModifiedRankineVortex *)jarg1; 
+  arg2 = (double)jarg2; 
+  if (arg1) (arg1)->phi = arg2;
+}
+
+
+SWIGEXPORT double SWIGSTDCALL CSharp_ModifiedRankineVortex_phi_get(void * jarg1) {
+  double jresult ;
+  ModifiedRankineVortex *arg1 = (ModifiedRankineVortex *) 0 ;
+  double result;
+  
+  arg1 = (ModifiedRankineVortex *)jarg1; 
+  result = (double) ((arg1)->phi);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_ModifiedRankineVortex__SWIG_0(double jarg1, double jarg2, double jarg3, double jarg4) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  double arg4 ;
+  ModifiedRankineVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  arg4 = (double)jarg4; 
+  result = (ModifiedRankineVortex *)new ModifiedRankineVortex(arg1,arg2,arg3,arg4);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_ModifiedRankineVortex__SWIG_1(double jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  ModifiedRankineVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (ModifiedRankineVortex *)new ModifiedRankineVortex(arg1,arg2,arg3);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_ModifiedRankineVortex__SWIG_2(double jarg1, double jarg2) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  ModifiedRankineVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  result = (ModifiedRankineVortex *)new ModifiedRankineVortex(arg1,arg2);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_ModifiedRankineVortex__SWIG_3(double jarg1) {
+  void * jresult ;
+  double arg1 ;
+  ModifiedRankineVortex *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  result = (ModifiedRankineVortex *)new ModifiedRankineVortex(arg1);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_ModifiedRankineVortex_vecAt(void * jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  ModifiedRankineVortex *arg1 = (ModifiedRankineVortex *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  Vec2 result;
+  
+  arg1 = (ModifiedRankineVortex *)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (arg1)->vecAt(arg2,arg3);
+  jresult = new Vec2(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_ModifiedRankineVortex(void * jarg1) {
+  ModifiedRankineVortex *arg1 = (ModifiedRankineVortex *) 0 ;
+  
+  arg1 = (ModifiedRankineVortex *)jarg1; 
+  delete arg1;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_RPV_BR__SWIG_0(double jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *)new RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 >(arg1,arg2,arg3);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_RPV_BR__SWIG_1(double jarg1, double jarg2) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  result = (RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *)new RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 >(arg1,arg2);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_RPV_BR__SWIG_2(double jarg1) {
+  void * jresult ;
+  double arg1 ;
+  RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  result = (RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *)new RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 >(arg1);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_RPV_BR__SWIG_3() {
+  void * jresult ;
+  RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *result = 0 ;
+  
+  result = (RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *)new RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 >();
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_RPV_BR_vecAt(void * jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *arg1 = (RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  Vec2 result;
+  
+  arg1 = (RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (arg1)->vecAt(arg2,arg3);
+  jresult = new Vec2(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_RPV_BR(void * jarg1) {
+  RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *arg1 = (RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *) 0 ;
+  
+  arg1 = (RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *)jarg1; 
+  delete arg1;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_RPV_BR_RR__SWIG_0(double jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *)new RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 >(arg1,arg2,arg3);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_RPV_BR_RR__SWIG_1(double jarg1, double jarg2) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  result = (RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *)new RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 >(arg1,arg2);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_RPV_BR_RR__SWIG_2(double jarg1) {
+  void * jresult ;
+  double arg1 ;
+  RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  result = (RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *)new RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 >(arg1);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_RPV_BR_RR__SWIG_3() {
+  void * jresult ;
+  RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *result = 0 ;
+  
+  result = (RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *)new RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 >();
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_RPV_BR_RR_vecAt(void * jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *arg1 = (RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  Vec2 result;
+  
+  arg1 = (RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (arg1)->vecAt(arg2,arg3);
+  jresult = new Vec2(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_RPV_BR_RR(void * jarg1) {
+  RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *arg1 = (RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *) 0 ;
+  
+  arg1 = (RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *)jarg1; 
+  delete arg1;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_RPV_S__SWIG_0(double jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *)new RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 >(arg1,arg2,arg3);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_RPV_S__SWIG_1(double jarg1, double jarg2) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  result = (RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *)new RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 >(arg1,arg2);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_RPV_S__SWIG_2(double jarg1) {
+  void * jresult ;
+  double arg1 ;
+  RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  result = (RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *)new RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 >(arg1);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_RPV_S__SWIG_3() {
+  void * jresult ;
+  RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *result = 0 ;
+  
+  result = (RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *)new RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 >();
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_RPV_S_vecAt(void * jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *arg1 = (RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  Vec2 result;
+  
+  arg1 = (RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (arg1)->vecAt(arg2,arg3);
+  jresult = new Vec2(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_RPV_S(void * jarg1) {
+  RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *arg1 = (RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *) 0 ;
+  
+  arg1 = (RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *)jarg1; 
+  delete arg1;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_RPV_S_RR__SWIG_0(double jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *)new RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 >(arg1,arg2,arg3);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_RPV_S_RR__SWIG_1(double jarg1, double jarg2) {
+  void * jresult ;
+  double arg1 ;
+  double arg2 ;
+  RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  arg2 = (double)jarg2; 
+  result = (RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *)new RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 >(arg1,arg2);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_RPV_S_RR__SWIG_2(double jarg1) {
+  void * jresult ;
+  double arg1 ;
+  RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *result = 0 ;
+  
+  arg1 = (double)jarg1; 
+  result = (RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *)new RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 >(arg1);
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_RPV_S_RR__SWIG_3() {
+  void * jresult ;
+  RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *result = 0 ;
+  
+  result = (RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *)new RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 >();
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_RPV_S_RR_vecAt(void * jarg1, double jarg2, double jarg3) {
+  void * jresult ;
+  RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *arg1 = (RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  Vec2 result;
+  
+  arg1 = (RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *)jarg1; 
+  arg2 = (double)jarg2; 
+  arg3 = (double)jarg3; 
+  result = (arg1)->vecAt(arg2,arg3);
+  jresult = new Vec2(result); 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_RPV_S_RR(void * jarg1) {
+  RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *arg1 = (RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *) 0 ;
+  
+  arg1 = (RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *)jarg1; 
+  delete arg1;
+}
+
+
 SWIGEXPORT void * SWIGSTDCALL CSharp_new_BurgersRottVortex__SWIG_0(double jarg1, double jarg2, double jarg3) {
   void * jresult ;
   double arg1 ;
@@ -2315,112 +2725,6 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_SullivanRRVortex(void * jarg1) {
   SullivanRRVortex *arg1 = (SullivanRRVortex *) 0 ;
   
   arg1 = (SullivanRRVortex *)jarg1; 
-  delete arg1;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_ModifiedRankineVortex_phi_set(void * jarg1, double jarg2) {
-  ModifiedRankineVortex *arg1 = (ModifiedRankineVortex *) 0 ;
-  double arg2 ;
-  
-  arg1 = (ModifiedRankineVortex *)jarg1; 
-  arg2 = (double)jarg2; 
-  if (arg1) (arg1)->phi = arg2;
-}
-
-
-SWIGEXPORT double SWIGSTDCALL CSharp_ModifiedRankineVortex_phi_get(void * jarg1) {
-  double jresult ;
-  ModifiedRankineVortex *arg1 = (ModifiedRankineVortex *) 0 ;
-  double result;
-  
-  arg1 = (ModifiedRankineVortex *)jarg1; 
-  result = (double) ((arg1)->phi);
-  jresult = result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_new_ModifiedRankineVortex__SWIG_0(double jarg1, double jarg2, double jarg3, double jarg4) {
-  void * jresult ;
-  double arg1 ;
-  double arg2 ;
-  double arg3 ;
-  double arg4 ;
-  ModifiedRankineVortex *result = 0 ;
-  
-  arg1 = (double)jarg1; 
-  arg2 = (double)jarg2; 
-  arg3 = (double)jarg3; 
-  arg4 = (double)jarg4; 
-  result = (ModifiedRankineVortex *)new ModifiedRankineVortex(arg1,arg2,arg3,arg4);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_new_ModifiedRankineVortex__SWIG_1(double jarg1, double jarg2, double jarg3) {
-  void * jresult ;
-  double arg1 ;
-  double arg2 ;
-  double arg3 ;
-  ModifiedRankineVortex *result = 0 ;
-  
-  arg1 = (double)jarg1; 
-  arg2 = (double)jarg2; 
-  arg3 = (double)jarg3; 
-  result = (ModifiedRankineVortex *)new ModifiedRankineVortex(arg1,arg2,arg3);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_new_ModifiedRankineVortex__SWIG_2(double jarg1, double jarg2) {
-  void * jresult ;
-  double arg1 ;
-  double arg2 ;
-  ModifiedRankineVortex *result = 0 ;
-  
-  arg1 = (double)jarg1; 
-  arg2 = (double)jarg2; 
-  result = (ModifiedRankineVortex *)new ModifiedRankineVortex(arg1,arg2);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_new_ModifiedRankineVortex__SWIG_3(double jarg1) {
-  void * jresult ;
-  double arg1 ;
-  ModifiedRankineVortex *result = 0 ;
-  
-  arg1 = (double)jarg1; 
-  result = (ModifiedRankineVortex *)new ModifiedRankineVortex(arg1);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_ModifiedRankineVortex_vecAt(void * jarg1, double jarg2, double jarg3) {
-  void * jresult ;
-  ModifiedRankineVortex *arg1 = (ModifiedRankineVortex *) 0 ;
-  double arg2 ;
-  double arg3 ;
-  Vec2 result;
-  
-  arg1 = (ModifiedRankineVortex *)jarg1; 
-  arg2 = (double)jarg2; 
-  arg3 = (double)jarg3; 
-  result = (arg1)->vecAt(arg2,arg3);
-  jresult = new Vec2(result); 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_delete_ModifiedRankineVortex(void * jarg1) {
-  ModifiedRankineVortex *arg1 = (ModifiedRankineVortex *) 0 ;
-  
-  arg1 = (ModifiedRankineVortex *)jarg1; 
   delete arg1;
 }
 
@@ -4557,6 +4861,38 @@ SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_BakerSterlingVortex_SWIGUpcast(Baker
 
 SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_ModifiedRankineVortex_SWIGUpcast(ModifiedRankineVortex *jarg1) {
     return (VortexModel *)jarg1;
+}
+
+SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_RPV_BR_SWIGUpcast(RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *jarg1) {
+    return (VortexModel *)jarg1;
+}
+
+SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_RPV_BR_RR_SWIGUpcast(RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *jarg1) {
+    return (VortexModel *)jarg1;
+}
+
+SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_RPV_S_SWIGUpcast(RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *jarg1) {
+    return (VortexModel *)jarg1;
+}
+
+SWIGEXPORT VortexModel * SWIGSTDCALL CSharp_RPV_S_RR_SWIGUpcast(RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *jarg1) {
+    return (VortexModel *)jarg1;
+}
+
+SWIGEXPORT RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > * SWIGSTDCALL CSharp_BurgersRottVortex_SWIGUpcast(BurgersRottVortex *jarg1) {
+    return (RationalPolynomialVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *)jarg1;
+}
+
+SWIGEXPORT RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > * SWIGSTDCALL CSharp_BurgersRottRRVortex_SWIGUpcast(BurgersRottRRVortex *jarg1) {
+    return (RationalPolynomialRRVortex< 182417933e-8,311150184667e-11,151889411e-8,1e0,768428406667e-12 > *)jarg1;
+}
+
+SWIGEXPORT RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > * SWIGSTDCALL CSharp_SullivanVortex_SWIGUpcast(SullivanVortex *jarg1) {
+    return (RationalPolynomialVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *)jarg1;
+}
+
+SWIGEXPORT RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > * SWIGSTDCALL CSharp_SullivanRRVortex_SWIGUpcast(SullivanRRVortex *jarg1) {
+    return (RationalPolynomialRRVortex< 1118044e-6,607023333333e-13,-1e0,2290069e-6,223272733333e-11 > *)jarg1;
 }
 
 SWIGEXPORT TransectRandomizer * SWIGSTDCALL CSharp_AutoTransectFitter_SWIGUpcast(AutoTransectFitter *jarg1) {

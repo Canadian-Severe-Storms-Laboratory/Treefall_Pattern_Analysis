@@ -17,27 +17,34 @@ namespace TreefallPatternAnalysis
         }
 
         public System.Drawing.Color color = System.Drawing.Color.Red;
+        public bool displayLPModel = true;
+        public Func<double, double?> customModelFunction = null;
         private double[] x;
         private double[] y;
         private ScottPlot.Plottable.ScatterPlotDraggable spd;
         private int rmaxIdx;
-
-
+        
         public LPGraph()
         {
             InitializeComponent();
 
             plot.Plot.Layout(left: 0, right: 0, bottom: 0, top: 0, padding: 0);
 
-            //x = [0.0, 0.2, 0.55, 1.0, 2.0, 4.0, 10.0];
-            //y = [0.0, 0.5, 0.89, 1.0, 0.7, 0.43, 0.0];
+            x = [0.0, 0.2, 0.55, 1.0, 2.0, 4.0, 10.0];
+            y = [0.0, 0.5, 0.89, 1.0, 0.7, 0.43, 0.0];
 
-            x = [0.0, 1.0, 1.1, 1.25, 1.5, 2.0, 3.0, 4.0, 5.0, 7.0, 10.0];
-            y = [0.0, 1.0, 1.0/1.1, 1.0/1.25, 1.0/1.5, 1.0/2.0, 1.0/3.0, 1.0/4.0, 1.0/5.0, 1.0/7.0, 0.0];
+            //x = [0.0, 1.0, 1.1, 1.25, 1.5, 2.0, 3.0, 4.0, 5.0, 7.0, 10.0];
+            //y = [0.0, 1.0, 1.0/1.1, 1.0/1.25, 1.0/1.5, 1.0/2.0, 1.0/3.0, 1.0/4.0, 1.0/5.0, 1.0/7.0, 0.0];
 
             rmaxIdx = Array.IndexOf(x, 1.0);
 
-            UpdateSpline();
+            UpdateGraph();
+            plot.Refresh();
+        }
+
+        public void ResetAxes()
+        {
+            plot.Plot.SetAxisLimits(xMin: -0.5, xMax: 11, yMin: -0.05, yMax: 1.1);
             plot.Refresh();
         }
 
@@ -59,27 +66,36 @@ namespace TreefallPatternAnalysis
             return lineData.ToArray();
         }
 
-        public void UpdateSpline()
+        public void UpdateGraph()
         {
             var plt = plot.Plot;
+            plt.Clear();
 
-            if (spd != null) plt.Remove(spd);
+            //if (spd != null) plt.Remove(spd);
 
-            spd = new ScottPlot.Plottable.ScatterPlotDraggable(x, y)
+            if (displayLPModel)
             {
-                DragEnabled = true,
-                DragXLimitMin = 0,
-                DragXLimitMax = 10,
-                DragYLimitMin = 0,
-                DragYLimitMax = 1,
-                MarkerSize = 10,
-                MarkerShape = MarkerShape.openSquare,
-                MarkerColor = color,
-                LineWidth = 2,
-            };
+                spd = new ScottPlot.Plottable.ScatterPlotDraggable(x, y)
+                {
+                    DragEnabled = true,
+                    DragXLimitMin = 0,
+                    DragXLimitMax = 10,
+                    DragYLimitMin = 0,
+                    DragYLimitMax = 1,
+                    MarkerSize = 10,
+                    MarkerShape = MarkerShape.openSquare,
+                    MarkerColor = color,
+                    LineWidth = 2,
+                };
 
-            plt.Add(spd);
+                plt.Add(spd);
+            }
+            else
+            {
+                plt.AddFunction(customModelFunction);
+            }
 
+            plot.Refresh();
         }
 
         public char lastKey = '\0';
@@ -158,7 +174,7 @@ namespace TreefallPatternAnalysis
             x = x.RemoveAt(idx);
             y = y.RemoveAt(idx);
 
-            UpdateSpline();
+            UpdateGraph();
             RaiseEvent(new RoutedEventArgs(UpdateDataEvent));
         }
 
@@ -175,7 +191,7 @@ namespace TreefallPatternAnalysis
             x = x.InsertAt(idx, mx);
             y = y.InsertAt(idx, my);
 
-            UpdateSpline();
+            UpdateGraph();
             RaiseEvent(new RoutedEventArgs(UpdateDataEvent));
         }
 

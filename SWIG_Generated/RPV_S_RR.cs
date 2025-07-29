@@ -9,18 +9,18 @@
 //------------------------------------------------------------------------------
 
 
-public partial class SullivanVortex : RPV_S {
+public partial class RPV_S_RR : VortexModel {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
 
-  internal SullivanVortex(global::System.IntPtr cPtr, bool cMemoryOwn) : base(PatternSolverPINVOKE.SullivanVortex_SWIGUpcast(cPtr), cMemoryOwn) {
+  internal RPV_S_RR(global::System.IntPtr cPtr, bool cMemoryOwn) : base(PatternSolverPINVOKE.RPV_S_RR_SWIGUpcast(cPtr), cMemoryOwn) {
     swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
   }
 
-  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(SullivanVortex obj) {
+  internal static global::System.Runtime.InteropServices.HandleRef getCPtr(RPV_S_RR obj) {
     return (obj == null) ? new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero) : obj.swigCPtr;
   }
 
-  internal static global::System.Runtime.InteropServices.HandleRef swigRelease(SullivanVortex obj) {
+  internal static global::System.Runtime.InteropServices.HandleRef swigRelease(RPV_S_RR obj) {
     if (obj != null) {
       if (!obj.swigCMemOwn)
         throw new global::System.ApplicationException("Cannot release ownership as memory is not owned");
@@ -38,7 +38,7 @@ public partial class SullivanVortex : RPV_S {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          PatternSolverPINVOKE.delete_SullivanVortex(swigCPtr);
+          PatternSolverPINVOKE.delete_RPV_S_RR(swigCPtr);
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
@@ -46,16 +46,21 @@ public partial class SullivanVortex : RPV_S {
     }
   }
 
-  public SullivanVortex(double Vr, double Vt, double Vs) : this(PatternSolverPINVOKE.new_SullivanVortex__SWIG_0(Vr, Vt, Vs), true) {
+  public RPV_S_RR(double Vr, double Vt, double Vs) : this(PatternSolverPINVOKE.new_RPV_S_RR__SWIG_0(Vr, Vt, Vs), true) {
   }
 
-  public SullivanVortex(double Vr, double Vt) : this(PatternSolverPINVOKE.new_SullivanVortex__SWIG_1(Vr, Vt), true) {
+  public RPV_S_RR(double Vr, double Vt) : this(PatternSolverPINVOKE.new_RPV_S_RR__SWIG_1(Vr, Vt), true) {
   }
 
-  public SullivanVortex(double Vr) : this(PatternSolverPINVOKE.new_SullivanVortex__SWIG_2(Vr), true) {
+  public RPV_S_RR(double Vr) : this(PatternSolverPINVOKE.new_RPV_S_RR__SWIG_2(Vr), true) {
   }
 
-  public SullivanVortex() : this(PatternSolverPINVOKE.new_SullivanVortex__SWIG_3(), true) {
+  public RPV_S_RR() : this(PatternSolverPINVOKE.new_RPV_S_RR__SWIG_3(), true) {
+  }
+
+  public override SWIGTYPE_p_Vec2 vecAt(double x, double y) {
+    SWIGTYPE_p_Vec2 ret = new SWIGTYPE_p_Vec2(PatternSolverPINVOKE.RPV_S_RR_vecAt(swigCPtr, x, y), true);
+    return ret;
   }
 
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "VortexModel.h"
 
+
 template <double k0, double k1, double k2, double k3, double k4>
 class RationalPolynomialVortex : public VortexModel
 {

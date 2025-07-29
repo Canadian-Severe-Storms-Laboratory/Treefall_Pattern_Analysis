@@ -9,12 +9,10 @@
 //------------------------------------------------------------------------------
 
 
-public partial class BurgersRottRRVortex : global::System.IDisposable {
+public partial class BurgersRottRRVortex : RPV_BR_RR {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
-  protected bool swigCMemOwn;
 
-  internal BurgersRottRRVortex(global::System.IntPtr cPtr, bool cMemoryOwn) {
-    swigCMemOwn = cMemoryOwn;
+  internal BurgersRottRRVortex(global::System.IntPtr cPtr, bool cMemoryOwn) : base(PatternSolverPINVOKE.BurgersRottRRVortex_SWIGUpcast(cPtr), cMemoryOwn) {
     swigCPtr = new global::System.Runtime.InteropServices.HandleRef(this, cPtr);
   }
 
@@ -35,16 +33,7 @@ public partial class BurgersRottRRVortex : global::System.IDisposable {
     }
   }
 
-  ~BurgersRottRRVortex() {
-    Dispose(false);
-  }
-
-  public void Dispose() {
-    Dispose(true);
-    global::System.GC.SuppressFinalize(this);
-  }
-
-  protected virtual void Dispose(bool disposing) {
+  protected override void Dispose(bool disposing) {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
         if (swigCMemOwn) {
@@ -53,6 +42,7 @@ public partial class BurgersRottRRVortex : global::System.IDisposable {
         }
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
+      base.Dispose(disposing);
     }
   }
 

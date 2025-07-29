@@ -537,6 +537,102 @@ class PatternSolverPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_BakerSterlingVortex")]
   public static extern void delete_BakerSterlingVortex(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_ModifiedRankineVortex_phi_set")]
+  public static extern void ModifiedRankineVortex_phi_set(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_ModifiedRankineVortex_phi_get")]
+  public static extern double ModifiedRankineVortex_phi_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_ModifiedRankineVortex__SWIG_0")]
+  public static extern global::System.IntPtr new_ModifiedRankineVortex__SWIG_0(double jarg1, double jarg2, double jarg3, double jarg4);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_ModifiedRankineVortex__SWIG_1")]
+  public static extern global::System.IntPtr new_ModifiedRankineVortex__SWIG_1(double jarg1, double jarg2, double jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_ModifiedRankineVortex__SWIG_2")]
+  public static extern global::System.IntPtr new_ModifiedRankineVortex__SWIG_2(double jarg1, double jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_ModifiedRankineVortex__SWIG_3")]
+  public static extern global::System.IntPtr new_ModifiedRankineVortex__SWIG_3(double jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_ModifiedRankineVortex_vecAt")]
+  public static extern global::System.IntPtr ModifiedRankineVortex_vecAt(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, double jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_ModifiedRankineVortex")]
+  public static extern void delete_ModifiedRankineVortex(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_RPV_BR__SWIG_0")]
+  public static extern global::System.IntPtr new_RPV_BR__SWIG_0(double jarg1, double jarg2, double jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_RPV_BR__SWIG_1")]
+  public static extern global::System.IntPtr new_RPV_BR__SWIG_1(double jarg1, double jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_RPV_BR__SWIG_2")]
+  public static extern global::System.IntPtr new_RPV_BR__SWIG_2(double jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_RPV_BR__SWIG_3")]
+  public static extern global::System.IntPtr new_RPV_BR__SWIG_3();
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_RPV_BR_vecAt")]
+  public static extern global::System.IntPtr RPV_BR_vecAt(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, double jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_RPV_BR")]
+  public static extern void delete_RPV_BR(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_RPV_BR_RR__SWIG_0")]
+  public static extern global::System.IntPtr new_RPV_BR_RR__SWIG_0(double jarg1, double jarg2, double jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_RPV_BR_RR__SWIG_1")]
+  public static extern global::System.IntPtr new_RPV_BR_RR__SWIG_1(double jarg1, double jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_RPV_BR_RR__SWIG_2")]
+  public static extern global::System.IntPtr new_RPV_BR_RR__SWIG_2(double jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_RPV_BR_RR__SWIG_3")]
+  public static extern global::System.IntPtr new_RPV_BR_RR__SWIG_3();
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_RPV_BR_RR_vecAt")]
+  public static extern global::System.IntPtr RPV_BR_RR_vecAt(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, double jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_RPV_BR_RR")]
+  public static extern void delete_RPV_BR_RR(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_RPV_S__SWIG_0")]
+  public static extern global::System.IntPtr new_RPV_S__SWIG_0(double jarg1, double jarg2, double jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_RPV_S__SWIG_1")]
+  public static extern global::System.IntPtr new_RPV_S__SWIG_1(double jarg1, double jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_RPV_S__SWIG_2")]
+  public static extern global::System.IntPtr new_RPV_S__SWIG_2(double jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_RPV_S__SWIG_3")]
+  public static extern global::System.IntPtr new_RPV_S__SWIG_3();
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_RPV_S_vecAt")]
+  public static extern global::System.IntPtr RPV_S_vecAt(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, double jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_RPV_S")]
+  public static extern void delete_RPV_S(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_RPV_S_RR__SWIG_0")]
+  public static extern global::System.IntPtr new_RPV_S_RR__SWIG_0(double jarg1, double jarg2, double jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_RPV_S_RR__SWIG_1")]
+  public static extern global::System.IntPtr new_RPV_S_RR__SWIG_1(double jarg1, double jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_RPV_S_RR__SWIG_2")]
+  public static extern global::System.IntPtr new_RPV_S_RR__SWIG_2(double jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_RPV_S_RR__SWIG_3")]
+  public static extern global::System.IntPtr new_RPV_S_RR__SWIG_3();
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_RPV_S_RR_vecAt")]
+  public static extern global::System.IntPtr RPV_S_RR_vecAt(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, double jarg3);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_RPV_S_RR")]
+  public static extern void delete_RPV_S_RR(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_BurgersRottVortex__SWIG_0")]
   public static extern global::System.IntPtr new_BurgersRottVortex__SWIG_0(double jarg1, double jarg2, double jarg3);
 
@@ -596,30 +692,6 @@ class PatternSolverPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_SullivanRRVortex")]
   public static extern void delete_SullivanRRVortex(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_ModifiedRankineVortex_phi_set")]
-  public static extern void ModifiedRankineVortex_phi_set(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_ModifiedRankineVortex_phi_get")]
-  public static extern double ModifiedRankineVortex_phi_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_ModifiedRankineVortex__SWIG_0")]
-  public static extern global::System.IntPtr new_ModifiedRankineVortex__SWIG_0(double jarg1, double jarg2, double jarg3, double jarg4);
-
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_ModifiedRankineVortex__SWIG_1")]
-  public static extern global::System.IntPtr new_ModifiedRankineVortex__SWIG_1(double jarg1, double jarg2, double jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_ModifiedRankineVortex__SWIG_2")]
-  public static extern global::System.IntPtr new_ModifiedRankineVortex__SWIG_2(double jarg1, double jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_new_ModifiedRankineVortex__SWIG_3")]
-  public static extern global::System.IntPtr new_ModifiedRankineVortex__SWIG_3(double jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_ModifiedRankineVortex_vecAt")]
-  public static extern global::System.IntPtr ModifiedRankineVortex_vecAt(global::System.Runtime.InteropServices.HandleRef jarg1, double jarg2, double jarg3);
-
-  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_delete_ModifiedRankineVortex")]
-  public static extern void delete_ModifiedRankineVortex(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_gridSize_get")]
   public static extern int gridSize_get();
@@ -1154,6 +1226,30 @@ class PatternSolverPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_ModifiedRankineVortex_SWIGUpcast")]
   public static extern global::System.IntPtr ModifiedRankineVortex_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_RPV_BR_SWIGUpcast")]
+  public static extern global::System.IntPtr RPV_BR_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_RPV_BR_RR_SWIGUpcast")]
+  public static extern global::System.IntPtr RPV_BR_RR_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_RPV_S_SWIGUpcast")]
+  public static extern global::System.IntPtr RPV_S_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_RPV_S_RR_SWIGUpcast")]
+  public static extern global::System.IntPtr RPV_S_RR_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_BurgersRottVortex_SWIGUpcast")]
+  public static extern global::System.IntPtr BurgersRottVortex_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_BurgersRottRRVortex_SWIGUpcast")]
+  public static extern global::System.IntPtr BurgersRottRRVortex_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_SullivanVortex_SWIGUpcast")]
+  public static extern global::System.IntPtr SullivanVortex_SWIGUpcast(global::System.IntPtr jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_SullivanRRVortex_SWIGUpcast")]
+  public static extern global::System.IntPtr SullivanRRVortex_SWIGUpcast(global::System.IntPtr jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("PatternSolver", EntryPoint="CSharp_AutoTransectFitter_SWIGUpcast")]
   public static extern global::System.IntPtr AutoTransectFitter_SWIGUpcast(global::System.IntPtr jarg1);

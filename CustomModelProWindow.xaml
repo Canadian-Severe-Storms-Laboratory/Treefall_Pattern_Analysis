@@ -37,12 +37,8 @@
         <Rectangle HorizontalAlignment="Center" Height="2" Margin="0,418,0,0" Stroke="Black" VerticalAlignment="Top" Width="1280" Grid.RowSpan="2"/>
         <Rectangle HorizontalAlignment="Center" Height="2" Stroke="Black" VerticalAlignment="Center" Width="1280"/>
         <Rectangle HorizontalAlignment="Left" Height="420" Margin="978,-2,0,0" Stroke="Black" VerticalAlignment="Top" Width="2" Grid.RowSpan="2"/>
-        <local:PatternPlot x:Name="patternPlot" HorizontalAlignment="Left" Margin="980,-1,0,0" VerticalAlignment="Top" Width="150" Height="420" Grid.RowSpan="2"/>
-        <local:PatternPlot x:Name="patternPlot_Copy" HorizontalAlignment="Left" Margin="1128,-1,0,0" VerticalAlignment="Top" Width="150"  Height="420" Grid.RowSpan="2"/>
-        <Rectangle HorizontalAlignment="Left" Height="29" Margin="980,390,0,0" Fill="White" VerticalAlignment="Top" Width="301" Grid.RowSpan="2"/>
+        <local:PatternPlot x:Name="patternPlot" HorizontalAlignment="Left" Margin="1056,0,0,0" VerticalAlignment="Top" Width="150" Height="418" Grid.RowSpan="2"/>
         <Label Content="Vr Profile" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Margin="265,418,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <Label Content="Vt Profile" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Margin="910,418,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <Button Content="test match" HorizontalAlignment="Left" Margin="1040,390,0,0" VerticalAlignment="Top" Width="75" Height="25" Grid.RowSpan="2"/>
-        <Label Content="0" HorizontalAlignment="Left" Margin="1135,392,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
     </Grid>
 </controls:ProWindow>

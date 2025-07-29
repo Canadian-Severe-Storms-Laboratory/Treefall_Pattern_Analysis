@@ -1,7 +1,7 @@
 #pragma once
 #include "RationalPolynomialVortex.h"
 
-EXPORT class BurgersRottVortex : public RationalPolynomialVortex<1.82417933, 3.11150184667, 1.51889411, 1.0, 0.768428406667>
+EXPORT class BurgersRottVortex : public RationalPolynomialVortex<182417933e-8, 311150184667e-11, 151889411e-8, 1e0, 768428406667e-12>
 {
 
 public:
