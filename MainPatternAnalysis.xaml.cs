@@ -65,7 +65,7 @@ namespace TreefallPatternAnalysis
 
             bool arePolylineFiles = await QueuedTask.Run(() =>
             {
-                if (IsShapeFileOfType<Polyline>(selectedVector) && IsShapeFileOfType<Polyline>(selectedConvergence)) return true;
+                if (IsFeatureLayerOfType<Polyline>(selectedVector) && IsFeatureLayerOfType<Polyline>(selectedConvergence)) return true;
 
                 return false;
             });

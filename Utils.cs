@@ -1,8 +1,10 @@
-﻿using ArcGIS.Core.Data;
+﻿using ArcGIS.Core.CIM;
+using ArcGIS.Core.Data;
 using ArcGIS.Core.Data.Raster;
 using ArcGIS.Core.Geometry;
 using ArcGIS.Desktop.Mapping;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
@@ -84,17 +86,15 @@ namespace ArcGISUtils
 
         public static RasterDataset OpenRasterDataset(string folder, string name)
         {
-            // Create a new raster dataset which is set to null
             RasterDataset rasterDatasetToOpen = null;
             try
             {
-                // Create a new file system connection path to open raster datasets using the folder path.
                 FileSystemConnectionPath connectionPath = new FileSystemConnectionPath(new System.Uri(folder), FileSystemDatastoreType.Raster);
-                // Create a new file system data store for the connection path created above.
+                
                 FileSystemDatastore dataStore = new FileSystemDatastore(connectionPath);
-                // Open the raster dataset.
+                
                 rasterDatasetToOpen = dataStore.OpenDataset<RasterDataset>(name);
-                // Check if it is not null. If it is show a message box with the appropriate message.
+                
                 if (rasterDatasetToOpen == null)
                     System.Windows.MessageBox.Show("Failed to open raster dataset: " + name);
             }
@@ -106,31 +106,27 @@ namespace ArcGISUtils
             return rasterDatasetToOpen;
         }
     
-        public static bool IsShapeFile(FeatureLayer layer)
+        public static bool HasDatastore(FeatureLayer layer)
         {
             using FeatureClass featureClass = layer.GetFeatureClass();
             using Datastore datastore = featureClass.GetDatastore();
-            if (datastore is FileSystemDatastore)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+
+            // check if layer has a valid datastore
+            if (!(datastore is FileSystemDatastore || datastore is Geodatabase)) return false;
+
+            //check that the layer is not empty
+            return featureClass.GetCount() > 0;
         }
 
-        public static bool IsShapeFileOfType<T>(FeatureLayer layer) where T : Geometry
+        private static Dictionary<Type, esriGeometryType> geometryDict = new() { { typeof(MapPoint), esriGeometryType.esriGeometryPoint }, 
+                                                                                 { typeof(Polyline), esriGeometryType.esriGeometryPolyline }, 
+                                                                                 { typeof(Polygon), esriGeometryType.esriGeometryPolygon }, };
+
+        public static bool IsFeatureLayerOfType<T>(FeatureLayer layer) where T : Geometry
         {
-            if (!IsShapeFile(layer)) return false;
+            if (!HasDatastore(layer)) return false;
 
-            string layertype = layer.ShapeType.ToString().Substring(12).ToLower();
-            var splitShapeType = typeof(T).ToString().Split(".");
-            string shapetype = splitShapeType[splitShapeType.Length - 1].ToLower();
-
-            if (layertype != shapetype) return false;
-
-            return true;
+            return geometryDict.ContainsKey(typeof(T)) && geometryDict[typeof(T)] == layer.ShapeType;
         }
         
 
