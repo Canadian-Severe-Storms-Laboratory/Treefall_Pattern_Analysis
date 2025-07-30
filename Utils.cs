@@ -118,9 +118,9 @@ namespace ArcGISUtils
             return featureClass.GetCount() > 0;
         }
 
-        private static Dictionary<Type, esriGeometryType> geometryDict = new() { { typeof(MapPoint), esriGeometryType.esriGeometryPoint }, 
-                                                                                 { typeof(Polyline), esriGeometryType.esriGeometryPolyline }, 
-                                                                                 { typeof(Polygon), esriGeometryType.esriGeometryPolygon }, };
+        private static readonly Dictionary<Type, esriGeometryType> geometryDict = new() { { typeof(MapPoint), esriGeometryType.esriGeometryPoint }, 
+                                                                                          { typeof(Polyline), esriGeometryType.esriGeometryPolyline }, 
+                                                                                          { typeof(Polygon), esriGeometryType.esriGeometryPolygon }, };
 
         public static bool IsFeatureLayerOfType<T>(FeatureLayer layer) where T : Geometry
         {

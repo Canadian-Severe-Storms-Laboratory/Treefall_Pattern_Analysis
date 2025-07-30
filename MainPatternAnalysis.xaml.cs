@@ -535,6 +535,8 @@ namespace TreefallPatternAnalysis
             plt.AddScatter(data, ys, System.Drawing.Color.Blue, 3, 0, MarkerShape.none);
             plt.SetAxisLimitsY(-0.05, 1.05);
 
+            plt.XLabel((patternTypeComboBox.SelectedIndex == 2 ? "Median" : "Min") + " Required, " + ((bool)gustVelCheckBox.IsChecked ? "V₃₋ₘₐₓ" : "Vₘₐₓ") + " (ms⁻¹)");
+
             plot.Refresh();
         }
 
