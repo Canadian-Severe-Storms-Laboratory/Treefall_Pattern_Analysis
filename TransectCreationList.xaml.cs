@@ -67,7 +67,7 @@ namespace TreefallPatternAnalysis
         {
             int count = transectList.Items.Count;
             transectList.Items.Add(new Transect((count + 1).ToString()));
-            transectList.SelectedIndex = transectList.Items.Count - 1;
+            transectList.SelectedIndex = count;
         }
 
         private void SortTransects(object sender, RoutedEventArgs e)

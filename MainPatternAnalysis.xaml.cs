@@ -12,8 +12,6 @@ using ScottPlot;
 using ArcGIS.Desktop.Internal.Mapping;
 using System.Linq;
 using System.Windows.Input;
-using System.Xaml.Schema;
-using ArcGIS.Core.Data.UtilityNetwork.Trace;
 
 namespace TreefallPatternAnalysis
 {
@@ -45,11 +43,6 @@ namespace TreefallPatternAnalysis
         private void ProWindow_Loaded(object sender, RoutedEventArgs e)
         {
             loaded = true;
-        }
-
-        private void ModelTypeListView_Loaded(object sender, RoutedEventArgs e)
-        {
-            modelTypeListView.SelectAll();
         }
 
         private async Task<Tuple<FeatureLayer, FeatureLayer>> GetInputPolylineFiles()
@@ -152,6 +145,17 @@ namespace TreefallPatternAnalysis
             transectPlot.RefreshPlots();
         }
 
+        private void TransectAnalysisSettingsChanged(object sender, RoutedEventArgs e)
+        {
+            if (!loaded) return;
+
+            Transect selectedTransect = transectCreationList.SelectedTransect();
+
+            if (selectedTransect == null) return;
+
+            selectedTransect.analysisSettings = analysisSettingsPanel.GetSettings();
+        }
+
         private bool lockSliders = false;
         private void TransectChanged(object sender, RoutedEventArgs e)
         {
@@ -183,6 +187,7 @@ namespace TreefallPatternAnalysis
                 selectedTransect.x = pt[0];
                 selectedTransect.y = pt[1];
                 selectedTransect.setPerpendicularAngle(pt[2]);
+                TransectAnalysisSettingsChanged(null, null);
             }
             else if (sender is TransectCreationList)
             {
@@ -193,6 +198,7 @@ namespace TreefallPatternAnalysis
                 transectLengthAboveSlider.SetValue(selectedTransect.lengthAbove);
                 transectLengthBelowSlider.SetValue(selectedTransect.lengthBelow);
                 transectWidthSlider.SetValue(selectedTransect.width);
+                analysisSettingsPanel.SetSettings(selectedTransect.analysisSettings);
             }
 
             ObservedPatternPlot.RemoveSimPattern();
@@ -238,7 +244,7 @@ namespace TreefallPatternAnalysis
             atf.widthRange.max = 100.0;
             atf.heightOffsetRange.min = -vectorSpacing.GetNumber();
             atf.heightOffsetRange.max = vectorSpacing.GetNumber();
-            atf.matchThreshold = cutoffThreshold.GetNumber() / 2.0;
+            atf.matchThreshold = transectCreationList.SelectedTransect().analysisSettings.threshold / 2.0;
 
             Monitor monitor = atf.monitor;
             monitor.Start();
@@ -272,6 +278,7 @@ namespace TreefallPatternAnalysis
 
             for (int i = 0; i < numFound; i++)
             {
+                transects[i].analysisSettings = analysisSettingsPanel.GetSettings();
                 transects[i].Render(transectPlot.OverviewPlot());
                 transectCreationList.Add(transects[i]);
             }
@@ -324,15 +331,15 @@ namespace TreefallPatternAnalysis
         {
             if (transectCreationList.SelectedTransect() == null) return;
 
-            Range VrRange = new() { min = vrmin.GetNumber(), max = vrmax.GetNumber() };
-            Range VtRange = new() { min = vtmin.GetNumber(), max = vtmax.GetNumber() };
-            Range VsRange = new() { min = vsmin.GetNumber(), max = vsmax.GetNumber() };
-            Range VcRange = new() { min = vcmin.GetNumber(), max = vcmax.GetNumber() };
+            ForceCursor = true;
+            Cursor = Cursors.Wait;
 
-            PatternMatcher matcher = new(VrRange, VtRange, VsRange, VcRange)
+            var settings = transectCreationList.SelectedTransect().analysisSettings;
+
+            PatternMatcher matcher = new(settings.vrRange, settings.vtRange, settings.vsRange, settings.vcRange)
             {
-                patternType = patternTypeComboBox.SelectedIndex,
-                models = modelTypeListView.SelectedItems.Cast<object>().Select(item => (double)modelTypeListView.Items.IndexOf(item)).ToArray()
+                patternType = settings.patternType,
+                models = settings.selectedModels
             };
 
             ObservedPattern obsPattern = GetSelectedObservedPattern();
@@ -340,9 +347,6 @@ namespace TreefallPatternAnalysis
             transectCreationList.SelectedTransect().bestMatchError = matcher.bestMatchError(obsPattern);
 
             Pattern simPattern = null;
-
-            ForceCursor = true;
-            Cursor = Cursors.Wait;
 
             await QueuedTask.Run(() => { simPattern = matcher.bestMatch(obsPattern); });
 
@@ -393,19 +397,22 @@ namespace TreefallPatternAnalysis
             if (transectCreationList.SelectedTransect() == null) return;
             Transect selectedTransect = transectCreationList.SelectedTransect();
 
-            Range VrRange = new() { min = vrmin.GetNumber(), max = vrmax.GetNumber() };
-            Range VtRange = new() { min = vtmin.GetNumber(), max = vtmax.GetNumber() };
-            Range VsRange = new() { min = vsmin.GetNumber(), max = vsmax.GetNumber() };
-            Range VcRange = new() { min = vcmin.GetNumber(), max = vcmax.GetNumber() };
+            var settings = selectedTransect.analysisSettings;
 
-            PatternMatcher matcher = new(VrRange, VtRange, VsRange, VcRange)
+            if (settings == null || settings.selectedModels.IsNullOrEmpty() || settings.numOfSimulations <= 0 || settings.threshold <= 0)
             {
-                numSimulations = numberOfSimulations.GetIntNumber(),
-                matchThreshold = cutoffThreshold.GetNumber(),
-                patternType = patternTypeComboBox.SelectedIndex,
-                useGustVel = (bool)gustVelCheckBox.IsChecked,
-                randomizeTransects = (bool)randomizeTransectsCheckBox.IsChecked,
-                models = modelTypeListView.SelectedItems.Cast<object>().Select(item => (double)modelTypeListView.Items.IndexOf(item)).ToArray()
+                MessageBox.Show("Invalid simulation settings");
+                return;
+            }
+
+            PatternMatcher matcher = new(settings.vrRange, settings.vtRange, settings.vsRange, settings.vcRange)
+            {
+                numSimulations = settings.numOfSimulations,
+                matchThreshold = settings.threshold,
+                patternType = settings.patternType,
+                useGustVel = settings.useGustVel,
+                randomizeTransects = settings.randomizeTransect,
+                models = settings.selectedModels
             };
 
             Monitor monitor = matcher.monitor;
@@ -435,7 +442,7 @@ namespace TreefallPatternAnalysis
 
             monitor.warning = "Pattern " + (transectCreationList.SelectedIndex() + 1) + "/" + transectCreationList.Count();
 
-            if (error > cutoffThreshold.GetNumber() / 2.0)
+            if (error > settings.threshold / 2.0)
             {
                 monitor.warning += " Warning: Pattern does not match very well";
             }
@@ -535,7 +542,9 @@ namespace TreefallPatternAnalysis
             plt.AddScatter(data, ys, System.Drawing.Color.Blue, 3, 0, MarkerShape.none);
             plt.SetAxisLimitsY(-0.05, 1.05);
 
-            plt.XLabel((patternTypeComboBox.SelectedIndex == 2 ? "Median" : "Min") + " Required, " + ((bool)gustVelCheckBox.IsChecked ? "V₃₋ₘₐₓ" : "Vₘₐₓ") + " (ms⁻¹)");
+            var settings = transectCreationList.SelectedTransect().analysisSettings;
+
+            plt.XLabel((settings.patternType == 2 ? "Median" : "Min") + " Required, " + (settings.useGustVel ? "V₃₋ₘₐₓ" : "Vₘₐₓ") + " (ms⁻¹)");
 
             plot.Refresh();
         }

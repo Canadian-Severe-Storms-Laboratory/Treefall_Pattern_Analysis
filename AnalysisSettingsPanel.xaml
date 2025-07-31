@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="TreefallPatternAnalysis.AnalysisSettingsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TreefallPatternAnalysis"
+             mc:Ignorable="d" 
+             Loaded="UC_Loaded"
+             d:DesignHeight="450" d:DesignWidth="1280">
+    <Grid Background="#FFE5E5E5" Margin="-2,0,2,0">
+
+        <ListBox x:Name="modelTypeListView" SelectionChanged="SettingsChanged" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" HorizontalContentAlignment="Center" SelectionMode="Multiple" Margin="10,40,0,10" Width="200" Loaded="ModelTypeListView_Loaded">
+            <ListBoxItem Content="Modified Rankine" FontSize="20" Padding="10" Margin="5,10,5,0" BorderBrush="Black"/>
+            <ListBoxItem Content="Baker-Sterling" FontSize="20"  Padding="10" Margin="5,10,5,0" BorderBrush="Black"/>
+            <ListBoxItem Content="Burgers-Rott" FontSize="20"  Padding="10" Margin="5,10,5,0" BorderBrush="Black"/>
+            <ListBoxItem Content="Sullivan" FontSize="20"  Padding="10" Margin="5,10,5,0" BorderBrush="Black"/>
+            <ListBoxItem Content="Burgers-Rott (RR)" FontSize="20"  Padding="10" Margin="5,10,5,0" BorderBrush="Black"/>
+            <ListBoxItem Content="Sullivan (RR)" FontSize="20"  Padding="10" Margin="5,10,5,0" BorderBrush="Black"/>
+        </ListBox>
+
+        <Label Content="Parameter Ranges (m/s)" Foreground="Black" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Height="45" Margin="367,220,0,0" VerticalAlignment="Top" Width="243"/>
+        <Label Content="Vortex Models" Foreground="Black" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="37" Margin="49,10,0,0" VerticalAlignment="Top" Width="122"/>
+        <Label Content="Vt" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="332,270,0,0" VerticalAlignment="Top" Width="30"/>
+        <Label Content="Vr" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="428,270,0,0" VerticalAlignment="Top" Width="30"/>
+        <Label Content="Vs" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="528,270,0,0" VerticalAlignment="Top" Width="30"/>
+        <Label Content="Vc" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="628,270,0,0" VerticalAlignment="Top" Width="30"/>
+        <Label Content="Min" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="236,320,0,0" VerticalAlignment="Top" Width="40"/>
+        <Label Content="Max" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="236,386,0,0" VerticalAlignment="Top" Width="49"/>
+        <local:NumberBox x:Name="vtmin" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="316,320,0,0" NumberString="1" VerticalAlignment="Top" Width="54"/>
+        <local:NumberBox x:Name="vtmax" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="316,390,0,0" NumberString="50" VerticalAlignment="Top" Width="54"/>
+        <local:NumberBox x:Name="vrmax" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="416,390,0,0" NumberString="80" VerticalAlignment="Top" Width="54"/>
+        <local:NumberBox x:Name="vrmin" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="416,320,0,0" NumberString="20" VerticalAlignment="Top" Width="54"/>
+        <local:NumberBox x:Name="vsmin" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="516,320,0,0" NumberString="10" VerticalAlignment="Top" Width="54"/>
+        <local:NumberBox x:Name="vsmax" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="516,390,0,0" NumberString="20" VerticalAlignment="Top" Width="54"/>
+        <local:NumberBox x:Name="vcmax" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="616,390,0,0" NumberString="40" VerticalAlignment="Top" Width="54"/>
+        <local:NumberBox x:Name="vcmin" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="616,320,0,0" NumberString="30" VerticalAlignment="Top" Width="54"/>
+
+        <Label FontSize="16" Content="Cutoff:" HorizontalAlignment="Left" Height="30" Margin="738,330,0,0" VerticalAlignment="Top" Width="140"/>
+        <Label FontSize="16" Content="#Simulations:" HorizontalAlignment="Left" Height="30" Margin="737,270,0,0" VerticalAlignment="Top" Width="110"/>
+        <Label FontSize="16" Content="3s-Gust Vel:" HorizontalAlignment="Left" Height="30" Margin="738,390,0,0" VerticalAlignment="Top" Width="140"/>
+        <local:NumberBox x:Name="cutoffThreshold" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="865,332,0,0" NumberString="0.10" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.712,0.633"/>
+        <local:NumberBox x:Name="numberOfSimulations" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="865,274,0,0" NumberString="10000" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.5,0.5"/>
+
+        <CheckBox x:Name="gustVelCheckBox" IsChecked="True" Checked="SettingsChanged" Unchecked="SettingsChanged" HorizontalAlignment="Left" Margin="892,399,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <CheckBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </CheckBox.RenderTransform>
+        </CheckBox>
+
+        <Label Content="Pattern Type" Width="95" Height="34" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="981,270,0,0"/>
+        <ComboBox x:Name="patternTypeComboBox" SelectedIndex="0" SelectionChanged="SettingsChanged" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="25" Margin="1094,273,0,0">
+            <ComboBoxItem Content="All Types"/>
+            <ComboBoxItem Content="Outer Only"/>
+            <ComboBoxItem Content="Not Outer"/>
+        </ComboBox>
+
+        <Label FontSize="16" Content="Randomize Transects:" HorizontalAlignment="Left" Height="30" Margin="982,330,0,0" VerticalAlignment="Top" Width="163"/>
+        <CheckBox x:Name="randomizeTransectsCheckBox" IsChecked="True" Checked="SettingsChanged" Unchecked="SettingsChanged" HorizontalAlignment="Left" Margin="1174,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.459,1.226">
+            <CheckBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-0.327" Y="5.479"/>
+                </TransformGroup>
+            </CheckBox.RenderTransform>
+        </CheckBox>
+
+    </Grid>
+</UserControl>

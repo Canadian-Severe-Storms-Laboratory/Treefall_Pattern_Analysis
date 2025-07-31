@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using TreefallPatternAnalysis;
 
 public partial class Transect
 {
@@ -10,6 +11,8 @@ public partial class Transect
     private ScottPlot.Plottable.MarkerPlot marker;
     private ScottPlot.Plottable.ScatterPlot perpLine;
     private Plot plt;
+
+    public TransectAnalysisSettings analysisSettings;
 
     [JsonInclude]
     public double[] vmaxResults;

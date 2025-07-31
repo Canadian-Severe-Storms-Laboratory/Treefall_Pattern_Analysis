@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Windows;
 
@@ -18,9 +19,15 @@ namespace TreefallPatternAnalysis
 
             string save = System.IO.File.ReadAllText(filePath);
 
-            string[] data = save.Split(new string[] { ";\n" }, 3, StringSplitOptions.None);
+            string[] data = save.Split(new string[] { ";\n" }, 4, StringSplitOptions.None);
 
-            if(!vectorBox.SelectByName(data[0]))
+            if (data.Length < 3)
+            {
+                MessageBox.Show("Save file is corrupted or incomplete");
+                return null;
+            }
+
+            if (!vectorBox.SelectByName(data[0]))
             {
                 MessageBox.Show("Could not find vectors shapefile layer");
                 return null;
@@ -33,6 +40,33 @@ namespace TreefallPatternAnalysis
             }
 
             var transects = JsonSerializer.Deserialize<List<Transect>>(data[2]);
+
+            if (data.Length < 4)
+            {
+                for (int i = 0; i < transects.Count; i++)
+                {
+                    transects[i].analysisSettings = new();
+                }
+                return transects;
+            }
+
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                IncludeFields = true,
+            };
+
+            var settings = JsonSerializer.Deserialize<List<TransectAnalysisSettings>>(data[3], options);
+
+            if (transects.Count != settings.Count)
+            {
+                MessageBox.Show("Save file is corrupted or incomplete");
+                return null;
+            }
+
+            for (int i = 0; i < transects.Count; i++)
+            {
+                transects[i].analysisSettings = settings[i];
+            }
 
             return transects;
         }
@@ -47,14 +81,23 @@ namespace TreefallPatternAnalysis
                 
             if(saveFileDialog.ShowDialog() == true)
             {
-                JsonSerializerOptions options = new JsonSerializerOptions
+                JsonSerializerOptions tOptions = new JsonSerializerOptions
                 {
                     WriteIndented = true
                 };
 
+                JsonSerializerOptions sOptions = new JsonSerializerOptions
+                {
+                    IncludeFields = true,
+                    WriteIndented = true
+                };
+
+                List<TransectAnalysisSettings> settings = transects.Select(t => t.analysisSettings).ToList();
+
                 string save = layerNames[0] + ";\n" +
                               layerNames[1] + ";\n" +
-                              JsonSerializer.Serialize(transects, options);
+                              JsonSerializer.Serialize(transects, tOptions) + ";\n" +
+                              JsonSerializer.Serialize(settings, sOptions);
 
                 System.IO.File.WriteAllText(saveFileDialog.FileName, save);
             }          

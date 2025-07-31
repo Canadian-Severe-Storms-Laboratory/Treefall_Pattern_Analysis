@@ -50,7 +50,14 @@ namespace TreefallPatternAnalysis
                 return 0.0;
             }
 
-            return double.Parse(NumberString, CultureInfo.InvariantCulture);
+            try
+            {
+                return double.Parse(NumberString, CultureInfo.InvariantCulture);
+            }
+            catch(Exception e)
+            {
+                return 0.0;
+            }
         }
 
         public void SetNumber(double number)
