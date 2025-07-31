@@ -16,7 +16,12 @@
     <Page Remove="PatternSolver\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Images\cssl_title.png" />
+    <None Remove="Images\custom16.png" />
+    <None Remove="Images\custom32.png" />
     <None Remove="Images\logo.ico" />
+    <None Remove="Images\pattern16.png" />
+    <None Remove="Images\pattern32.png" />
     <None Remove="PatternSolver.exe" />
     <None Remove="PatternSolver.exp" />
     <None Remove="PatternSolver.lib" />
@@ -27,7 +32,14 @@
     <Content Include="Images\AddInDesktop16.png" />
     <Content Include="Images\AddInDesktop32.png" />
     <Content Include="DarkImages\AddInDesktop16.png" />
-    <Content Include="DarkImages\AddInDesktop32.png" />    
+    <Content Include="DarkImages\AddInDesktop32.png" />
+    <Resource Include="Images\cssl_title.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Images\custom16.png" />
+    <Content Include="Images\custom32.png" />
+    <Content Include="Images\pattern16.png" />
+    <Content Include="Images\pattern32.png" />    
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\launchSettings.json" />

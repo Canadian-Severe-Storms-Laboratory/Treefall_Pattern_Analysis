@@ -36,9 +36,10 @@
                     <local:RasterSelectionBox x:Name="ConvergenceSelectionBox" Height="50" Width="300" Margin="0,303,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                     <Label Content="Select Treefall Vectors" FontSize="20" HorizontalAlignment="Center" Margin="0,144,0,0" VerticalAlignment="Top" Width="300"/>
                     <Label Content="Select Convergence Line" FontSize="20" HorizontalAlignment="Center" Margin="0,266,0,0" VerticalAlignment="Top" Width="300"/>
-                    <Button Content="Next" FontSize="16" HorizontalAlignment="Left" Margin="1117,636,0,0" VerticalAlignment="Top" Height="30" Width="80" Click="InputSelectionNextButton"/>
-                    <local:FileSelector x:Name="saveFileSelector" OnSelection="LoadSave" Width="60" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="725,404,0,0"/>
-                    <Label Content="Load Saved Analysis" FontSize="20" HorizontalAlignment="Left" Margin="487,398,0,0" VerticalAlignment="Top" Width="193"/>
+                    <Button Content="Next" FontSize="16" HorizontalAlignment="Right" Margin="0,0,50,25" VerticalAlignment="Bottom" Height="30" Width="80" Click="InputSelectionNextButton"/>
+                    <local:FileSelector x:Name="saveFileSelector" OnSelection="LoadSave" Width="60" Height="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="230,404,0,0"/>
+                    <Label Content="Load Saved Analysis" FontSize="20" HorizontalAlignment="Center" Margin="-100,398,0,0" VerticalAlignment="Top" Width="193"/>
+                    <Image HorizontalAlignment="Left" Source="Images/cssl_title.png" Height="100" Margin="20,0,0,15" VerticalAlignment="Bottom" Width="320"/>
 
                 </Grid>
             </TabItem>
@@ -92,7 +93,7 @@
                         <ComboBoxItem Content="Swirl Ratio"/>
                         <ComboBoxItem Content="Core Radius (Rmax)"/>
                     </ComboBox>
-                    
+
                 </Grid>
             </TabItem>
 

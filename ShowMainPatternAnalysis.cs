@@ -1,5 +1,7 @@
 ﻿using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
+using System;
+using System.Windows;
 using static ArcGISUtils.Utils;
 
 namespace TreefallPatternAnalysis
@@ -17,10 +19,19 @@ namespace TreefallPatternAnalysis
 
             PreLoadDlls();
 
-            _mainpatternanalysis = new MainPatternAnalysis();
-            _mainpatternanalysis.Owner = FrameworkApplication.Current.MainWindow;
-            _mainpatternanalysis.Closed += (o, e) => { _mainpatternanalysis = null; };
-            _mainpatternanalysis.Show();
+            try
+            {
+                _mainpatternanalysis = new MainPatternAnalysis();
+                _mainpatternanalysis.Owner = FrameworkApplication.Current.MainWindow;
+                _mainpatternanalysis.Closed += (o, e) => { _mainpatternanalysis = null; };
+                _mainpatternanalysis.Show();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("An unhandled Error has Occurred" + e.Message);
+                return;
+            }
+
             //uncomment for modal
             //_mainpatternanalysis.ShowDialog();
         }

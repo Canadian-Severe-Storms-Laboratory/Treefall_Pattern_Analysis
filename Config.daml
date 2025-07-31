@@ -27,10 +27,10 @@
         </group>
       </groups>
       <controls>
-		<button id="TreefallPatternAnalysis_MainPatternAnalysis" caption="Pattern Analysis" className="ShowMainPatternAnalysis" loadOnClick="true" smallImage="GenericButtonPurple16" largeImage="GenericButtonPurple32">
+		<button id="TreefallPatternAnalysis_MainPatternAnalysis" caption="Pattern Analysis" className="ShowMainPatternAnalysis" loadOnClick="true" smallImage="Images/pattern16.png" largeImage="Images/pattern32.png">
 			<tooltip heading="Treefall Pattern Analysis"></tooltip>
 		</button>
-        <button id="TreefallPatternAnalysis_CustomModelProWindow" caption="Custom Model Analysis" className="ShowCustomModelProWindow" loadOnClick="true" smallImage="GenericButtonPurple16" largeImage="GenericButtonPurple32">
+        <button id="TreefallPatternAnalysis_CustomModelProWindow" caption="Custom Model Analysis" className="ShowCustomModelProWindow" loadOnClick="true" smallImage="Images/custom16.png" largeImage="Images/custom32.png">
           <tooltip heading="Custom Model Analysis"></tooltip>
         </button>
       </controls>
