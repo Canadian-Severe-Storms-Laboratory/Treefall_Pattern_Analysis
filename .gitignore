@@ -1,8 +1,8 @@
 /.vs/*
 /bin/*
 /obj/*
+/x64/*
 /properties/*
 /DarkImages/*
-/Images/*
 PatternSolver.exe
 /PatternSolver/x64/*
