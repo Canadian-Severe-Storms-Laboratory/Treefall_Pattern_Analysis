@@ -28,8 +28,10 @@ namespace TreefallPatternAnalysis
 
         private void ModelTypeListView_Loaded(object sender, RoutedEventArgs e)
         {
-            if (loaded) return;
+            if (modelTypeListView_loaded) return;
+
             modelTypeListView.SelectAll();
+            modelTypeListView_loaded = true;
         }
 
         public TransectAnalysisSettings GetSettings()
@@ -98,6 +100,7 @@ namespace TreefallPatternAnalysis
         }
 
         private bool loaded = false;
+        private bool modelTypeListView_loaded = false;
 
         private void UC_Loaded(object sender, RoutedEventArgs e)
         {

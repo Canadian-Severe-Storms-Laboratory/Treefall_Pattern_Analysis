@@ -113,6 +113,8 @@ namespace TreefallPatternAnalysis
                                 "polyline shapefile where each vector is a polyline, and the\n" +
                                 "convergence line must be a single polyline\n\nError:\n\n" + ex.Message);
             }
+
+            transectCreationList.Enable();
         }
 
         private async void LoadSave(object sender, RoutedEventArgs e)
@@ -183,7 +185,7 @@ namespace TreefallPatternAnalysis
                 selectedTransect.angleOffset = transectAngleOffsetSlider.GetValue();
                 selectedTransect.lengthAbove = transectLengthAboveSlider.GetValue();
                 selectedTransect.lengthBelow = transectLengthBelowSlider.GetValue();
-                selectedTransect.width = transectWidthSlider.GetValue();
+                selectedTransect.width = transectWidthSlider.GetValue() / 2.0;
                 selectedTransect.x = pt[0];
                 selectedTransect.y = pt[1];
                 selectedTransect.setPerpendicularAngle(pt[2]);
@@ -197,7 +199,7 @@ namespace TreefallPatternAnalysis
                 transectAngleOffsetSlider.SetValue(selectedTransect.angleOffset);
                 transectLengthAboveSlider.SetValue(selectedTransect.lengthAbove);
                 transectLengthBelowSlider.SetValue(selectedTransect.lengthBelow);
-                transectWidthSlider.SetValue(selectedTransect.width);
+                transectWidthSlider.SetValue(selectedTransect.width * 2.0);
                 analysisSettingsPanel.SetSettings(selectedTransect.analysisSettings);
             }
 

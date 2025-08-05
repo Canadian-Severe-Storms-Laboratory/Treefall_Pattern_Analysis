@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="340" d:DesignWidth="130">
     <Grid>
-        <ListBox x:Name="transectList" BorderBrush="Black" BorderThickness="1.25" SelectionChanged="TransectSelected" FontSize="16" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" Margin="0,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ListBox x:Name="transectList" IsEnabled="False" BorderBrush="Black" BorderThickness="1.25" SelectionChanged="TransectSelected" FontSize="16" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" Margin="0,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="New" Click="NewTransect"/>

@@ -30,6 +30,11 @@ namespace TreefallPatternAnalysis
             InitializeComponent();
         }
 
+        public void Enable()
+        {
+            transectList.IsEnabled = true;
+        }
+
         private void TransectSelected(object sender, SelectionChangedEventArgs e)
         {
             if (transectList.SelectedItem == null) return;
