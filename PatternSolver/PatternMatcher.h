@@ -12,24 +12,24 @@
 using namespace Utils;
 
 EXPORT struct MatchResult {
-	std::vector<double> minVels;
+	std::vector<double> vels;
 	std::vector<double> bestSwirls;
 	std::vector<double> Rmaxs;
 
 	void reserve(const size_t size) {
-		minVels.reserve(size);
+		vels.reserve(size);
 		bestSwirls.reserve(size);
 		Rmaxs.reserve(size);
 	}
 
 	void sort() {
-		std::sort(minVels.begin(), minVels.end());
+		std::sort(vels.begin(), vels.end());
 		std::sort(bestSwirls.begin(), bestSwirls.end());
 		std::sort(Rmaxs.begin(), Rmaxs.end());
 	}
 
-	void add(const double minVel, const double bestSwirl, const double Rmax) {
-		minVels.push_back(minVel);
+	void add(const double vel, const double bestSwirl, const double Rmax) {
+		vels.push_back(vel);
 		bestSwirls.push_back(bestSwirl);
 		Rmaxs.push_back(Rmax);
 	}
@@ -63,18 +63,18 @@ private:
 		double max;
 		double step;
 
-		RatioRange(Range range, double divisor) {
+		RatioRange(Range range, double divisor, int iters) {
 		
 			min = range.min / divisor;
 			max = range.max / divisor;
-			step = (max - min) / 63; //64 iterations	
+			step = (max - min) / (double)(iters - 1);
 		}
 
-		RatioRange(Range range, Range divisor) {
+		RatioRange(Range range, Range divisor, int iters) {
 
 			min = range.min / divisor.max;
 			max = range.max / divisor.min;
-			step = (max - min) / 63; //64 iterations	
+			step = (max - min) / (double) (iters - 1);	
 		}
 	};
 
@@ -125,7 +125,7 @@ private:
 		return (errorSum / weightSum) / 3.14159265358979323;
 	}
 
-	bool isCorrectType(VortexModel& model) {
+	bool isCorrectType(VortexModel& model) const {
 		if (patternType == 0) return true;
 
 		if (patternType == 1) return model.isOuterType();
@@ -154,9 +154,9 @@ public:
 
 
 	double bestMatchError(ObservedPattern obsPattern) {
-		const RatioRange VrRatioRange(VrRange, VcRange);
-		const RatioRange VtRatioRange(VtRange, VcRange);
-		const RatioRange VsRatioRange(VsRange, VcRange);
+		const RatioRange VrRatioRange(VrRange, VcRange, 32);
+		const RatioRange VtRatioRange(VtRange, VcRange, 32);
+		const RatioRange VsRatioRange(VsRange, VcRange, 32);
 		double minError = 1E100;
 
 		#pragma omp parallel for schedule(dynamic) num_threads((int)(std::thread::hardware_concurrency()*0.8))
@@ -197,9 +197,9 @@ public:
 
 	Pattern bestMatch(ObservedPattern obsPattern) {
 
-		const RatioRange VrRatioRange(VrRange, VcRange);
-		const RatioRange VtRatioRange(VtRange, VcRange);
-		const RatioRange VsRatioRange(VsRange, VcRange);
+		const RatioRange VrRatioRange(VrRange, VcRange, 32);
+		const RatioRange VtRatioRange(VtRange, VcRange, 32);
+		const RatioRange VsRatioRange(VsRange, VcRange, 32);
 
 		double minError = 1E100;
 
@@ -266,7 +266,7 @@ public:
 		TransectRandomizer tRandomizer = TransectRandomizer(transect, vectorHashGrid, convergenceLine);
 
 		#pragma omp parallel num_threads((int)(std::thread::hardware_concurrency()*0.8))
-		while (results.minVels.size() < ITERS && !monitor.cancelled) {
+		while (results.vels.size() < ITERS && !monitor.cancelled) {
 
 			std::random_device rd;
 			std::mt19937 gen(rd());
@@ -283,8 +283,8 @@ public:
 			const double Vc = VcRange.random(dist, gen);
 			const double Vs = VsRange.random(dist, gen) / Vc;
 
-			const RatioRange VrRatioRange(VrRange, Vc);
-			const RatioRange VtRatioRange(VtRange, Vc);
+			const RatioRange VrRatioRange(VrRange, Vc, 64);
+			const RatioRange VtRatioRange(VtRange, Vc, 64);
 
 			double minVel = 1E308;
 			double bestSwirl = 1E308;

@@ -4142,23 +4142,23 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_AutoTransectFitter(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_MatchResult_minVels_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_MatchResult_vels_set(void * jarg1, void * jarg2) {
   MatchResult *arg1 = (MatchResult *) 0 ;
   std::vector< double > *arg2 = (std::vector< double > *) 0 ;
   
   arg1 = (MatchResult *)jarg1; 
   arg2 = (std::vector< double > *)jarg2; 
-  if (arg1) (arg1)->minVels = *arg2;
+  if (arg1) (arg1)->vels = *arg2;
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_MatchResult_minVels_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_MatchResult_vels_get(void * jarg1) {
   void * jresult ;
   MatchResult *arg1 = (MatchResult *) 0 ;
   std::vector< double > *result = 0 ;
   
   arg1 = (MatchResult *)jarg1; 
-  result = (std::vector< double > *)& ((arg1)->minVels);
+  result = (std::vector< double > *)& ((arg1)->vels);
   jresult = (void *)result; 
   return jresult;
 }

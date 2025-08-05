@@ -56,12 +56,12 @@ public partial class MatchResult : global::System.IDisposable {
     }
   }
 
-  public DoubleVector minVels {
+  public DoubleVector vels {
     set {
-      PatternSolverPINVOKE.MatchResult_minVels_set(swigCPtr, DoubleVector.getCPtr(value));
+      PatternSolverPINVOKE.MatchResult_vels_set(swigCPtr, DoubleVector.getCPtr(value));
     } 
     get {
-      global::System.IntPtr cPtr = PatternSolverPINVOKE.MatchResult_minVels_get(swigCPtr);
+      global::System.IntPtr cPtr = PatternSolverPINVOKE.MatchResult_vels_get(swigCPtr);
       DoubleVector ret = (cPtr == global::System.IntPtr.Zero) ? null : new DoubleVector(cPtr, false);
       return ret;
     } 
@@ -97,8 +97,8 @@ public partial class MatchResult : global::System.IDisposable {
     PatternSolverPINVOKE.MatchResult_sort(swigCPtr);
   }
 
-  public void add(double minVel, double bestSwirl, double Rmax) {
-    PatternSolverPINVOKE.MatchResult_add(swigCPtr, minVel, bestSwirl, Rmax);
+  public void add(double vel, double bestSwirl, double Rmax) {
+    PatternSolverPINVOKE.MatchResult_add(swigCPtr, vel, bestSwirl, Rmax);
   }
 
   public MatchResult() : this(PatternSolverPINVOKE.new_MatchResult(), true) {

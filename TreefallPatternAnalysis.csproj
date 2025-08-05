@@ -8,6 +8,7 @@
     <NoWarn>CA1416</NoWarn>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <Configurations>Debug;Release;CPP Release;_CPP_Debug</Configurations>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="PatternSolver\**" />

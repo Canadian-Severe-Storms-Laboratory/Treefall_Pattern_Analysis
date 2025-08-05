@@ -455,7 +455,7 @@ namespace TreefallPatternAnalysis
 
             if (monitor.cancelled) return;
 
-            selectedTransect.vmaxResults = results.minVels;
+            selectedTransect.vmaxResults = results.vels;
             selectedTransect.swirlResults = results.bestSwirls;
             selectedTransect.rmaxResults = results.Rmaxs;
 
