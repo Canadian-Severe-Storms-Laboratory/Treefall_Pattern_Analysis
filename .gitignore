@@ -8,4 +8,5 @@ PatternSolver.exe
 PatternSolver.dll
 PatternSolver.exp
 PatternSolver.lib
+PatternSolver.pdb
 /PatternSolver/x64/*
