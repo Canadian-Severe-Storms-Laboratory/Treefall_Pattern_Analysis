@@ -14,6 +14,8 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 
 This software is an Add-on for ArcGIS Pro (3.3+). To install, download the TreefallPatternAnalysis.esriAddinX from the Releases Tab --->
 
+[User Manual](https://github.com/Canadian-Severe-Storms-Laboratory/Treefall_Pattern_Analysis/blob/v2/User%20Manual.pdf)
+
 ![image](https://github.com/Canadian-Severe-Storms-Laboratory/Treefall_Pattern_Analysis/blob/v2/Images/Screenshot%202024-11-18%20155645.png)
 ![image](https://github.com/Canadian-Severe-Storms-Laboratory/Treefall_Pattern_Analysis/blob/v2/Images/Screenshot%202025-08-05%20094826.png)
 ![image](https://github.com/Canadian-Severe-Storms-Laboratory/Treefall_Pattern_Analysis/blob/v2/Images/Screenshot%202025-08-05%20095019.png)
