@@ -5,4 +5,7 @@
 /properties/*
 /DarkImages/*
 PatternSolver.exe
+PatternSolver.dll
+PatternSolver.exp
+PatternSolver.lib
 /PatternSolver/x64/*
