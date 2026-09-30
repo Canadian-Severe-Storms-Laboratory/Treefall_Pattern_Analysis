@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace TreefallPatternAnalysis
+namespace CSSL_ArcGISPro_Utils
 {
     /// <summary>
     /// Interaction logic for RasterSelectionBox.xaml

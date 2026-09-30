@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TreefallPatternAnalysis"
+             xmlns:cssl="clr-namespace:CSSL_ArcGISPro_Utils"
              mc:Ignorable="d" 
              Loaded="UC_Loaded"
              d:DesignHeight="450" d:DesignWidth="1280">
@@ -26,20 +27,20 @@
         <Label Content="Vc" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="628,270,0,0" VerticalAlignment="Top" Width="30"/>
         <Label Content="Min" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="236,320,0,0" VerticalAlignment="Top" Width="40"/>
         <Label Content="Max" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Height="32" Margin="236,386,0,0" VerticalAlignment="Top" Width="49"/>
-        <local:NumberBox x:Name="vtmin" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="316,320,0,0" NumberString="1" VerticalAlignment="Top" Width="54"/>
-        <local:NumberBox x:Name="vtmax" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="316,390,0,0" NumberString="50" VerticalAlignment="Top" Width="54"/>
-        <local:NumberBox x:Name="vrmax" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="416,390,0,0" NumberString="80" VerticalAlignment="Top" Width="54"/>
-        <local:NumberBox x:Name="vrmin" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="416,320,0,0" NumberString="20" VerticalAlignment="Top" Width="54"/>
-        <local:NumberBox x:Name="vsmin" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="516,320,0,0" NumberString="10" VerticalAlignment="Top" Width="54"/>
-        <local:NumberBox x:Name="vsmax" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="516,390,0,0" NumberString="20" VerticalAlignment="Top" Width="54"/>
-        <local:NumberBox x:Name="vcmax" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="616,390,0,0" NumberString="40" VerticalAlignment="Top" Width="54"/>
-        <local:NumberBox x:Name="vcmin" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="616,320,0,0" NumberString="30" VerticalAlignment="Top" Width="54"/>
+        <cssl:NumberBox x:Name="vtmin" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="316,320,0,0" NumberString="1" VerticalAlignment="Top" Width="54"/>
+        <cssl:NumberBox x:Name="vtmax" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="316,390,0,0" NumberString="50" VerticalAlignment="Top" Width="54"/>
+        <cssl:NumberBox x:Name="vrmax" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="416,390,0,0" NumberString="80" VerticalAlignment="Top" Width="54"/>
+        <cssl:NumberBox x:Name="vrmin" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="416,320,0,0" NumberString="20" VerticalAlignment="Top" Width="54"/>
+        <cssl:NumberBox x:Name="vsmin" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="516,320,0,0" NumberString="10" VerticalAlignment="Top" Width="54"/>
+        <cssl:NumberBox x:Name="vsmax" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="516,390,0,0" NumberString="20" VerticalAlignment="Top" Width="54"/>
+        <cssl:NumberBox x:Name="vcmax" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="616,390,0,0" NumberString="40" VerticalAlignment="Top" Width="54"/>
+        <cssl:NumberBox x:Name="vcmin" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="616,320,0,0" NumberString="30" VerticalAlignment="Top" Width="54"/>
 
         <Label FontSize="16" Content="Cutoff:" HorizontalAlignment="Left" Height="30" Margin="738,330,0,0" VerticalAlignment="Top" Width="140"/>
         <Label FontSize="16" Content="#Simulations:" HorizontalAlignment="Left" Height="30" Margin="737,270,0,0" VerticalAlignment="Top" Width="110"/>
         <Label FontSize="16" Content="3s-Gust Vel:" HorizontalAlignment="Left" Height="30" Margin="738,390,0,0" VerticalAlignment="Top" Width="140"/>
-        <local:NumberBox x:Name="cutoffThreshold" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="865,332,0,0" NumberString="0.10" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.712,0.633"/>
-        <local:NumberBox x:Name="numberOfSimulations" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="865,274,0,0" NumberString="10000" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.5,0.5"/>
+        <cssl:NumberBox x:Name="cutoffThreshold" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="865,332,0,0" NumberString="0.10" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.712,0.633"/>
+        <cssl:NumberBox x:Name="numberOfSimulations" TextChanged="SettingsChanged" HorizontalAlignment="Left" FontSize="16" Height="24" Margin="865,274,0,0" NumberString="10000" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.5,0.5"/>
 
         <CheckBox x:Name="gustVelCheckBox" IsChecked="True" Checked="SettingsChanged" Unchecked="SettingsChanged" HorizontalAlignment="Left" Margin="892,399,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
             <CheckBox.RenderTransform>

@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace TreefallPatternAnalysis
+namespace CSSL_ArcGISPro_Utils
 {
     /// <summary>
     /// Interaction logic for ProgressWindow.xaml

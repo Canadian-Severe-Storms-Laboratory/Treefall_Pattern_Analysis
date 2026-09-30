@@ -1,0 +1,62 @@
+﻿  dbscan.cpp
+  Main.cpp
+  swig_wrap.cxx
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\dbscan.cpp(97,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\Main.cpp(131,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(30,11): warning C4005: 'SWIGTEMPLATEDISAMBIGUATOR': macro redefinition
+      C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(24,11):
+      see previous definition of 'SWIGTEMPLATEDISAMBIGUATOR'
+  
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(39,12): warning C4005: 'SWIGINLINE': macro redefinition
+      C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(37,12):
+      see previous definition of 'SWIGINLINE'
+  
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(49,14): warning C4005: 'SWIGUNUSED': macro redefinition
+      C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(47,14):
+      see previous definition of 'SWIGUNUSED'
+  
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(52,12): warning C4005: 'SWIGUNUSED': macro redefinition
+      C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(49,14):
+      see previous definition of 'SWIGUNUSED'
+  
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(54,12): warning C4005: 'SWIGUNUSED': macro redefinition
+      C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(52,12):
+      see previous definition of 'SWIGUNUSED'
+  
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(68,12): warning C4005: 'SWIGUNUSEDPARM': macro redefinition
+      C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(66,12):
+      see previous definition of 'SWIGUNUSEDPARM'
+  
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(96,14): warning C4005: 'SWIGEXPORT': macro redefinition
+      C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(94,14):
+      see previous definition of 'SWIGEXPORT'
+  
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(100,14): warning C4005: 'SWIGEXPORT': macro redefinition
+      C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(96,14):
+      see previous definition of 'SWIGEXPORT'
+  
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(102,14): warning C4005: 'SWIGEXPORT': macro redefinition
+      C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(100,14):
+      see previous definition of 'SWIGEXPORT'
+  
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(112,12): warning C4005: 'SWIGSTDCALL': macro redefinition
+      C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(110,12):
+      see previous definition of 'SWIGSTDCALL'
+  
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(143,10): warning C4005: 'SWIG_NULLPTR': macro redefinition
+      C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(141,10):
+      see previous definition of 'SWIG_NULLPTR'
+  
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(166,10): warning C4005: 'SWIG_snprintf': macro redefinition
+      C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(159,10):
+      see previous definition of 'SWIG_snprintf'
+  
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(167,10): warning C4005: 'SWIG_snprintf2': macro redefinition
+      C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(160,10):
+      see previous definition of 'SWIG_snprintf2'
+  
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(349,10): warning C4005: 'SWIG_STD_MOVE': macro redefinition
+      C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(347,10):
+      see previous definition of 'SWIG_STD_MOVE'
+  
+C:\Users\danie\Documents\Treefall Pattern Analysis\TreefallPatternAnalysisV2\PatternSolver\swig_wrap.cxx(4953,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?

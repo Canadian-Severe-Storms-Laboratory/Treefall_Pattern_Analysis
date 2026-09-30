@@ -1,8 +1,11 @@
 #pragma once
 #include <functional>
 #include <array>
+#include <concepts>
+#include <type_traits>
 
-double binarySearch(std::function<bool(double)> func, std::array<double, 2> I, double tol = 1e-5) {
+template <typename F> requires std::invocable<F, double>&& std::same_as<std::invoke_result_t<F, double>, bool>
+double binarySearch(F func, std::array<double, 2> I, double tol = 1e-5) {
     
 	double left = I[0];
 	double right = I[1];
@@ -23,7 +26,8 @@ double binarySearch(std::function<bool(double)> func, std::array<double, 2> I, d
     return mid;
 }
 
-double localRoot(std::function<double(double)> func, std::array<double, 2> I, double tol = 1e-5) {
+template <typename F> requires std::invocable<F, double>&& std::same_as<std::invoke_result_t<F, double>, double>
+double localRoot(F func, std::array<double, 2> I, double tol = 1e-5) {
     double a = I[0], b = I[1], c = I[1], d = 0.0, e = 0.0, min1, min2;
     double fa = func(a), fb = func(b), fc, p, q, r, s, tol1, xm;
 
@@ -98,8 +102,8 @@ double localRoot(std::function<double(double)> func, std::array<double, 2> I, do
     return 0.0;
 }
 
-
-double localMinima(std::function<double(double)> f, std::array<double, 2> I, const double t = 1e-5, const double minThres = -1e308) {
+template <typename F> requires std::invocable<F, double>&& std::same_as<std::invoke_result_t<F, double>, double>
+double localMinima(F f, std::array<double, 2> I, const double t = 1e-5, const double minThres = -1e308) {
     double a = I[0];
     double b = I[1];
 
@@ -221,7 +225,8 @@ double localMinima(std::function<double(double)> f, std::array<double, 2> I, con
     return x;
 }
 
-std::array<double, 2> globalMinimum(std::function<double(double)> f, std::array<double, 2> I, size_t iters = 100, double eps = 1E-7) {
+template <typename F> requires std::invocable<F, double>&& std::same_as<std::invoke_result_t<F, double>, double>
+std::array<double, 2> globalMinimum(F f, std::array<double, 2> I, size_t iters = 100, double eps = 1E-7) {
     const double dx = (I[1] - I[0]) / (double)(iters - 1);
     double f0 = f(I[0]);
     double f1 = f(I[0] + dx);
@@ -249,8 +254,8 @@ std::array<double, 2> globalMinimum(std::function<double(double)> f, std::array<
 }
 
 // integration using Simpson's method, N = number of function samples
-template<size_t N=10>
-double integrate(std::function<double(double)> f, std::array<double, 2> I) {
+template<size_t N=10, typename F> requires std::invocable<F, double>&& std::same_as<std::invoke_result_t<F, double>, double>
+double integrate(F f, std::array<double, 2> I) {
 
     static_assert(N % 2 == 0); // N must be even
 
@@ -269,8 +274,8 @@ double integrate(std::function<double(double)> f, std::array<double, 2> I) {
     return (f(a) + f(b) + 2.0 * sum_evens + 4.0 * sum_odds) * h / 3.0;
 }
 
-template<size_t N=10>
-double integrate2D(std::function<double(double, double)> f, std::array<double, 4> I) {
+template<size_t N=10, typename F> requires std::invocable<F, double, double>&& std::same_as<std::invoke_result_t<F, double, double>, double>
+double integrate2D(F f, std::array<double, 4> I) {
 
     const auto outerFunc = [&](double y) {
         
@@ -281,5 +286,3 @@ double integrate2D(std::function<double(double, double)> f, std::array<double, 4
 
     return integrate<N>(outerFunc, { I[2], I[3] });
 }
-
-

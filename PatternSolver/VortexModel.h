@@ -46,7 +46,7 @@ EXPORT class VortexModel
 {
 
 protected:
-	std::array<double, 3> axesOfInterest() {
+	void axesOfInterest() {
 		
 		constexpr double limit = 100.0;
 
@@ -57,15 +57,13 @@ protected:
 
 		auto upperFunc = [&](double x) { return patternLocationExists(x); }; //there is a root
 		
-		const double lower = binarySearch(lowerFunc, { -limit, x0 });
+		lower = binarySearch(lowerFunc, { -limit, x0 });
 
-		const double upper = binarySearch(upperFunc, { x0, limit });
+		upper = binarySearch(upperFunc, { x0, limit });
 
 		auto signFunc = [&](double x) { return vecAt(x, patternLocation(x)).x; };
 
-		const double Xc = localRoot(signFunc, { lower + 1e-5, upper - 1e-5 });
-
-		return { lower, upper, Xc };
+		Xc = localRoot(signFunc, { lower + 1e-3, upper - 1e-3 });
 	}
 
 	std::array<double, 4> patternVecArray(double x) {
@@ -91,7 +89,7 @@ public:
 	virtual double patternLocation(double x) {
 		constexpr double Rmax = 1.0;
 		constexpr double Vc2 = 1.0;
-		constexpr double limit = 100.0;
+		const double limit = length();
 
 		const auto rootFunc = [&](double y) { return Vc2 - vecAt(x, y).magSq(); };
 
@@ -103,7 +101,7 @@ public:
 			if (rootFunc(-ym) <= 0.0) return localRoot(rootFunc, { -ym, ym });
 		}
 
-		const double ym = localMinima(rootFunc, { -limit, limit }, 1e-5, 0.0); // upper = 0.0?
+		const double ym = localMinima(rootFunc, { -limit, limit }, 1e-5, 0.0);
 
 		if (rootFunc(ym) <= 0.0) return localRoot(rootFunc, { ym, limit });
 
@@ -146,37 +144,34 @@ public:
 	}
 
 	void solveAxesOfInterest() {
-		const std::array<double, 3> axes = axesOfInterest();
-		lower = axes[0];
-		upper = axes[1];
-		Xc = axes[2];
+		axesOfInterest();
 	}
 
-	double length() {
+	inline double length() {
 		return upper - lower;
 	}
 
-	double lengthAbove() {
+	inline double lengthAbove() {
 		return Xc - lower;
 	}
 
-	double lengthBelow() {
+	inline double lengthBelow() {
 		return upper - Xc;
 	}
 
-	double vmax() {
+	inline double vmax() {
 		return hypot(Vr, Vt) + Vs;
 	}
 
-	bool hasPattern() {
+	inline bool hasPattern() {
 		return vmax() > 1.01;
 	}
 
-	bool isOuterType() {
+	inline bool isOuterType() {
 		return vmax() >= 1.0 + 2.0 * Vs;
 	}
 
-	Vec2 unitVecAt(double x, double y) {
+	inline Vec2 unitVecAt(double x, double y) {
 		return vecAt(x, y).unit();
 	}
 
@@ -186,11 +181,11 @@ public:
 		return unitVecAt(x, y);
 	}
 
-	double magAt(double x, double y) {
+	inline double magAt(double x, double y) {
 		return vecAt(x, y).mag();
 	}
 
-	double swirlRatio() {
+	inline double swirlRatio() {
 		return Vt / Vr;
 	}
 

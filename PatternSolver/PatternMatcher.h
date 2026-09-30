@@ -43,13 +43,10 @@ private:
 	double median(std::vector<double>& data) {
 		size_t n = data.size();
 
-		if (n % 2 == 1) { // Odd number of elements
-			std::nth_element(data.begin(), data.begin() + n / 2, data.end());
-			return data[n / 2];
-		}
-
 		std::nth_element(data.begin(), data.begin() + n / 2, data.end());
 		double val1 = data[n / 2];
+
+		if (n % 2 == 1) return val1;
 
 		std::nth_element(data.begin(), data.begin() + (n - 1) / 2, data.begin() + n / 2);
 		double val2 = data[(n - 1) / 2];
@@ -78,16 +75,17 @@ private:
 		}
 	};
 
-	double patternError(ObservedPattern& obsPattern, VortexModel& model) {
+	double patternError(ObservedPattern& obsPattern, VortexModel& model, const double Rmax) {
 	
 		double errorSum = 0.0;
 		double weightSum = 0.0;
 		int centerIdx = obsPattern.centerIdx();
-		double dx = obsPattern.spacing * model.length() / obsPattern.length();
+		double Rmax_1 = 1.0 / Rmax;
+		double dx = obsPattern.spacing * Rmax_1; // model.length() / obsPattern.length();
 
 		// left
-		double d = 1.0 / ((obsPattern.lengthAbove + obsPattern.spacing) * model.length() / obsPattern.length());
-		double x = model.Xc - dx;
+		double d = 1.0 / ((obsPattern.lengthAbove + obsPattern.spacing) * Rmax_1); // model.length() / obsPattern.length()
+ 		double x = model.Xc - dx;
 
 		for (int i = centerIdx - 1; i > 0; i--) {
 			Vec2 simVec = model.patternVec(x).rot90CW();
@@ -108,7 +106,7 @@ private:
 		errorSum += std::min(simVec1.angleBetweenUnit(obsPattern.vecs[centerIdx]), simVec2.angleBetweenUnit(obsPattern.vecs[centerIdx]));
 
 		// right
-		d = 1.0 / ((obsPattern.lengthBelow + obsPattern.spacing) * model.length() / obsPattern.length());
+		d = 1.0 / ((obsPattern.lengthBelow + obsPattern.spacing) * Rmax_1);
 		x = model.Xc + dx;
 		
 		for (int i = centerIdx + 1; i < obsPattern.size() - 1; i++) {
@@ -135,32 +133,37 @@ private:
 
 
 public:
+	static constexpr int steps = 64;
+
 	std::vector<double> models;
 	Range VrRange;
 	Range VtRange;
 	Range VsRange;
 	Range VcRange;
+	Range RmaxRange;
 	Monitor monitor;
 	double matchThreshold = 0.1;
 	int patternType = 0;
 	int numSimulations = 10000;
 	bool useGustVel = true;
 	bool randomizeTransects = true;
+	bool useMedianVel = false;
 
 	double bestMatchScale = 1.0;
 	double bestError = 100.0;
 
-	PatternMatcher(Range VrRange, Range VtRange, Range VsRange, Range VcRange) : VrRange(VrRange), VtRange(VtRange), VsRange(VsRange), VcRange(VcRange) {}
-
+	PatternMatcher(Range VrRange, Range VtRange, Range VsRange, Range VcRange) : VrRange(VrRange), VtRange(VtRange), VsRange(VsRange), VcRange(VcRange) {
+		RmaxRange = { 0.1, 0.5 };
+	}
 
 	double bestMatchError(ObservedPattern obsPattern) {
-		const RatioRange VrRatioRange(VrRange, VcRange, 32);
-		const RatioRange VtRatioRange(VtRange, VcRange, 32);
-		const RatioRange VsRatioRange(VsRange, VcRange, 32);
+		const RatioRange VrRatioRange(VrRange, VcRange, steps);
+		const RatioRange VtRatioRange(VtRange, VcRange, steps);
+		const RatioRange VsRatioRange(VsRange, VcRange, steps);
 		double minError = 1E100;
 
 		#pragma omp parallel for schedule(dynamic) num_threads((int)(std::thread::hardware_concurrency()*0.8))
-		for (int i = 0; i < 64; i++) {
+		for (int i = 0; i < steps; i++) {
 
 			const double Vr = VrRatioRange.min + VrRatioRange.step * i;
 
@@ -176,12 +179,12 @@ public:
 
 						const double Rmax = obsPattern.length() / model->length();
 
-						if (0.1 * obsPattern.length() > Rmax || Rmax > 0.5 * obsPattern.length()) continue; //Rmax must be between 10% and 50% of the observed pattern's length
+						if (RmaxRange.min * obsPattern.length() > Rmax || Rmax > RmaxRange.max * obsPattern.length()) continue; //Rmax must be between 10% and 50% of the observed pattern's length
 
 						if (fabs(obsPattern.lengthAbove - model->lengthAbove() * Rmax) > obsPattern.spacing ||
 							fabs(obsPattern.lengthBelow - model->lengthBelow() * Rmax) > obsPattern.spacing) continue;
 
-						const double error = patternError(obsPattern, *model);
+						const double error = patternError(obsPattern, *model, Rmax);
 
 						#pragma omp critical
 						{
@@ -196,17 +199,16 @@ public:
 	}
 
 	Pattern bestMatch(ObservedPattern obsPattern) {
-
-		const RatioRange VrRatioRange(VrRange, VcRange, 32);
-		const RatioRange VtRatioRange(VtRange, VcRange, 32);
-		const RatioRange VsRatioRange(VsRange, VcRange, 32);
+		const RatioRange VrRatioRange(VrRange, VcRange, steps);
+		const RatioRange VtRatioRange(VtRange, VcRange, steps);
+		const RatioRange VsRatioRange(VsRange, VcRange, steps);
 
 		double minError = 1E100;
 
 		std::unique_ptr<VortexModel> bestModel;
 
 		#pragma omp parallel for schedule(dynamic) num_threads((int)(std::thread::hardware_concurrency()*0.8))
-		for (int i = 0; i < 64; i++) {
+		for (int i = 0; i < steps; i++) {
 
 			const double Vr = VrRatioRange.min + VrRatioRange.step * i;
 
@@ -222,12 +224,12 @@ public:
 
 						const double Rmax = obsPattern.length() / model->length();
 
-						if (0.1 * obsPattern.length() > Rmax || Rmax > 0.5 * obsPattern.length()) continue; //Rmax must be between 10% and 50% of the observed pattern's length
+						if (RmaxRange.min * obsPattern.length() > Rmax || Rmax > RmaxRange.max * obsPattern.length()) continue; //Rmax must be between 10% and 50% of the observed pattern's length
 
 						if (fabs(obsPattern.lengthAbove - model->lengthAbove() * Rmax) > obsPattern.spacing ||
 							fabs(obsPattern.lengthBelow - model->lengthBelow() * Rmax) > obsPattern.spacing) continue;
 
-						const double error = patternError(obsPattern, *model);
+						const double error = patternError(obsPattern, *model, Rmax);
 
 						#pragma omp critical
 						{
@@ -241,6 +243,8 @@ public:
 			}
 		}
 
+		if (minError > 1E99) return Pattern();
+
 		if (!bestModel->hasPattern()) return Pattern();
 
 		bestError = minError;
@@ -249,9 +253,7 @@ public:
 		return bestModel->pattern(obsPattern.spacing / bestMatchScale);
 	}
 
-
 	MatchResult monteCarloMatching(Transect& transect, VecHashGrid& vectorHashGrid, ConvergenceLine& convergenceLine) {
-
 		const int ITERS = numSimulations;
 
 		monitor.max = ITERS;
@@ -283,8 +285,8 @@ public:
 			const double Vc = VcRange.random(dist, gen);
 			const double Vs = VsRange.random(dist, gen) / Vc;
 
-			const RatioRange VrRatioRange(VrRange, Vc, 64);
-			const RatioRange VtRatioRange(VtRange, Vc, 64);
+			const RatioRange VrRatioRange(VrRange, Vc, steps);
+			const RatioRange VtRatioRange(VtRange, Vc, steps);
 
 			double minVel = 1E308;
 			double bestSwirl = 1E308;
@@ -307,12 +309,12 @@ public:
 
 					const double Rmax = obsPattern.length() / model->length();
 
-					if (0.1 * obsPattern.length() > Rmax || Rmax > 0.5 * obsPattern.length()) continue; //Rmax must be between 10% and 50% of the observed pattern's length
+					if (RmaxRange.min * obsPattern.length() > Rmax || Rmax > RmaxRange.max * obsPattern.length()) continue; //Rmax must be between 10% and 50% of the observed pattern's length
 
 					if (fabs(obsPattern.lengthAbove - model->lengthAbove() * Rmax) > obsPattern.spacing ||
 						fabs(obsPattern.lengthBelow - model->lengthBelow() * Rmax) > obsPattern.spacing) continue;
 
-					const double error = patternError(obsPattern, *model);
+					const double error = patternError(obsPattern, *model, Rmax);
 
 					if (error > matchThreshold) continue;
 
@@ -338,7 +340,7 @@ public:
 
 			double medianMaxVel = median(maxVels);
 
-			double vel = patternType > 1 ? medianMaxVel : minVel;
+			double vel = ((patternType > 1) || useMedianVel) ? medianMaxVel : minVel;
 
 			#pragma omp critical
 			{
@@ -352,4 +354,248 @@ public:
 		return results;
 	}
 
+	double bestPhi(ObservedPattern obsPattern) {
+		const RatioRange VrRatioRange(VrRange, VcRange, steps);
+		const RatioRange VtRatioRange(VtRange, VcRange, steps);
+		const RatioRange VsRatioRange(VsRange, VcRange, steps);
+
+		double minError = 1E100;
+
+		double bestPhi = 0.0;
+
+		#pragma omp parallel for schedule(dynamic) num_threads((int)(std::thread::hardware_concurrency()*0.8))
+		for (int i = 0; i < steps; i++) {
+
+			const double Vr = VrRatioRange.min + VrRatioRange.step * i;
+
+			for (double Vt = VtRatioRange.min; Vt <= VtRatioRange.max; Vt += VtRatioRange.step) {
+				for (double Vs = VsRatioRange.min; Vs <= VsRatioRange.max; Vs += VsRatioRange.step) {
+
+					for (int j = 0; j < 16; j++) {
+						double phi = 0.25 + 0.05 * j;
+						ModifiedRankineVortex model = ModifiedRankineVortex(phi, Vr, Vt, Vs);
+
+						if (!model.hasPattern() || !isCorrectType(model)) continue;
+
+						model.solveAxesOfInterest();
+
+						const double Rmax = obsPattern.length() / model.length();
+
+						if (RmaxRange.min * obsPattern.length() > Rmax || Rmax > RmaxRange.max * obsPattern.length()) continue; //Rmax must be between 10% and 50% of the observed pattern's length
+
+						if (fabs(obsPattern.lengthAbove - model.lengthAbove() * Rmax) > obsPattern.spacing ||
+							fabs(obsPattern.lengthBelow - model.lengthBelow() * Rmax) > obsPattern.spacing) continue;
+
+						const double error = patternError(obsPattern, model, Rmax);
+
+						#pragma omp critical
+						{
+							if (error < minError) {
+								minError = error;
+								bestPhi = phi;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return bestPhi;
+	}
+
+	double bestMatchErrorRmax(ObservedPattern obsPattern) {
+		const RatioRange VrRatioRange(VrRange, VcRange, steps);
+		const RatioRange VtRatioRange(VtRange, VcRange, steps);
+		const RatioRange VsRatioRange(VsRange, VcRange, steps);
+		double minError = 1E100;
+
+		#pragma omp parallel for schedule(dynamic) num_threads((int)(std::thread::hardware_concurrency()*0.8))
+		for (int i = 0; i < steps; i++) {
+
+			const double Vr = VrRatioRange.min + VrRatioRange.step * i;
+
+			for (double Vt = VtRatioRange.min; Vt <= VtRatioRange.max; Vt += VtRatioRange.step) {
+				for (double Vs = VsRatioRange.min; Vs <= VsRatioRange.max; Vs += VsRatioRange.step) {
+
+					for (int j = 0; j < models.size(); j++) {
+						auto model = VortexFactory::fromIndex(models[j], Vr, Vt, Vs);
+
+						if (!model->hasPattern() || !isCorrectType(*model)) continue;
+
+						model->solveAxesOfInterest();
+
+						const double approxRmax = obsPattern.length() / model->length();
+
+						for (double Rmax = 0.8 * approxRmax; Rmax <= 3.0 * approxRmax; Rmax += 0.1 * approxRmax) {
+
+							if (model->lengthAbove() * Rmax < obsPattern.lengthAbove || model->lengthBelow() * Rmax < obsPattern.lengthBelow) continue;
+
+							const double error = patternError(obsPattern, *model, Rmax);
+
+							#pragma omp critical
+							{
+								minError = std::min(minError, error);
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return minError;
+	}
+
+	Pattern bestMatchRmax(ObservedPattern obsPattern) {
+		const RatioRange VrRatioRange(VrRange, VcRange, steps);
+		const RatioRange VtRatioRange(VtRange, VcRange, steps);
+		const RatioRange VsRatioRange(VsRange, VcRange, steps);
+
+		double minError = 1E100;
+
+		std::unique_ptr<VortexModel> bestModel;
+
+		#pragma omp parallel for schedule(dynamic) num_threads((int)(std::thread::hardware_concurrency()*0.8))
+		for (int i = 0; i < steps; i++) {
+
+			const double Vr = VrRatioRange.min + VrRatioRange.step * i;
+
+			for (double Vt = VtRatioRange.min; Vt <= VtRatioRange.max; Vt += VtRatioRange.step) {
+				for (double Vs = VsRatioRange.min; Vs <= VsRatioRange.max; Vs += VsRatioRange.step) {
+
+					for (int j = 0; j < models.size(); j++) {
+						auto model = VortexFactory::fromIndex(models[j], Vr, Vt, Vs);
+
+						if (!model->hasPattern() || !isCorrectType(*model)) continue;
+
+						model->solveAxesOfInterest();
+
+						const double approxRmax = obsPattern.length() / model->length();
+
+						for (double Rmax = 0.8 * approxRmax; Rmax <= 3.0 * approxRmax; Rmax += 0.1 * approxRmax) {
+
+							if (model->lengthAbove() * Rmax < obsPattern.lengthAbove || model->lengthBelow() * Rmax < obsPattern.lengthBelow) continue;
+
+							const double error = patternError(obsPattern, *model, Rmax);
+
+							#pragma omp critical
+							{
+								if (error < minError) {
+									minError = error;
+									bestModel = VortexFactory::fromIndex(models[j], Vr, Vt, Vs);
+									bestMatchScale = Rmax;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		if (minError > 1E99) return Pattern();
+
+		if (!bestModel->hasPattern()) return Pattern();
+
+		bestError = minError;
+		bestModel->solveAxesOfInterest();
+		return bestModel->pattern(obsPattern.spacing / bestMatchScale);
+	}
+
+	MatchResult monteCarloMatchingRmax(Transect& transect, VecHashGrid& vectorHashGrid, ConvergenceLine& convergenceLine) {
+		const int ITERS = numSimulations;
+
+		monitor.max = ITERS;
+		monitor.title = "Monte Carlo Simulation";
+		monitor.message = "Matching...";
+		monitor.value = 0;
+
+		MatchResult results;
+
+		results.reserve(ITERS);
+
+		TransectRandomizer tRandomizer = TransectRandomizer(transect, vectorHashGrid, convergenceLine);
+
+		#pragma omp parallel num_threads((int)(std::thread::hardware_concurrency()*0.8))
+		while (results.vels.size() < ITERS && !monitor.cancelled) {
+
+			std::random_device rd;
+			std::mt19937 gen(rd());
+			std::uniform_real_distribution<double> dist(0.0, 1.0);
+
+			ObservedPattern obsPattern(transect.lengthAbove, transect.lengthBelow, transect.spacing, vectorHashGrid.query(transect));
+
+			if (randomizeTransects) {
+				obsPattern = tRandomizer.rand(dist, gen);
+
+				if (obsPattern.lengthAbove < 0.0) continue;
+			}
+
+			const double Vc = VcRange.random(dist, gen);
+			const double Vs = VsRange.random(dist, gen) / Vc;
+
+			const RatioRange VrRatioRange(VrRange, Vc, steps);
+			const RatioRange VtRatioRange(VtRange, Vc, steps);
+
+			double minVel = 1E308;
+			double bestSwirl = 1E308;
+			double bestR = 1E308;
+			double minError = 1E308;
+			std::vector<double> maxVels;
+
+			auto model = VortexFactory::randomModel(models, dist, gen);
+			model->Vs = Vs;
+
+			for (double Vr = VrRatioRange.min; Vr <= VrRatioRange.max; Vr += VrRatioRange.step) {
+				for (double Vt = VtRatioRange.min; Vt <= VtRatioRange.max; Vt += VtRatioRange.step) {
+
+					model->Vr = Vr;
+					model->Vt = Vt;
+
+					if (!model->hasPattern() || !isCorrectType(*model)) continue;
+
+					model->solveAxesOfInterest();
+
+					const double approxRmax = obsPattern.length() / model->length();
+
+					for (double Rmax = 0.8 * approxRmax; Rmax <= 3.0 * approxRmax; Rmax += 0.1 * approxRmax) {
+
+						if (model->lengthAbove() * Rmax < obsPattern.lengthAbove || model->lengthBelow() * Rmax < obsPattern.lengthBelow) continue;
+
+						const double error = patternError(obsPattern, *model, Rmax);
+
+						if (error > matchThreshold) continue;
+
+						const double Vmax = (useGustVel ? model->vgust(Vc, Rmax) : model->vmax()) * Vc;
+
+						maxVels.push_back(Vmax);
+						minVel = std::min(Vmax, minVel);
+
+						if (error < minError) {
+							minError = error;
+							bestSwirl = model->swirlRatio();
+							bestR = Rmax;
+						}
+					}
+
+				}
+			}
+
+			model.reset();
+
+			if (minError > matchThreshold) continue;
+
+			double medianMaxVel = median(maxVels);
+
+			double vel = ((patternType > 1) || useMedianVel) ? medianMaxVel : minVel;
+
+			#pragma omp critical
+			{
+				results.add(vel, bestSwirl, bestR);
+				monitor.value++;
+			}
+		}
+
+		results.sort();
+
+		return results;
+	}
 };

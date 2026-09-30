@@ -1,11 +1,12 @@
-﻿<UserControl x:Class="TreefallPatternAnalysis.FileSelector"
+﻿<UserControl x:Class="CSSL_ArcGISPro_Utils.RasterSelectionList"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TreefallPatternAnalysis"
-             mc:Ignorable="d">
+             xmlns:local="clr-namespace:CSSL_ArcGISPro_Utils"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="400">
     <Grid>
-        <Button x:Name="browseButton" Content="Browse..." Click="SelectFile" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="60" Height="25"/>
+        <ListBox x:Name="listBox" SelectionMode="Extended"/>
     </Grid>
 </UserControl>

@@ -5,7 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions"
-        xmlns:local="clr-namespace:TreefallPatternAnalysis"
+        xmlns:local="clr-namespace:TreefallPatternAnalysis" 
+        xmlns:cssl="clr-namespace:CSSL_ArcGISPro_Utils"
         mc:Ignorable="d"
         ResizeMode="CanResize"
         ShowMinButton="True" 
@@ -32,12 +33,12 @@
         <TabControl x:Name="headerTabs" Grid.ColumnSpan="3" SelectionChanged="TabChanged">
             <TabItem Header="Input Selection" Width="150">
                 <Grid Background="#FFE5E5E5">
-                    <local:RasterSelectionBox x:Name="VectorsSelectionBox" Height="50" Width="300" Margin="0,174,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <local:RasterSelectionBox x:Name="ConvergenceSelectionBox" Height="50" Width="300" Margin="0,303,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <cssl:RasterSelectionBox x:Name="VectorsSelectionBox" Height="50" Width="300" Margin="0,174,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <cssl:RasterSelectionBox x:Name="ConvergenceSelectionBox" Height="50" Width="300" Margin="0,303,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                     <Label Content="Select Treefall Vectors" FontSize="20" HorizontalAlignment="Center" Margin="0,144,0,0" VerticalAlignment="Top" Width="300"/>
                     <Label Content="Select Convergence Line" FontSize="20" HorizontalAlignment="Center" Margin="0,266,0,0" VerticalAlignment="Top" Width="300"/>
                     <Button Content="Next" FontSize="16" HorizontalAlignment="Right" Margin="0,0,50,25" VerticalAlignment="Bottom" Height="30" Width="80" Click="InputSelectionNextButton"/>
-                    <local:FileSelector x:Name="saveFileSelector" OnSelection="LoadSave" Width="60" Height="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="230,404,0,0"/>
+                    <cssl:FileSelector x:Name="saveFileSelector" OnSelection="LoadSave" Width="60" Height="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="230,404,0,0"/>
                     <Label Content="Load Saved Analysis" FontSize="20" HorizontalAlignment="Center" Margin="-100,398,0,0" VerticalAlignment="Top" Width="193"/>
                     <Image HorizontalAlignment="Left" Source="Images/cssl_title.png" Height="100" Margin="20,0,0,15" VerticalAlignment="Bottom" Width="320"/>
 
@@ -63,7 +64,7 @@
                     <Button x:Name="autoFitTransectsButton" Click="AutoFitTransects" Content="Auto Fit" FontSize="14" HorizontalAlignment="Left" Height="25" Margin="1159,417,0,0" VerticalAlignment="Top" Width="80"/>
                     <Rectangle HorizontalAlignment="Left" Height="708" Margin="-6,-2,0,0" Stroke="White" Fill="White" VerticalAlignment="Top" Width="6"/>
                     <Label Content="Vector Spacing" Foreground="Black" FontSize="16" HorizontalAlignment="Left" Height="31" Margin="930,430,0,0" VerticalAlignment="Top" Width="116"/>
-                    <local:NumberBox TextChanged="TransectChanged" x:Name="vectorSpacing" NumberString="40" HorizontalAlignment="Left" FontSize="16" Margin="1046,435,0,0" VerticalAlignment="Top" Width="45" Height="25"/>
+                    <cssl:NumberBox TextChanged="TransectChanged" x:Name="vectorSpacing" NumberString="40" HorizontalAlignment="Left" FontSize="16" Margin="1046,435,0,0" VerticalAlignment="Top" Width="45" Height="25"/>
                     <Ellipse x:Name="validTransectSignal" Fill="Red" ToolTip="Pattern is reasonable?" HorizontalAlignment="Left" Height="30" Margin="1085,200,0,0" StrokeThickness="3" Stroke="Black" VerticalAlignment="Top" Width="30"/>
                     <Button x:Name="testMatchButton" Click="TestMatch"  Content="Test Match" FontSize="14" HorizontalAlignment="Left" Height="25" Margin="1159,467,0,0" VerticalAlignment="Top" Width="80"/>
                 </Grid>
@@ -93,6 +94,7 @@
                         <ComboBoxItem Content="Swirl Ratio"/>
                         <ComboBoxItem Content="Core Radius (Rmax)"/>
                     </ComboBox>
+                    <Button x:Name="rmaxTestButton" Click="RmaxTest" Content="Rmax Test" FontSize="14" HorizontalAlignment="Left" Height="25" Margin="1155,442,0,0" VerticalAlignment="Top" Width="80"/>
 
                 </Grid>
             </TabItem>

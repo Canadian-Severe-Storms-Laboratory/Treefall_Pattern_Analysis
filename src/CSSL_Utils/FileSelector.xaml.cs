@@ -3,7 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace TreefallPatternAnalysis
+namespace CSSL_ArcGISPro_Utils
 {
     public partial class FileSelector : UserControl
     {
@@ -17,7 +17,7 @@ namespace TreefallPatternAnalysis
             DependencyProperty.Register(
                 "OnSelection",
                 typeof(Action<object, RoutedEventArgs>),
-                typeof(TransectCreationList)
+                typeof(FileSelector)
             );
 
         private string filePath = null;

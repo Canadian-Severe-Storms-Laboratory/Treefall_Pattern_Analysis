@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace TreefallPatternAnalysis
+namespace CSSL_ArcGISPro_Utils
 {
     /// <summary>
     /// Interaction logic for NumberBox.xaml

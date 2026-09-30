@@ -30,17 +30,22 @@ namespace TreefallPatternAnalysis
         [JsonInclude]
         public bool randomizeTransect;
 
+        public (double, double) rmaxRange;
+        public bool useMedianVel;
+
         public TransectAnalysisSettings() {
             selectedModels = [0, 1, 2, 3, 4, 5];
             vrRange = (20, 80);
             vtRange = (1, 50);
             vsRange = (10, 20);
             vcRange = (30, 40);
+            rmaxRange = (0.1, 0.5);
             threshold = 0.1;
             numOfSimulations = 10000;
             patternType = 0;
             useGustVel = true;
             randomizeTransect = true;
+            useMedianVel = false;
         }
     }
 }

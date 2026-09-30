@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using static ArcGISUtils.Utils;
+using CSSL_ArcGISPro_Utils;
 using System.Runtime.InteropServices;
 using System.Windows.Controls;
 using ScottPlot;
@@ -346,11 +347,11 @@ namespace TreefallPatternAnalysis
 
             ObservedPattern obsPattern = GetSelectedObservedPattern();
 
-            transectCreationList.SelectedTransect().bestMatchError = matcher.bestMatchError(obsPattern);
+            transectCreationList.SelectedTransect().bestMatchError = matcher.bestMatchErrorRmax(obsPattern);
 
             Pattern simPattern = null;
 
-            await QueuedTask.Run(() => { simPattern = matcher.bestMatch(obsPattern); });
+            await QueuedTask.Run(() => { simPattern = matcher.bestMatchRmax(obsPattern); });
 
             if (simPattern.vecs.Count == 0)
             {
@@ -360,6 +361,10 @@ namespace TreefallPatternAnalysis
 
             ObservedPatternPlot.simScale = matcher.bestMatchScale;
             ObservedPatternPlot.Display(simPattern);
+
+            //double phi = await QueuedTask.Run(() => { return matcher.bestPhi(obsPattern); });
+
+            //MessageBox.Show("Best Match Phi: " + Math.Round(phi, 2));
 
             Cursor = null;
             ForceCursor = false;
@@ -409,10 +414,12 @@ namespace TreefallPatternAnalysis
 
             PatternMatcher matcher = new(settings.vrRange, settings.vtRange, settings.vsRange, settings.vcRange)
             {
+                RmaxRange = settings.rmaxRange,
                 numSimulations = settings.numOfSimulations,
                 matchThreshold = settings.threshold,
                 patternType = settings.patternType,
                 useGustVel = settings.useGustVel,
+                useMedianVel = settings.useMedianVel,
                 randomizeTransects = settings.randomizeTransect,
                 models = settings.selectedModels
             };
@@ -428,14 +435,14 @@ namespace TreefallPatternAnalysis
 
             await QueuedTask.Run(() => 
             {
-                simPattern = matcher.bestMatch(obsPattern);
+                simPattern = matcher.bestMatchRmax(obsPattern);
                 error = matcher.bestError;
             });
 
             if (simPattern.vecs.Count == 0)
             {
                 monitor.Stop();
-                MessageBox.Show("No pattern match found");
+                if (sender != null) MessageBox.Show("No pattern match found");
                 return;
             }
 
@@ -451,7 +458,7 @@ namespace TreefallPatternAnalysis
 
             selectedTransect.bestMatchError = error;
 
-            MatchResult results = await QueuedTask.Run(() => matcher.monteCarloMatching(selectedTransect, vecHashGrid, convergenceLine));
+            MatchResult results = await QueuedTask.Run(() => matcher.monteCarloMatchingRmax(selectedTransect, vecHashGrid, convergenceLine));
 
             monitor.Stop();
 
@@ -461,7 +468,41 @@ namespace TreefallPatternAnalysis
             selectedTransect.swirlResults = results.bestSwirls;
             selectedTransect.rmaxResults = results.Rmaxs;
 
-            PlotTransectResults(null, null);
+            if (sender != null) PlotTransectResults(null, null);
+        }
+
+        private async void RmaxTest(object sender, RoutedEventArgs e)
+        {
+            transectCreationList.SelectedTransect().analysisSettings.useMedianVel = true;
+
+            List<double> vels = [];
+            List<double> rmaxs = [];
+
+            for (double r = 0.05; r < 0.5; r += 0.05)
+            {
+                transectCreationList.SelectedTransect().analysisSettings.rmaxRange = ( r, r + 0.05 );
+                transectCreationList.SelectedTransect().analysisSettings.vrRange = (20, 160);
+                transectCreationList.SelectedTransect().analysisSettings.vtRange = (1, 100);
+
+                await RunSimulation(null, null);
+
+                double[] data = transectCreationList.SelectedTransect().vmaxResults;
+
+                vels.Add(data[data.Length / 2]);
+                rmaxs.Add(r);
+            }
+
+            transectCreationList.SelectedTransect().analysisSettings.rmaxRange = ( 0.1, 0.5 );
+            transectCreationList.SelectedTransect().analysisSettings.useMedianVel = false;
+
+            var plt = otherPlot.Plot;
+            plt.Clear();
+
+            plt.AddScatter(rmaxs.ToArray(), vels.ToArray(), System.Drawing.Color.Blue, 3, 0, MarkerShape.filledCircle);
+            plt.XLabel("Rmax (% of Damage Width)");
+            plt.YLabel("Median V3-max (ms⁻¹)");
+
+            otherPlot.Refresh();
         }
 
         private void PlotTransectResults(object sender, RoutedEventArgs e)
@@ -611,7 +652,7 @@ namespace TreefallPatternAnalysis
             double ef5 = Math.Round((y[y.Length - 1] - y[FindClosestIndex(transect.vmaxResults, 87.0)]) * 100.0, 2);
 
             resultStatsText.Text = $"Error:\t{Math.Round(transect.bestMatchError, 4)}\n" +
-                                   $"Vmax:\t{Math.Round(vmaxMedian)} ± {Math.Round(vmaxStats.StDev)}\n" +
+                                   $"Vmax:\t{Math.Round(vmaxMedian, 1)} ± {Math.Round(vmaxStats.StDev, 1)}\n" +
                                    $"Swirl:\t{Math.Round(swirlMedian, 2)} ± {Math.Round(swirlStats.StDev, 2)}\n" +
                                    $"Rmax:\t{Math.Round(rmaxMedian)} ± {Math.Round(rmaxStats.StDev)} ({Math.Round(rmaxMedian / length, 2)}%)\n" +
                                    $"\nProbabilities\n" +
@@ -634,5 +675,7 @@ namespace TreefallPatternAnalysis
 
             return arr.Length - 1;
         }
+
+        
     }
 }
